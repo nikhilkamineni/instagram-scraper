@@ -12,36 +12,37 @@ server.get('/', (req, res) => {
 });
 
 server.get('/getData/:page', async (req, res) => {
+  const page = req.params.page;
+
   try {
-    const data = await fetch(`https://www.instagram.com/${req.params.page}`);
+    const data = await fetch(`https://www.instagram.com/${page}`);
     const text = await data.text();
     const $ = await cheerio.load(text);
-    const allScripts = await $('script').toArray();
+    const allScripts = $('script').toArray();
 
-    const script = await allScripts.find(script => {
+    let targetScript = await allScripts.find(script => {
       if (script.children.length) {
         const data = script.children[0].data;
-        if (data.includes('window._sharedData = {')) {
-          return true;
-        }
+        return data.includes('window._sharedData = {');
       }
     });
 
-    let scriptContents = await script.children[0].data;
-    scriptContents = scriptContents.substring(
-      scriptContents.indexOf('{'),
-      scriptContents.length - 1
+    targetScript = targetScript.children[0].data;
+    scriptContents = targetScript.substring(
+      targetScript.indexOf('{'),
+      targetScript.length - 1
     );
-    const scriptEval = await eval('(' + scriptContents + ')');
-    const postData = scriptEval.entry_data.ProfilePage[0].graphql.user
-    const edges = postData.edge_owner_to_timeline_media.edges.map(edge => {
-      return edge.node.display_url;
-    })
-
-    res.status(200).json({
-      page: req.params.page,
-      edges
+    scriptContents = eval('(' + scriptContents + ')');
+    const postData = scriptContents.entry_data.ProfilePage[0].graphql.user;
+    const posts = postData.edge_owner_to_timeline_media.edges.map(edge => {
+      return {
+        url: edge.node.display_url,
+        timestamp: edge.node.taken_at_timestamp,
+        dimensions: edge.node.dimensions
+      };
     });
+
+    res.status(200).json({ page, posts });
     console.log('FETCH SUCCESS');
   } catch (err) {
     res.status(500).json({ message: 'Error fetching!', err });
