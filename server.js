@@ -1,10 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const server = express();
 
 const PORT = 8000;
+
+server.use(express.json());
+server.use(helmet());
 
 server.get('/', (req, res) => {
   console.log('STATUS: OK');
@@ -52,5 +58,13 @@ server.get('/getData/:page', async (req, res) => {
 });
 
 server.listen(8000, () => {
-  console.log(`Server is listening on PORT: ${PORT}`);
+  console.log(`\n==== Server is listening on PORT: ${PORT} ====\n`);
 });
+
+mongoose.connect(
+  process.env.DB_URI,
+  { useNewUrlParser: true },
+  () => {
+    console.log(`\n========== Connected to database ==========\n`);
+  }
+);
