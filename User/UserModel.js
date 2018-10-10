@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
   ]
 });
 
-const PageModel = mongoose.Model('Page', PageSchema);
-const UserModel = mongoose.Model('User', UserSchema);
+const Page = mongoose.model('Page', PageSchema);
+const User = mongoose.model('User', UserSchema);
 
-module.exports = { UserModel, PageModel };
+module.exports = { User, Page };

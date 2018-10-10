@@ -1,9 +1,9 @@
 const express = require('express');
-const { User, Page } = require('./UserModel');
+const { User, Page} = require('./UserModel');
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.get('/:id', async (req, res) => {
+userRouter.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
@@ -14,3 +14,18 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message, error });
   }
 });
+
+userRouter.post('/saveUser', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const newUser = new User({ username, password });
+    const savedUser = await newUser.save();
+    res.status(200).json(savedUser);
+  } catch (error) {
+    const message = 'Error saving new user';
+    console.error(`${message}\n${error}`);
+    res.status(500).json({ message, error });
+  }
+});
+
+module.exports = userRouter;

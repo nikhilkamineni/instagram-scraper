@@ -4,6 +4,7 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
+const userRouter = require('./User/UserRouter');
 
 const server = express();
 
@@ -11,13 +12,14 @@ const PORT = 8000;
 
 server.use(express.json());
 server.use(helmet());
+server.use('/api/user', userRouter);
 
 server.get('/', (req, res) => {
   console.log('STATUS: OK');
   res.status(200).json({ message: 'STATUS: OK' });
 });
 
-server.get('/getData/:page', async (req, res) => {
+server.get('/api/getData/:page', async (req, res) => {
   const page = req.params.page;
 
   try {
@@ -34,7 +36,7 @@ server.get('/getData/:page', async (req, res) => {
     });
 
     targetScript = targetScript.children[0].data;
-    scriptContents = targetScript.substring(
+    let scriptContents = targetScript.substring(
       targetScript.indexOf('{'),
       targetScript.length - 1
     );
