@@ -1,16 +1,5 @@
 const mongoose = require('mongoose');
 
-const PageSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  handle: {
-    type: String,
-    required: true
-  }
-});
-
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -22,13 +11,12 @@ const UserSchema = new mongoose.Schema({
   },
   pages: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Page'
+      name: { type: String, required: true },
+      handle: { type: String, required: true }
     }
   ]
 });
 
-const Page = mongoose.model('Page', PageSchema);
 const User = mongoose.model('User', UserSchema);
 
-module.exports = { User, Page };
+module.exports = User;
