@@ -7,18 +7,18 @@ const MongodbMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
 const mongod = new MongodbMemoryServer();
 
 describe('Server.js test suite', () => {
-  beforeAll(async () => {
-    const uri = await mongod.getConnectionString();
-    await mongoose.connect(
-      uri,
-      { useNewUrlParser: true }
-    );
-  });
+  // beforeAll(async () => {
+  //   const uri = await mongod.getConnectionString();
+  //   await mongoose.connect(
+  //     uri,
+  //     { useNewUrlParser: true }
+  //   );
+  // });
 
-  afterAll(async () => {
-    mongoose.disconnect();
-    mongod.stop();
-  });
+  // afterAll(async () => {
+  //   mongoose.disconnect();
+  //   mongod.stop();
+  // });
 
   test('Basic test', () => {
     const message = 'Hello World!';

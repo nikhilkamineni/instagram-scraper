@@ -1,0 +1,34 @@
+const mongoose = require('mongoose');
+const MongodbMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
+const User = require('./UserModel');
+
+const mongod = new MongodbMemoryServer();
+
+describe('User.js test suite', () => {
+  beforeAll(async () => {
+    const uri = await mongod.getConnectionString();
+    await mongoose.connect(
+      uri,
+      { useNewUrlParser: true }
+    );
+  });
+
+  afterAll(async () => {
+    mongoose.disconnect();
+    mongod.stop();
+  });
+
+  test('Basic test', () => {
+    const message = 'Hello World!';
+    expect(typeof message).toBe('string');
+    expect(message).toBe('Hello World!');
+  });
+
+  test('UserModel saves new user correctly', async () => {
+    const newUser = { username: 'newTestUser', password: '123456' };
+    const savedUser = await new User(newUser).save();
+    expect(savedUser).toBeDefined();
+    expect(savedUser.username).toBe('newTestUser');
+    expect(savedUser.password).toBe('123456');
+  });
+});
