@@ -18,11 +18,6 @@ describe('User.js test suite', () => {
     mongod.stop();
   });
 
-  test('Basic test', () => {
-    const message = 'Hello World!';
-    expect(typeof message).toBe('string');
-    expect(message).toBe('Hello World!');
-  });
 
   test('UserModel saves new user correctly', async () => {
     const newUser = { username: 'newTestUser', password: '123456' };
@@ -32,18 +27,29 @@ describe('User.js test suite', () => {
     expect(savedUser.password).toBe('123456');
   });
 
+
   test('UserModel throws error if password is not supplied', async () => {
     const newUser = { username: 'newTestUser' };
     let savedUser;
-    let error;
 
     try {
       savedUser = await new User(newUser).save();
-    } catch(err) {
-      error = err;
+    } catch(error) {
+      expect(savedUser).toBeUndefined();
+      expect(error).toBeDefined();
     }
+  });
 
-    expect(savedUser).toBeUndefined();
-    expect(error).toBeDefined();
+
+  test('UserModel throws error if username is not supplied', async () => {
+    const newUser = { password: '123456' };
+    let savedUser;
+
+    try {
+      savedUser = await new User(newUser).save();
+    } catch(error) {
+      expect(savedUser).toBeUndefined();
+      expect(error).toBeDefined();
+    }
   });
 });
