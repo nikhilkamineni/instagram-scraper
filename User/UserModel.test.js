@@ -15,7 +15,8 @@ describe('User.js test suite', () => {
 
     const testUserData = {
       username: 'existingTestUser',
-      password: '123456'
+      password: '123456',
+      pages: [{ name: 'Cats of Instagram', handle: 'cats_of_instagram' }]
     };
     existingTestUser = await new User(testUserData).save();
   });
@@ -30,6 +31,9 @@ describe('User.js test suite', () => {
     expect(retrievedUser).toBeDefined();
     expect(retrievedUser.username).toBe('existingTestUser');
     expect(retrievedUser.password).toBe('123456');
+    expect(retrievedUser._id).toEqual(existingTestUser._id);
+    expect(retrievedUser.pages[0].name).toBe('Cats of Instagram');
+    expect(retrievedUser.pages[0].handle).toBe('cats_of_instagram');
   });
 
   test('findById returns null if id does not exist', async () => {
