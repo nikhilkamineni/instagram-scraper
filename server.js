@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const PORT = process.env.PORT;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`\n=== Server listening on PORT: ${PORT} ===\n`);
 });
 
@@ -15,3 +15,5 @@ mongoose.connect(
     console.log(`\n======= Connected to database ========\n`);
   }
 );
+
+module.exports = server;

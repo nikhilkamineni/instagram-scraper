@@ -90,4 +90,24 @@ describe('User.js test suite', () => {
       expect(error).toBeDefined();
     }
   });
+
+  test('Saving a new page works correctly', async () => {
+    const id = existingTestUser._id;
+    const newPage = {
+      $push: {
+        pages: {
+          name: 'Cats On Synthesizers In Space',
+          handle: 'catsonsynthesizersinspace'
+        }
+      }
+    };
+    const options = { upsert: true, new: true };
+    const updatedUser = await User.findByIdAndUpdate(id, newPage, options);
+
+    expect(updatedUser).toBeDefined();
+    expect(updatedUser.username).toBe('existingTestUser');
+    expect(updatedUser.pages.length).toBe(2);
+    expect(updatedUser.pages[1].handle).toEqual('catsonsynthesizersinspace');
+    expect(updatedUser.pages[1].name).toEqual('Cats On Synthesizers In Space');
+  });
 });

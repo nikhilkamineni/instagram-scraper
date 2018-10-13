@@ -12,7 +12,6 @@ app.use(helmet());
 app.use('/api/user', userRouter);
 
 app.get('/', (req, res) => {
-  console.log('STATUS: OK'); // eslint-disable-line
   res.status(200).json({ message: 'STATUS: OK' });
 });
 
