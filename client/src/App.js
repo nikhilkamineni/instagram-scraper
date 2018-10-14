@@ -9,17 +9,24 @@ class Page extends Component {
     };
   }
   async componentDidMount() {
-    const url = `http://localhost:8000/api/getData/${this.props.handle}`;
-    const response = await fetch(url);
+    const url = `${process.env.REACT_APP_API_URL}/api/getData`;
+    const body = {
+      handle: this.props.handle
+    };
+    const options = {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' }
+    };
+    const response = await fetch(url, options);
     const data = await response.json();
     this.setState({ ...data });
-    console.log('STATE: ', this.state.posts[0].url);
   }
 
   render() {
     return (
       <div>
-        <header>{this.props.name}</header>
+        <h2>{this.props.name}</h2>
         {this.state.posts.map((post, i) => {
           return <img src={post.url} alt="" key={i} />;
         })}
@@ -35,11 +42,11 @@ class App extends Component {
       user: {}
     };
   }
+
   async componentDidMount() {
+    const url = `${process.env.REACT_APP_API_URL}/api/user/5bc38c93642e225002c834e7`
     try {
-      const response = await fetch(
-        'http://localhost:8000/api/user/5bc38c93642e225002c834e7'
-      );
+      const response = await fetch(url);
       const userData = await response.json();
       await this.setState({ user: userData });
     } catch (error) {
@@ -49,12 +56,11 @@ class App extends Component {
 
   render() {
     const pages = this.state.user.pages;
-    console.log('PAGES: ', pages);
     return (
       <div className="App">
-        {this.state.user.pages &&
-          this.state.user.pages
-          .map(page => 
+      <h1>Hello {this.state.user.username}</h1>
+        {pages &&
+          pages.map(page => 
             <Page name={page.name} handle={page.handle} key={page._id} />
           )}
       </div>

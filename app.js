@@ -17,11 +17,11 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'STATUS: OK' });
 });
 
-app.get('/api/getData/:page', async (req, res) => {
-  const page = req.params.page;
+app.post('/api/getData', async (req, res) => {
+  const handle = req.body.handle;
 
   try {
-    const data = await fetch(`https://www.instagram.com/${page}`);
+    const data = await fetch(`https://www.instagram.com/${handle}`);
     const text = await data.text();
     const $ = await cheerio.load(text);
     const allScripts = $('script').toArray();
@@ -48,7 +48,7 @@ app.get('/api/getData/:page', async (req, res) => {
       };
     });
 
-    res.status(200).json({ page, posts });
+    res.status(200).json({ handle, posts });
   } catch (err) {
     res.status(500).json({ message: 'Error fetching!', err });
     console.error(err); // eslint-disable-line

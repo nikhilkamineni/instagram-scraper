@@ -25,12 +25,20 @@ describe('app.js test suite', () => {
     expect(data.message).toEqual('STATUS: OK');
   });
 
-  test('GET /api/getData/:page', async () => {
-    const response = await fetch(`${BASE_URL}/api/getData/cats_of_instagram`);
+  test('POST /api/getData', async () => {
+    const body = {
+      handle: 'cats_of_instagram'
+    };
+    const options = {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' }
+    };
+    const response = await fetch(`${BASE_URL}/api/getData`, options);
     const data = await response.json();
     expect(response.status).toBe(200);
     expect(data).toBeDefined();
-    expect(data.page).toBeDefined();
+    expect(data.handle).toBeDefined();
     expect(Array.isArray(data.posts)).toBe(true);
   });
 });
