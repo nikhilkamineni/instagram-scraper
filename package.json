@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "cors": "^2.8.4",
     "dotenv": "^6.1.0",
     "express": "^4.16.3",
     "helmet": "^3.13.0",
@@ -27,6 +28,9 @@
     "mongodb-memory-server": "^2.4.3"
   },
   "jest": {
-    "testPathIgnorePatterns": ["<rootDir>/node_modules", "<rootDir>/client"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules",
+      "<rootDir>/client"
+    ]
   }
 }

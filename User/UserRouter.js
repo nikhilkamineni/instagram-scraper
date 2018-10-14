@@ -28,4 +28,22 @@ userRouter.post('/saveUser', async (req, res) => {
   }
 });
 
+userRouter.post('/savePage', async (req, res) => {
+  try {
+    const { name, handle, id } = req.body;
+    const newPage = {
+      $push: {
+        pages: { name, handle }
+      }
+    };
+    const options = { upsert: true, new: true };
+    const savedPage = await User.findByIdAndUpdate(id, newPage, options);
+    res.status(201).json(savedPage);
+  } catch (error) {
+    const message = 'Error saving a new page';
+    console.error(`${message}\n${error}`);
+    res.status(500).json({ message, error });
+  }
+});
+
 module.exports = userRouter;

@@ -4,9 +4,11 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const helmet = require('helmet');
 const userRouter = require('./User/UserRouter');
+const cors = require('cors');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(helmet());
 app.use('/api/user', userRouter);
