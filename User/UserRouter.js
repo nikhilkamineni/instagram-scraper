@@ -30,13 +30,14 @@ userRouter.post('/saveUser', async (req, res) => {
 
 userRouter.post('/savePage', async (req, res) => {
   try {
-    const { name, handle, id } = req.body;
+    const { id, name, handle } = req.body;
+    console.log(req.body)
     const newPage = {
       $push: {
         pages: { name, handle }
       }
     };
-    const options = { upsert: true, new: true };
+    const options = { new: true };
     const savedPage = await User.findByIdAndUpdate(id, newPage, options);
     res.status(201).json(savedPage);
   } catch (error) {
