@@ -6,6 +6,7 @@ class Page extends Component {
     super(props);
     this.state = {
       posts: [],
+      name: null,
       error: null,
       message: null
     };
@@ -24,7 +25,6 @@ class Page extends Component {
       const response = await fetch(url, options);
       const data = await response.json();
       this.setState({ ...data });
-      console.log(this.state)
     } catch (error) {
       console.error(error);
       this.setState({ error });
@@ -37,8 +37,8 @@ class Page extends Component {
 
   render() {
     return (
-      <div className="Page">
-        <h2 onClick={() => this.toggleShow()}>{this.props.name}</h2>
+      <div className="Page" onClick={() => this.toggleShow()}>
+        <h2>{this.state.name}</h2>
         {this.state.show && (
           <div className="Posts">
             {this.state.message ? (

@@ -30,11 +30,11 @@ userRouter.post('/saveUser', async (req, res) => {
 
 userRouter.post('/savePage', async (req, res) => {
   try {
-    const { id, name, handle } = req.body;
+    const { id, handle } = req.body;
     console.log(req.body)
     const newPage = {
       $push: {
-        pages: { name, handle }
+        pages: {  handle }
       }
     };
     const options = { new: true };

@@ -21,7 +21,9 @@ app.post('/api/getData', async (req, res) => {
   const handle = req.body.handle;
 
   try {
-    const data = await fetch(`https://www.instagram.com/${handle}`);
+    const url = `https://www.instagram.com/${handle}/`
+    console.log(url)
+    const data = await fetch(url);
     const text = await data.text();
     const $ = await cheerio.load(text);
     const allScripts = $('script').toArray();
@@ -40,6 +42,7 @@ app.post('/api/getData', async (req, res) => {
     );
     scriptContents = eval('(' + scriptContents + ')');
     const postData = scriptContents.entry_data.ProfilePage[0].graphql.user;
+    const name = postData.full_name;
     const posts = postData.edge_owner_to_timeline_media.edges.map(edge => {
       return {
         url: edge.node.display_url,
@@ -48,7 +51,7 @@ app.post('/api/getData', async (req, res) => {
       };
     });
 
-    res.status(200).json({ handle, posts });
+    res.status(200).json({ name, handle, posts });
   } catch (err) {
     res.status(500).json({ message: 'Error fetching!', err });
     console.error(err); // eslint-disable-line

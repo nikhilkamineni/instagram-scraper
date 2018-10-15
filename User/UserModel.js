@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
   },
   pages: [
     {
-      name: { type: String, required: true },
       handle: { type: String, required: true }
     }
   ]

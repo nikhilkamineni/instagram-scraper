@@ -32,7 +32,6 @@ describe('User.js test suite', () => {
     expect(retrievedUser.username).toBe('existingTestUser');
     expect(retrievedUser.password).toBe('123456');
     expect(retrievedUser._id).toEqual(existingTestUser._id);
-    expect(retrievedUser.pages[0].name).toBe('Cats of Instagram');
     expect(retrievedUser.pages[0].handle).toBe('cats_of_instagram');
   });
 
@@ -96,7 +95,6 @@ describe('User.js test suite', () => {
     const newPage = {
       $push: {
         pages: {
-          name: 'Cats On Synthesizers In Space',
           handle: 'catsonsynthesizersinspace'
         }
       }
@@ -108,6 +106,5 @@ describe('User.js test suite', () => {
     expect(updatedUser.username).toBe('existingTestUser');
     expect(updatedUser.pages.length).toBe(2);
     expect(updatedUser.pages[1].handle).toEqual('catsonsynthesizersinspace');
-    expect(updatedUser.pages[1].name).toEqual('Cats On Synthesizers In Space');
   });
 });
