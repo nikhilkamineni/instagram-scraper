@@ -22,7 +22,6 @@ app.post('/api/getData', async (req, res) => {
 
   try {
     const url = `https://www.instagram.com/${handle}/`
-    console.log(url)
     const data = await fetch(url);
     const text = await data.text();
     const $ = await cheerio.load(text);

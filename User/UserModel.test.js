@@ -5,25 +5,35 @@ const User = require('./UserModel');
 const mongod = new MongodbMemoryServer();
 
 describe('User.js test suite', () => {
-  let existingTestUser;
+  // Connect to the mongodb before tests are run
   beforeAll(async () => {
     const uri = await mongod.getConnectionString();
     await mongoose.connect(
       uri,
       { useNewUrlParser: true }
     );
+  });
 
+  // Disconnect from mongodb after all tests are completed
+  afterAll(async () => {
+    mongoose.disconnect();
+    mongod.stop();
+  });
+
+  // Save a test user before each test starts
+  let existingTestUser;
+  beforeEach(async () => {
     const testUserData = {
       username: 'existingTestUser',
       password: '123456',
-      pages: [{ name: 'Cats of Instagram', handle: 'cats_of_instagram' }]
+      pages: [{ handle: 'cats_of_instagram' }, { handle: 'animals.co' }]
     };
     existingTestUser = await new User(testUserData).save();
   });
 
-  afterAll(async () => {
-    mongoose.disconnect();
-    mongod.stop();
+  // Clear the collection after each test is run
+  afterEach(async () => {
+    await User.remove({});
   });
 
   test('findById retrieves user correctly', async () => {
@@ -104,7 +114,27 @@ describe('User.js test suite', () => {
 
     expect(updatedUser).toBeDefined();
     expect(updatedUser.username).toBe('existingTestUser');
-    expect(updatedUser.pages.length).toBe(2);
-    expect(updatedUser.pages[1].handle).toEqual('catsonsynthesizersinspace');
+    expect(updatedUser.pages.length).toBe(3);
+    expect(updatedUser.pages[2].handle).toEqual('catsonsynthesizersinspace');
+  });
+
+
+  test('Deleting a page works correctly', async () => {
+    const id = mongoose.mongo.ObjectID(existingTestUser._id);
+    const pageId = mongoose.mongo.ObjectID(existingTestUser.pages[0]._id);
+    const pageToRemove = {
+      $pull: {
+        pages: {
+          _id: pageId
+        }
+      }
+    };
+    const options = { new: true };
+    updatedUser = await User.findByIdAndUpdate(id, pageToRemove, options);
+
+    expect(id).toBeDefined();
+    expect(pageId).toBeDefined();
+    expect(existingTestUser.pages.length).toBe(2);
+    expect(updatedUser.pages.length).toBe(1);
   });
 });

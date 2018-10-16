@@ -31,10 +31,10 @@ userRouter.post('/saveUser', async (req, res) => {
 userRouter.post('/savePage', async (req, res) => {
   try {
     const { id, handle } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     const newPage = {
       $push: {
-        pages: {  handle }
+        pages: { handle }
       }
     };
     const options = { new: true };
