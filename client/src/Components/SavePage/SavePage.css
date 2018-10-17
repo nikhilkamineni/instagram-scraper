@@ -3,3 +3,20 @@
   padding-bottom: 30px;
   border: 1px solid gray;
 }
+.SavePageForm input[type='text'] {
+  padding: 5px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.SavePageForm input[type='text']:focus {
+  border-color: #333;
+}
+.SavePageForm input[type='submit'] {
+  padding: 5px 15px;
+  background: #9b9b9b;
+  border: 0 none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
