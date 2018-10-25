@@ -37,10 +37,13 @@ class Page extends Component {
 
   render() {
     return (
-      <div className="Page" onClick={() => this.toggleShow()}>
-        <h2>{this.state.name}</h2>
+      <div className="Page">
+        <div className="Page__title">
+          <h2 onClick={() => this.toggleShow()}>{this.state.name}</h2>
+          <button>Delete</button>
+        </div>
         {this.state.show && (
-          <div className="Posts">
+          <div className="Posts" onClick={() => this.toggleShow()}>
             {this.state.message ? (
               <p>{this.state.message}</p>
             ) : (

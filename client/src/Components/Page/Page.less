@@ -2,12 +2,22 @@
   margin: 5px;
   border: 2px solid black;
   background-color: rgb(75, 75, 75);
-  cursor: pointer;
 
-  h2 {
-    color: white;
-    padding: 2px;
-    margin: 2px;
+  .Page__title {
+    display: flex;
+    justify-content: center;
+
+    h2 {
+      color: white;
+      padding: 2px;
+      margin: 2px;
+      margin-left: auto;
+      cursor: pointer;
+    }
+
+    button {
+      margin-left: auto;
+    }
   }
 
   .Posts {
@@ -15,6 +25,7 @@
     flex-flow: row wrap;
     justify-content: space-around;
     min-height: 20px;
+    cursor: pointer;
     img {
       max-height: 100vh;
       padding: 5px 0;
