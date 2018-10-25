@@ -31,7 +31,6 @@ userRouter.post('/saveUser', async (req, res) => {
 userRouter.post('/savePage', async (req, res) => {
   try {
     const { id, handle } = req.body;
-    console.log(req.body);
     const newPage = {
       $push: {
         pages: { handle }
@@ -46,5 +45,25 @@ userRouter.post('/savePage', async (req, res) => {
     res.status(500).json({ message, error });
   }
 });
+
+userRouter.post('/deletePage', async (req, res) => {
+  try {
+    const { userId, pageId } = req.body
+    const pageToRemove = {
+      $pull: {
+        pages: {
+          _id: pageId
+        }
+      }
+    };
+    const options = { new: true };
+    const updatedUser = await User.findByIdAndUpdate(userId, pageToRemove, options);
+    res.status(200).json({message: 'Page was successfully deleted!'});
+  } catch (error) {
+    const message = 'Error deleting a new page'
+    console.error(`${message}\n${error}`);
+    res.status(500).json({ message, error });
+  }
+})
 
 module.exports = userRouter;
