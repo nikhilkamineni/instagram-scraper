@@ -31,14 +31,17 @@ class Page extends Component {
     }
   }
 
-  toggleShow = () => {
-    this.setState({ show: !this.state.show });
+  toggleShow = async () => {
+    await this.setState({ show: !this.state.show });
+    const ref = document.getElementById(`${this.props.handle}__header`);
+    console.log(ref)
+    window.scrollTo(0, ref.offsetTop);
   };
 
   render() {
     return (
-      <div className="Page">
-        <div className="Page__header">
+      <div className="Page" id={this.props.handle}>
+        <div className="Page__header" id={`${this.props.handle}__header`}>
           <h2 onClick={() => this.toggleShow()}>
             {this.state.name} ({this.props.handle})
           </h2>
