@@ -38,7 +38,7 @@ class Page extends Component {
             Delete
           </button>
         </div>
-        {this.props.pageBeingViewed && (
+        {this.props.beingViewed && (
           <div
             className="Posts"
             onClick={() => this.props.handleViewPage(this.props.handle)}

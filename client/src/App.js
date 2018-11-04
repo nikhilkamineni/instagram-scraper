@@ -67,7 +67,7 @@ class App extends Component {
               id={page._id}
               handleDeletePage={this.handleDeletePage}
               handleViewPage={this.handleViewPage}
-              pageBeingViewed={this.state.pageBeingViewed === page.handle}
+              beingViewed={this.state.pageBeingViewed === page.handle}
             />
           ))
         ) : (
