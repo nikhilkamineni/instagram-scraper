@@ -3,7 +3,7 @@ import './App.css';
 import Page from './Components/Page/Page.js';
 import SavePage from './Components/SavePage/SavePage.js';
 
-const API_URL = process.env.process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 class App extends Component {
   constructor() {
