@@ -3,7 +3,6 @@ import './App.css';
 import Page from './Components/Page/Page.js';
 import SavePage from './Components/SavePage/SavePage.js';
 
-
 class App extends Component {
   constructor() {
     super();
@@ -23,7 +22,7 @@ class App extends Component {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   componentDidMount() {
     this.getUserData();
@@ -33,10 +32,15 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.user && <h1>Hello {this.state.user.username}</h1>}
-        <SavePage id={this.state.user._id} getUserData={this.getUserData}/>
+        <SavePage id={this.state.user._id} getUserData={this.getUserData} />
         {this.state.user.pages ? (
           this.state.user.pages.map(page => (
-            <Page handle={page.handle} id={page._id} key={page._id} />
+            <Page
+              handle={page.handle}
+              userId={user._id}
+              pageId={page._id}
+              key={page._id}
+            />
           ))
         ) : (
           <h3>Loading...</h3>
