@@ -46,7 +46,7 @@ userRouter.post('/savePage', async (req, res) => {
   }
 });
 
-userRouter.post('/deletePage', async (req, res) => {
+userRouter.put('/deletePage', async (req, res) => {
   try {
     const { userId, pageId } = req.body
     const pageToRemove = {
