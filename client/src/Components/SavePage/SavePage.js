@@ -4,8 +4,10 @@ import './SavePage.css';
 const SavePage = props => {
   async function handleSubmit(event) {
     event.preventDefault();
+
     const id = props.id;
     const handle = event.target.handle.value;
+
     if (id && handle) {
       const url = `${process.env.REACT_APP_API_URL}/api/user/savePage`;
       const body = { id, handle };
@@ -14,10 +16,14 @@ const SavePage = props => {
         body: JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' }
       };
+
       await fetch(url, options);
+
       // TODO: Add error handling
       props.getUserData();
-      document.getElementById('newPageHandleInput').value = '';
+
+      // clear form element after hitting submit
+      document.getElementById('SavePageForm__Input').value = '';
     } else {
       console.error('Missing an id and/or handle');
     }
@@ -26,7 +32,7 @@ const SavePage = props => {
   return (
     <form onSubmit={handleSubmit} className="SavePageForm">
       <h3>Save a new page:</h3>
-      <input id="newPageHandleInput" type="text" name="handle" /><input type="submit" /> <br/>
+      <input id="SavePageForm__Input" type="text" name="handle" /><input type="submit" /> <br/>
     </form>
   );
 };

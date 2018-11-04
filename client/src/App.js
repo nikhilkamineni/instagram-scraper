@@ -6,12 +6,10 @@ import SavePage from './Components/SavePage/SavePage.js';
 const API_URL = process.env.REACT_APP_API_URL;
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: {}
-    };
-  }
+  state = {
+    user: {},
+    pageBeingViewed: ''
+  };
 
   getUserData = async () => {
     try {
@@ -26,6 +24,16 @@ class App extends Component {
 
   componentDidMount() {
     this.getUserData();
+  }
+
+  handleViewPage = async page => {
+    if (this.state.pageBeingViewed === page)
+      await this.setState({ pageBeingViewed: '' })
+    else
+      await this.setState({ pageBeingViewed: page })
+
+    const ref = document.getElementById(`${page}__header`);
+    window.scrollTo(0, ref.offsetTop);
   }
 
   handleDeletePage = async pageId => {
@@ -58,6 +66,8 @@ class App extends Component {
               handle={page.handle}
               id={page._id}
               handleDeletePage={this.handleDeletePage}
+              handleViewPage={this.handleViewPage}
+              pageBeingViewed={this.state.pageBeingViewed === page.handle}
             />
           ))
         ) : (
