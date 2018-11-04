@@ -17,6 +17,7 @@ const SavePage = props => {
       await fetch(url, options);
       // TODO: Add error handling
       props.getUserData();
+      document.getElementById('newPageHandleInput').value = '';
     } else {
       console.error('Missing an id and/or handle');
     }
@@ -25,7 +26,7 @@ const SavePage = props => {
   return (
     <form onSubmit={handleSubmit} className="SavePageForm">
       <h3>Save a new page:</h3>
-      <input type="text" name="handle" /><input type="submit" /> <br/>
+      <input id="newPageHandleInput" type="text" name="handle" /><input type="submit" /> <br/>
     </form>
   );
 };
