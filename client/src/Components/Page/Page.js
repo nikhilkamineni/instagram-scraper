@@ -40,7 +40,7 @@ class Page extends Component {
       <div className="Page">
         <div className="Page__title">
           <h2 onClick={() => this.toggleShow()}>{this.state.name}</h2>
-          <button>Delete</button>
+          <button onClick={() => this.props.handleDeletePage(this.props.id)}>Delete</button>
         </div>
         {this.state.show && (
           <div className="Posts" onClick={() => this.toggleShow()}>

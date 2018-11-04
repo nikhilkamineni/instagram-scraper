@@ -58,7 +58,7 @@ userRouter.put('/deletePage', async (req, res) => {
     };
     const options = { new: true };
     const updatedUser = await User.findByIdAndUpdate(userId, pageToRemove, options);
-    res.status(200).json({message: 'Page was successfully deleted!'});
+    res.status(200).json({message: 'Page was successfully deleted!', updatedUser});
   } catch (error) {
     const message = 'Error deleting a new page'
     console.error(`${message}\n${error}`);

@@ -3,6 +3,8 @@ import './App.css';
 import Page from './Components/Page/Page.js';
 import SavePage from './Components/SavePage/SavePage.js';
 
+const API_URL = process.env.process.env.REACT_APP_API_URL;
+
 class App extends Component {
   constructor() {
     super();
@@ -13,9 +15,7 @@ class App extends Component {
 
   getUserData = async () => {
     try {
-      const url = `${
-        process.env.REACT_APP_API_URL
-      }/api/user/5bc38c93642e225002c834e7`;
+      const url = `${API_URL}/api/user/5bc38c93642e225002c834e7`;
       const response = await fetch(url);
       const userData = await response.json();
       this.setState({ user: userData });
@@ -28,6 +28,24 @@ class App extends Component {
     this.getUserData();
   }
 
+  handleDeletePage = async pageId => {
+    try {
+      const url = `${process.env.REACT_APP_API_URL}/api/user/deletePage`;
+      const userId = this.state.user._id;
+      const body = { userId, pageId };
+      const options = {
+        method: 'put',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' }
+      };
+      const response = await fetch(url, options);
+      const json = await response.json();
+      this.setState({ user: json.updatedUser });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -36,10 +54,10 @@ class App extends Component {
         {this.state.user.pages ? (
           this.state.user.pages.map(page => (
             <Page
-              handle={page.handle}
-              userId={user._id}
-              pageId={page._id}
               key={page._id}
+              handle={page.handle}
+              id={page._id}
+              handleDeletePage={this.handleDeletePage}
             />
           ))
         ) : (
