@@ -36,7 +36,7 @@ class App extends Component {
         <SavePage id={this.state.user._id} getUserData={this.getUserData}/>
         {this.state.user.pages ? (
           this.state.user.pages.map(page => (
-            <Page handle={page.handle} key={page._id} />
+            <Page handle={page.handle} id={page._id} key={page._id} />
           ))
         ) : (
           <h3>Loading...</h3>
