@@ -17,8 +17,8 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'STATUS: OK' });
 });
 
-app.post('/api/getData', async (req, res) => {
-  const handle = req.body.handle;
+app.get('/api/getData', async (req, res) => {
+  const handle = req.query.handle;
 
   try {
     const url = `https://www.instagram.com/${handle}/`

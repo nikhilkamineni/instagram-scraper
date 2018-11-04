@@ -26,15 +26,12 @@ describe('app.js test suite', () => {
   });
 
   test('POST /api/getData', async () => {
-    const body = {
-      handle: 'cats_of_instagram'
-    };
-    const options = {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' }
-    };
-    const response = await fetch(`${BASE_URL}/api/getData`, options);
+    const handle = 'cats_of_instagram'
+    // const options = {
+    //   method: 'get',
+    //   headers: { 'Content-Type': 'application/json' }
+    // };
+    const response = await fetch(`${BASE_URL}/api/getData?handle=${handle}`);
     const data = await response.json();
     expect(response.status).toBe(200);
     expect(data).toBeDefined();

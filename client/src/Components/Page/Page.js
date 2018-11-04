@@ -14,15 +14,9 @@ class Page extends Component {
 
   async componentDidMount() {
     try {
-      const url = `${process.env.REACT_APP_API_URL}/api/getData`;
-      const body = { handle: this.props.handle };
-      const options = {
-        method: 'post',
-        body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json' }
-      };
+      const url = `${process.env.REACT_APP_API_URL}/api/getData?handle=${this.props.handle}`;
 
-      const response = await fetch(url, options);
+      const response = await fetch(url);
       const data = await response.json();
       this.setState({ ...data });
     } catch (error) {
