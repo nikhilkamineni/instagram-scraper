@@ -3,18 +3,19 @@
   border: 2px solid black;
   background-color: #4b4b4b;
 }
-.Page .Page__title {
+.Page .Page__header {
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
-.Page .Page__title h2 {
+.Page .Page__header h2 {
   color: white;
   padding: 2px;
   margin: 2px;
   margin-left: auto;
-  cursor: pointer;
+  width: 100%;
 }
-.Page .Page__title button {
+.Page .Page__header button {
   margin-left: auto;
 }
 .Page .Posts {

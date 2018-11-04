@@ -38,9 +38,13 @@ class Page extends Component {
   render() {
     return (
       <div className="Page">
-        <div className="Page__title">
-          <h2 onClick={() => this.toggleShow()}>{this.state.name}</h2>
-          <button onClick={() => this.props.handleDeletePage(this.props.id)}>Delete</button>
+        <div className="Page__header">
+          <h2 onClick={() => this.toggleShow()}>
+            {this.state.name} ({this.props.handle})
+          </h2>
+          <button onClick={() => this.props.handleDeletePage(this.props.id)}>
+            Delete
+          </button>
         </div>
         {this.state.show && (
           <div className="Posts" onClick={() => this.toggleShow()}>
