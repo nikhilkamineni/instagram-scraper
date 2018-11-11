@@ -27,6 +27,10 @@ class Page extends Component {
     }
   }
 
+  handleOpenSource = () => {
+    window.open(`https://www.instagram.com/${this.props.handle}`, "_blank")
+  }
+
   render() {
     return (
       <div className="Page" id={this.props.handle}>
@@ -34,6 +38,7 @@ class Page extends Component {
           <h2 onClick={() => this.props.handleViewPage(this.props.handle)}>
             {this.state.name} a.k.a {this.props.handle}
           </h2>
+          <button onClick={this.handleOpenSource}>Source</button>
           <button onClick={() => this.props.handleDeletePage(this.props.id)}>
             Delete
           </button>
