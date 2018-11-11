@@ -1,22 +1,38 @@
 .SavePageForm {
   margin: 5px;
   padding-bottom: 30px;
-  border: 1px solid gray;
 }
 .SavePageForm input[type='text'] {
   padding: 5px;
-  border: 2px solid #ccc;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  border: 2px solid black;
+  background-color: #555;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: Helvetica;
+}
+.SavePageForm input[type='text']:hover {
+  background-color: #777;
 }
 .SavePageForm input[type='text']:focus {
-  border-color: #333;
+  background-color: #777;
+}
+.SavePageForm input[type='text']:active {
+  background-color: #777;
 }
 .SavePageForm input[type='submit'] {
   padding: 5px 15px;
-  background: #9b9b9b;
+  background: #555;
   border: 0 none;
   cursor: pointer;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  color: black;
+  font-family: Helvetica;
+  font-size: 15px;
+  border: 2px solid black;
+}
+.SavePageForm input[type='submit']:hover {
+  background-color: #777;
+}
+.SavePageForm input[type='submit']:active {
+  background-color: #888;
 }

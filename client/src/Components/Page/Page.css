@@ -1,7 +1,7 @@
 .Page {
   margin: 5px;
   border: 2px solid black;
-  background-color: #4b4b4b;
+  background-color: #3a3a3a;
 }
 .Page .Page__header {
   display: flex;
