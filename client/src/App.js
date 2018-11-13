@@ -28,13 +28,12 @@ class App extends Component {
 
   handleViewPage = async page => {
     if (this.state.pageBeingViewed === page)
-      await this.setState({ pageBeingViewed: '' })
-    else
-      await this.setState({ pageBeingViewed: page })
+      await this.setState({ pageBeingViewed: '' });
+    else await this.setState({ pageBeingViewed: page });
 
     const ref = document.getElementById(`${page}__header`);
     window.scrollTo(0, ref.offsetTop);
-  }
+  };
 
   handleDeletePage = async pageId => {
     try {
@@ -60,16 +59,18 @@ class App extends Component {
         {this.state.user && <h1>Hello {this.state.user.username}</h1>}
         <SavePage id={this.state.user._id} getUserData={this.getUserData} />
         {this.state.user.pages ? (
-          this.state.user.pages.map(page => (
-            <Page
-              key={page._id}
-              handle={page.handle}
-              id={page._id}
-              handleDeletePage={this.handleDeletePage}
-              handleViewPage={this.handleViewPage}
-              beingViewed={this.state.pageBeingViewed === page.handle}
-            />
-          ))
+          this.state.user.pages
+            .map(page => (
+              <Page
+                key={page._id}
+                handle={page.handle}
+                id={page._id}
+                handleDeletePage={this.handleDeletePage}
+                handleViewPage={this.handleViewPage}
+                beingViewed={this.state.pageBeingViewed === page.handle}
+              />
+            ))
+            .reverse()
         ) : (
           <h3>Loading...</h3>
         )}
