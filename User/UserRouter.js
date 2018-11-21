@@ -31,24 +31,32 @@ userRouter.post('/saveUser', async (req, res) => {
 userRouter.post('/savePage', async (req, res) => {
   try {
     const { id, handle } = req.body;
-    const newPage = {
-      $push: {
-        pages: { handle }
-      }
+
+    const conditions = {
+      _id: id,
+      'pages.handle': { $ne: handle }
     };
+
+    const newPage = {
+      $push: { pages: { handle } }
+    };
+
     const options = { new: true };
-    const savedPage = await User.findByIdAndUpdate(id, newPage, options);
-    res.status(201).json(savedPage);
+
+    const savedPage = await User.findOneAndUpdate(conditions, newPage, options);
+    if (!savedPage)
+      return res.status(400).json({ message: 'Page already exists!' });
+    else return res.status(201).json(savedPage);
   } catch (error) {
     const message = 'Error saving a new page';
     console.error(`${message}\n${error}`);
-    res.status(500).json({ message, error });
+    return res.status(500).json({ message, error });
   }
 });
 
 userRouter.put('/deletePage', async (req, res) => {
   try {
-    const { userId, pageId } = req.body
+    const { userId, pageId } = req.body;
     const pageToRemove = {
       $pull: {
         pages: {
@@ -57,13 +65,19 @@ userRouter.put('/deletePage', async (req, res) => {
       }
     };
     const options = { new: true };
-    const updatedUser = await User.findByIdAndUpdate(userId, pageToRemove, options);
-    res.status(200).json({message: 'Page was successfully deleted!', updatedUser});
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      pageToRemove,
+      options
+    );
+    res
+      .status(200)
+      .json({ message: 'Page was successfully deleted!', updatedUser });
   } catch (error) {
-    const message = 'Error deleting a new page'
+    const message = 'Error deleting a new page';
     console.error(`${message}\n${error}`);
     res.status(500).json({ message, error });
   }
-})
+});
 
 module.exports = userRouter;
