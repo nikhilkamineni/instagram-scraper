@@ -11,7 +11,8 @@ const UserSchema = new mongoose.Schema({
   },
   pages: [
     {
-      handle: { type: String, required: true }
+      handle: { type: String, required: true },
+      dateAdded: { type: Date, required: true, default: Date.now }
     }
   ]
 });
