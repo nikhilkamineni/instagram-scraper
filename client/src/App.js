@@ -53,11 +53,20 @@ class App extends Component {
     }
   };
 
+  handleSorted = e => {
+    console.log(e.target.value)
+  }
+
   render() {
     return (
       <div className="App">
         {this.state.user && <h1>Hello {this.state.user.username}</h1>}
         <SavePage id={this.state.user._id} getUserData={this.getUserData} />
+        <select id="sort" name="sort" onChange={this.handleSorted}>
+          <option value="oldestToNewest">Oldest to Newest</option>
+          <option value="newestToOldest">Newest to Oldest</option>
+          <option value="alphabetical">Alphabetical</option>
+        </select>
         {this.state.user.pages ? (
           this.state.user.pages
             .map(page => (
@@ -70,7 +79,6 @@ class App extends Component {
                 beingViewed={this.state.pageBeingViewed === page.handle}
               />
             ))
-            .reverse()
         ) : (
           <h3>Loading...</h3>
         )}
