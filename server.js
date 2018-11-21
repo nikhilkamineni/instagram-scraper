@@ -9,6 +9,7 @@ const server = app.listen(PORT, () => {
   console.log(`\n=== Server listening on PORT: ${PORT} ===`);
 });
 
+mongoose.set('useFindAndModify', false) // Fix for depracation warning
 mongoose.connect(
   process.env.DB_URI,
   { useNewUrlParser: true },
