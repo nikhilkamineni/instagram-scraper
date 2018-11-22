@@ -8,6 +8,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 class App extends Component {
   state = {
     user: {},
+    sort: 'oldestToNewest',
     pageBeingViewed: ''
   };
 
@@ -54,10 +55,24 @@ class App extends Component {
   };
 
   handleSorted = e => {
-    console.log(e.target.value)
-  }
+    this.setState({ sort: e.target.value });
+  };
 
   render() {
+    const sort = this.state.sort
+    let pages = this.state.user.pages ? (this.state.user.pages.map(page => (
+      <Page
+        key={page._id}
+        handle={page.handle}
+        id={page._id}
+        handleDeletePage={this.handleDeletePage}
+        handleViewPage={this.handleViewPage}
+        beingViewed={this.state.pageBeingViewed === page.handle}
+      />)
+    )) : [];
+
+    if (sort === 'newestToOldest') pages = pages.reverse();
+
     return (
       <div className="App">
         {this.state.user && <h1>Hello {this.state.user.username}</h1>}
@@ -67,19 +82,7 @@ class App extends Component {
           <option value="newestToOldest">Newest to Oldest</option>
           <option value="alphabetical">Alphabetical</option>
         </select>
-        {this.state.user.pages ? (
-          this.state.user.pages
-            .map(page => (
-              <Page
-                key={page._id}
-                handle={page.handle}
-                id={page._id}
-                handleDeletePage={this.handleDeletePage}
-                handleViewPage={this.handleViewPage}
-                beingViewed={this.state.pageBeingViewed === page.handle}
-              />
-            ))
-        ) : (
+        {pages ? pages : (
           <h3>Loading...</h3>
         )}
       </div>
