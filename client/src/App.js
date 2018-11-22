@@ -72,6 +72,10 @@ class App extends Component {
     )) : [];
 
     if (sort === 'newestToOldest') pages = pages.reverse();
+    if (sort === 'alphabetical') pages = pages.sort((a, b) => {
+      return a.props.handle.charCodeAt(0) - b.props.handle.charCodeAt(0);
+    })
+    console.log(pages)
 
     return (
       <div className="App">

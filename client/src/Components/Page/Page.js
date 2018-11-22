@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import './Page.css';
 
 class Page extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: [],
-      name: null,
-      error: null,
-      message: null
-    };
-  }
+  state = {
+    posts: [],
+    name: null,
+    error: null,
+    message: null
+  };
 
   async componentDidMount() {
     try {
@@ -28,15 +25,15 @@ class Page extends Component {
   }
 
   handleOpenSource = () => {
-    window.open(`https://www.instagram.com/${this.props.handle}`, "_blank")
-  }
+    window.open(`https://www.instagram.com/${this.props.handle}`, '_blank');
+  };
 
   render() {
     return (
       <div className="Page" id={this.props.handle}>
         <div className="Page__header" id={`${this.props.handle}__header`}>
           <h2 onClick={() => this.props.handleViewPage(this.props.handle)}>
-            {this.state.name} a.k.a {this.props.handle}
+            {this.state.name} - a.k.a -  {this.props.handle}
           </h2>
           <button onClick={this.handleOpenSource}>Source</button>
           <button onClick={() => this.props.handleDeletePage(this.props.id)}>
