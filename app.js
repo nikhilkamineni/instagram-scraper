@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const userRouter = require('./User/UserRouter');
 const cors = require('cors');
 
+const SECRET = process.env.SECRET;
 const app = express();
 
 app.use(cors());
@@ -17,11 +18,13 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'STATUS: OK' });
 });
 
+// Get a User's data
 app.get('/api/getData', async (req, res) => {
   const handle = req.query.handle;
 
   try {
-    const url = `https://www.instagram.com/${handle}/`
+    // Attempt to scrape data
+    const url = `https://www.instagram.com/${handle}/`;
     const data = await fetch(url);
     const text = await data.text();
     const $ = await cheerio.load(text);
@@ -52,9 +55,41 @@ app.get('/api/getData', async (req, res) => {
 
     res.status(200).json({ name, handle, posts });
   } catch (err) {
+    // Failed to scrape data
     res.status(500).json({ message: 'Error fetching!', err });
     console.error(err); // eslint-disable-line
   }
-});
+}); // /api/getData
+
+// Login user
+app.post('/api/login', (req, res) => {
+  let { username, password } = req.body;
+  username = username.toLowerCase();
+
+  // Error handling
+  if (!username || !password) {
+    res
+      .status(422)
+      .json({ error: 'You need to provide a username and password' });
+  }
+
+  // Find User model matching the provided username
+  User.findOne({ username }, (err, user) => {
+    if (err)
+      return res.status(403).json({ error: 'Invalid username of password!' });
+    if (user === null)
+      return res.status(422).json({ error: 'User does not exist' });
+
+    user.checkPassword(password, (nonMatch, isMatch) => {
+      if (nonMatch)
+        return res.status(422).json({ error: 'Incorrect password' });
+      if (isMatch) {
+        const payload = { username: user.username };
+        const token = jwt.sign(payload, SECRET);
+        return res.status(200).json({ token });
+      }
+    });
+  });
+}); // /api/login
 
 module.exports = app;

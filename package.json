@@ -8,7 +8,8 @@
     "url": "https://github.com/nikhilkamineni/instagram-scraper.git"
   },
   "scripts": {
-    "start": "concurrently \"nodemon server.js\" \"cd client;npm start\"",
+    "start": "nodemon server.js",
+    "start-all": "concurrently \"nodemon server.js\" \"cd client;npm start\"",
     "test": "jest --watch"
   },
   "keywords": [],

@@ -5,14 +5,19 @@ const mongoose = require('mongoose');
 const PORT = process.env.PORT;
 
 const server = app.listen(PORT, () => {
-  console.log('\n========== Instagram-Scraper =========')
+  console.log('\n========== Instagram-Scraper =========');
   console.log(`\n=== Server listening on PORT: ${PORT} ===`);
 });
 
-mongoose.set('useFindAndModify', false) // Fix for depracation warning
+const options = {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+};
+
 mongoose.connect(
   process.env.DB_URI,
-  { useNewUrlParser: true },
+  options,
   () => {
     console.log(`\n======= Connected to database ========\n`);
   }
