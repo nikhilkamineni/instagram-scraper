@@ -61,6 +61,28 @@ app.get('/api/getData', async (req, res) => {
   }
 }); // /api/getData
 
+app.post('/api/register', async (req, res) => {
+  let { username, password } = req.body;
+  username = username.toLowerCase();
+
+  // Error handling
+  if (!username || !password) {
+    res
+      .status(422)
+      .json({ error: 'You need to provide a username and password' });
+  }
+
+  try {
+    const newUser = new User({ username, password });
+    const user = await newUser.save();
+    return res
+      .status(201)
+      .json({ message: 'New user succesfully registered!', user });
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal server error!', error });
+  }
+});
+
 // Login user
 app.post('/api/login', (req, res) => {
   let { username, password } = req.body;
