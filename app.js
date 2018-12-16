@@ -65,7 +65,7 @@ app.get('/api/getData', async (req, res) => {
 // Register a new user. Expects JSON object with 'username' and 'password' field
 app.post('/api/register', async (req, res) => {
   let { username, password } = req.body;
-  username = username.toLowerCase();
+  // username = username.toLowerCase();
 
   // Error handling
   if (!username || !password) {
