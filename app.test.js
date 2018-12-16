@@ -25,12 +25,8 @@ describe('app.js test suite', () => {
     expect(data.message).toEqual('STATUS: OK');
   });
 
-  test('POST /api/getData', async () => {
+  test('GET /api/getData', async () => {
     const handle = 'cats_of_instagram'
-    // const options = {
-    //   method: 'get',
-    //   headers: { 'Content-Type': 'application/json' }
-    // };
     const response = await fetch(`${BASE_URL}/api/getData?handle=${handle}`);
     const data = await response.json();
     expect(response.status).toBe(200);

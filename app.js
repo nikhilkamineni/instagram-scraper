@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const userRouter = require('./User/UserRouter');
 const cors = require('cors');
 
+const User = require('./User/UserModel');
 const SECRET = process.env.SECRET;
 const app = express();
 
@@ -61,9 +62,12 @@ app.get('/api/getData', async (req, res) => {
   }
 }); // /api/getData
 
+// Register a new user. Expects JSON object with 'username' and 'password' field
 app.post('/api/register', async (req, res) => {
   let { username, password } = req.body;
   username = username.toLowerCase();
+
+  console.log(req.body);
 
   // Error handling
   if (!username || !password) {

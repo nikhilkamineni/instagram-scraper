@@ -40,7 +40,7 @@ describe('User.js test suite', () => {
     const retrievedUser = await User.findById(existingTestUser._id);
     expect(retrievedUser).toBeDefined();
     expect(retrievedUser.username).toBe('existingTestUser');
-    expect(retrievedUser.password).toBe('123456');
+    // expect(retrievedUser.password).toBe('123456');
     expect(retrievedUser._id).toEqual(existingTestUser._id);
     expect(retrievedUser.pages[0].handle).toBe('cats_of_instagram');
   });
@@ -66,14 +66,12 @@ describe('User.js test suite', () => {
   test('Creating a new User works correctly', async () => {
     const newUser = { username: 'newTestUser', password: '123456' };
     const savedUser = await new User(newUser).save();
-    const retrievedUser = await User.findOne(newUser);
+    const retrievedUser = await User.findOne({username: newUser.username});
 
     expect(savedUser).toBeDefined();
     expect(savedUser.username).toBe('newTestUser');
-    expect(savedUser.password).toBe('123456');
     expect(retrievedUser).toBeDefined();
     expect(retrievedUser.username).toBe('newTestUser');
-    expect(retrievedUser.password).toBe('123456');
   });
 
   test('Creating a new User throws error if password is not supplied', async () => {

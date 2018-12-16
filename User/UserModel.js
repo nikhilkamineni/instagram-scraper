@@ -15,13 +15,13 @@ const UserSchema = new mongoose.Schema({
   },
   pages: [
     {
-      handle: { type: String, required: true, unique: true },
-      dateAdded: { type: Date, required: true, default: Date.now }
+      handle: { type: String },
+      dateAdded: { type: Date, default: Date.now }
     }
   ]
 });
 
-UserSchema.pre('save', next => {
+UserSchema.pre('save', function(next) {
   bcrypt.hash(this.password, BCRYPT_COST, (err, hash) => {
     if (err) return next(err);
     this.password = hash;
