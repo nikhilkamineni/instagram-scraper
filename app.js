@@ -67,8 +67,6 @@ app.post('/api/register', async (req, res) => {
   let { username, password } = req.body;
   username = username.toLowerCase();
 
-  console.log(req.body);
-
   // Error handling
   if (!username || !password) {
     res
