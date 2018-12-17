@@ -3,10 +3,10 @@ const User = require('./UserModel');
 
 const userRouter = express.Router();
 
-userRouter.get('/:id', async (req, res) => {
+userRouter.get('/:username', async (req, res) => {
   try {
-    const id = req.params.id;
-    const user = await User.findById(id);
+    const username = req.params.username;
+    const user = await User.findOne({ username });
     res.status(200).json(user);
   } catch (error) {
     const message = 'Error getting User with that ID';

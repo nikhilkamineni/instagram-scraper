@@ -71,4 +71,13 @@ describe('app.js test suite', () => {
     expect(responseJSON.user.pages).toBeDefined();
     expect(responseJSON.message).toEqual('New user succesfully registered!');
   });
+
+  test('GET /api/user/:username', async () => {
+    const response = await fetch(`${BASE_URL}/api/user/testuser`)
+    const responseJSON = await response.json();
+
+    expect(responseJSON).toBeDefined();
+    expect(responseJSON.username).toEqual('testuser');
+    expect(responseJSON.pages).toBeDefined();
+  })
 });
