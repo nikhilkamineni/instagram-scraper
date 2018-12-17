@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const BCRYPT_COST = 11;
 
@@ -29,7 +30,7 @@ UserSchema.pre('save', function(next) {
   });
 });
 
-UserSchema.methods.checkPassword = (passwordAttempt, cb) => {
+UserSchema.methods.checkPassword = function(passwordAttempt, cb) {
   bcrypt.compare(passwordAttempt, this.password, (err, isMatch) => {
     if (!isMatch) return cb(err);
     cb(null, isMatch);

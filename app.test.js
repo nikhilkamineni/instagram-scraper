@@ -72,6 +72,21 @@ describe('app.js test suite', () => {
     expect(responseJSON.message).toEqual('New user succesfully registered!');
   });
 
+  test('POST /api/login', async () => {
+    const body = { username: 'testuser', password: '123456' };
+    const headers = { 'Content-Type': 'application/json' };
+    const options = { method: 'post', body: JSON.stringify(body), headers };
+
+    const response = await fetch(`${BASE_URL}/api/login`, options);
+    const responseJSON = await response.json();
+    console.log(responseJSON)
+
+    expect(responseJSON).toBeDefined();
+    expect(responseJSON.token).toBeDefined();
+    // expect(responseJSON.username).toEqual('testuser');
+    // expect(responseJSON.pages).toBeDefined();
+  })
+
   test('GET /api/user/:username', async () => {
     const response = await fetch(`${BASE_URL}/api/user/testuser`)
     const responseJSON = await response.json();

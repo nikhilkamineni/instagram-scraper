@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const cheerio = require('cheerio');
+const cors = require('cors');
 const fetch = require('node-fetch');
 const helmet = require('helmet');
-const userRouter = require('./User/UserRouter');
-const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
+const userRouter = require('./User/UserRouter');
 const User = require('./User/UserModel');
+
 const SECRET = process.env.SECRET;
 const app = express();
 
@@ -87,8 +89,9 @@ app.post('/api/register', async (req, res) => {
 
 // Login user
 app.post('/api/login', (req, res) => {
+  console.log(req.body)
   let { username, password } = req.body;
-  username = username.toLowerCase();
+  // username = username.toLowerCase();
 
   // Error handling
   if (!username || !password) {
