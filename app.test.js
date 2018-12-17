@@ -79,12 +79,9 @@ describe('app.js test suite', () => {
 
     const response = await fetch(`${BASE_URL}/api/login`, options);
     const responseJSON = await response.json();
-    console.log(responseJSON)
 
     expect(responseJSON).toBeDefined();
     expect(responseJSON.token).toBeDefined();
-    // expect(responseJSON.username).toEqual('testuser');
-    // expect(responseJSON.pages).toBeDefined();
   })
 
   test('GET /api/user/:username', async () => {

@@ -15,20 +15,16 @@ class App extends Component {
     authenticated: false
   };
 
-  getUserData = async () => {
+  getUserData = async username => {
     try {
-      const url = `${API_URL}/api/user/5bc38c93642e225002c834e7`;
+      const url = `${API_URL}/api/user/${username}`;
       const response = await fetch(url);
       const userData = await response.json();
-      this.setState({ user: userData });
+      this.setState({ user: userData, pages: userData.pages });
     } catch (error) {
       console.error(error);
     }
   };
-
-  componentDidMount() {
-    // this.getUserData();
-  }
 
   handleViewPage = async page => {
     if (this.state.pageBeingViewed === page)
@@ -41,7 +37,7 @@ class App extends Component {
 
   handleDeletePage = async pageId => {
     try {
-      const url = `${process.env.REACT_APP_API_URL}/api/user/deletePage`;
+      const url = `${API_URL}/api/user/deletePage`;
       const userId = this.state.user._id;
       const body = { userId, pageId };
       const options = {
@@ -56,6 +52,26 @@ class App extends Component {
       console.error(err);
     }
   };
+
+  handleLogin = async (username, password) => {
+    try {
+      const url = `${API_URL}/api/login`;
+      const body = { username, password };
+      const options = {
+        method: 'post',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' }
+      };
+      const response = await fetch(url, options);
+      const json = await response.json();
+      const token = json.token;
+      if (token)
+        localStorage.setItem('token', token);
+      else console.error('Token was not retrieved!')
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   handleSorted = e => {
     this.setState({ sort: e.target.value });
@@ -81,7 +97,6 @@ class App extends Component {
       pages = pages.sort((a, b) => {
         return a.props.handle.charCodeAt(0) - b.props.handle.charCodeAt(0);
       });
-    console.log(pages);
 
     return (
       <div className="App">
@@ -98,7 +113,7 @@ class App extends Component {
           </div>
         ) : (
           <div className="App__Auth">
-            <Login />
+            <Login handleLogin={this.handleLogin}/>
           </div>
         )}
       </div>
