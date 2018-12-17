@@ -101,13 +101,13 @@ app.post('/api/login', (req, res) => {
   // Find User model matching the provided username
   User.findOne({ username }, (err, user) => {
     if (err)
-      return res.status(403).json({ error: 'Invalid username of password!' });
+      return res.status(403).json({ error: 'Invalid username or password!' });
     if (user === null)
       return res.status(422).json({ error: 'User does not exist' });
 
-    user.checkPassword(password, (nonMatch, isMatch) => {
-      if (nonMatch)
-        return res.status(422).json({ error: 'Incorrect password' });
+    // Compare password using UserSchema method
+    user.checkPassword(password, (error, isMatch) => {
+      if (error) return res.status(422).json({ error })
       if (isMatch) {
         const payload = { username: user.username };
         const token = jwt.sign(payload, SECRET);

@@ -32,7 +32,7 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.methods.checkPassword = function(passwordAttempt, cb) {
   bcrypt.compare(passwordAttempt, this.password, (err, isMatch) => {
-    if (!isMatch) return cb(err);
+    if (!isMatch) return cb('Password does not match!');
     cb(null, isMatch);
   });
 };

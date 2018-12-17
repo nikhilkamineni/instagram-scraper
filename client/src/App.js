@@ -66,8 +66,9 @@ class App extends Component {
       const json = await response.json();
       const token = json.token;
       if (token)
-        localStorage.setItem('token', token);
-      else console.error('Token was not retrieved!')
+        return localStorage.setItem('token', token);
+      else if (json.error) return console.error(json.error)
+      else return console.error('Token was not retrieved!')
     } catch (err) {
       console.error(err);
     }
