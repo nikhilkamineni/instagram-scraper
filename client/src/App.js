@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Login from './Components/Auth/Login.js';
 import Page from './Components/Page/Page.js';
 import SavePage from './Components/SavePage/SavePage.js';
 
@@ -8,8 +9,10 @@ const API_URL = process.env.REACT_APP_API_URL;
 class App extends Component {
   state = {
     user: {},
+    pages: [],
     sort: 'oldestToNewest',
-    pageBeingViewed: ''
+    pageBeingViewed: '',
+    authenticated: false
   };
 
   getUserData = async () => {
@@ -24,7 +27,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getUserData();
+    // this.getUserData();
   }
 
   handleViewPage = async page => {
@@ -59,35 +62,44 @@ class App extends Component {
   };
 
   render() {
-    const sort = this.state.sort
-    let pages = this.state.user.pages ? (this.state.user.pages.map(page => (
-      <Page
-        key={page._id}
-        handle={page.handle}
-        id={page._id}
-        handleDeletePage={this.handleDeletePage}
-        handleViewPage={this.handleViewPage}
-        beingViewed={this.state.pageBeingViewed === page.handle}
-      />)
-    )) : [];
+    const sort = this.state.sort;
+    let pages = this.state.user.pages
+      ? this.state.pages.map(page => (
+          <Page
+            key={page._id}
+            handle={page.handle}
+            id={page._id}
+            handleDeletePage={this.handleDeletePage}
+            handleViewPage={this.handleViewPage}
+            beingViewed={this.state.pageBeingViewed === page.handle}
+          />
+        ))
+      : [];
 
     if (sort === 'newestToOldest') pages = pages.reverse();
-    if (sort === 'alphabetical') pages = pages.sort((a, b) => {
-      return a.props.handle.charCodeAt(0) - b.props.handle.charCodeAt(0);
-    })
-    console.log(pages)
+    if (sort === 'alphabetical')
+      pages = pages.sort((a, b) => {
+        return a.props.handle.charCodeAt(0) - b.props.handle.charCodeAt(0);
+      });
+    console.log(pages);
 
     return (
       <div className="App">
-        {this.state.user && <h1>Hello {this.state.user.username}</h1>}
-        <SavePage id={this.state.user._id} getUserData={this.getUserData} />
-        <select id="sort" name="sort" onChange={this.handleSorted}>
-          <option value="oldestToNewest">Oldest to Newest</option>
-          <option value="newestToOldest">Newest to Oldest</option>
-          <option value="alphabetical">Alphabetical</option>
-        </select>
-        {pages ? pages : (
-          <h3>Loading...</h3>
+        {this.state.authenticated ? (
+          <div className="App__Container">
+            {this.state.user && <h1>Hello {this.state.user.username}</h1>}
+            <SavePage id={this.state.user._id} getUserData={this.getUserData} />
+            <select id="sort" name="sort" onChange={this.handleSorted}>
+              <option value="oldestToNewest">Oldest to Newest</option>
+              <option value="newestToOldest">Newest to Oldest</option>
+              <option value="alphabetical">Alphabetical</option>
+            </select>
+            {pages ? pages : <h3>Loading...</h3>}
+          </div>
+        ) : (
+          <div className="App__Auth">
+            <Login />
+          </div>
         )}
       </div>
     );
