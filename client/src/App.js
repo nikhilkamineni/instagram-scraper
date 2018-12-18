@@ -65,14 +65,16 @@ class App extends Component {
       const response = await fetch(url, options);
       const json = await response.json();
       const token = json.token;
-      if (token)
-        return localStorage.setItem('token', token);
-      else if (json.error) return console.error(json.error)
-      else return console.error('Token was not retrieved!')
+
+      if (token) {
+        localStorage.setItem('token', token);
+        return this.setState({ authenticated: true });
+      } else if (json.error) return console.error(json.error);
+      else return console.error('Token was not retrieved!');
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   handleSorted = e => {
     this.setState({ sort: e.target.value });
@@ -114,7 +116,7 @@ class App extends Component {
           </div>
         ) : (
           <div className="App__Auth">
-            <Login handleLogin={this.handleLogin}/>
+            <Login handleLogin={this.handleLogin} />
           </div>
         )}
       </div>
