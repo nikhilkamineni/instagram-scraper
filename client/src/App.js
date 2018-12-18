@@ -15,7 +15,7 @@ class App extends Component {
     authenticated: false
   };
 
-  getUserData = async username => {
+  getUser = async () => {
     const token = localStorage.getItem('token');
     try {
       const url = `${API_URL}/api/user/getUser`;
@@ -76,6 +76,7 @@ class App extends Component {
 
       if (token) {
         localStorage.setItem('token', token);
+        await this.getUser();
         return this.setState({ authenticated: true });
       } else if (json.error) return console.error(json.error);
       else return console.error('Token was not retrieved!');
