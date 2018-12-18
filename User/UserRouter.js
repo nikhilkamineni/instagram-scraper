@@ -5,7 +5,7 @@ const userRouter = express.Router();
 
 userRouter.get('/getUser', async (req, res) => {
   try {
-    const username = req.user.username;
+    const username = req.user.username; // passed on from authenticate middleware
     const user = await User.findOne({ username });
     res.status(200).json(user);
   } catch (error) {
@@ -17,10 +17,11 @@ userRouter.get('/getUser', async (req, res) => {
 
 userRouter.post('/savePage', async (req, res) => {
   try {
-    const { id, handle } = req.body;
+    const handle = req.body.handle;
+    const username = req.user.username // passed on from authenticate middleware
 
     const conditions = {
-      _id: id,
+      username,
       'pages.handle': { $ne: handle }
     };
 
