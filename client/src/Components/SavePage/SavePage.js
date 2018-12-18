@@ -5,16 +5,19 @@ const SavePage = props => {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const id = props.id;
     const handle = event.target.handle.value;
+    const token = localStorage.getItem('token');
 
-    if (id && handle) {
+    if (token && handle) {
       const url = `${process.env.REACT_APP_API_URL}/api/user/savePage`;
-      const body = { id, handle };
+      const body = { handle };
       const options = {
         method: 'post',
         body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
       };
 
       await fetch(url, options);
@@ -32,7 +35,8 @@ const SavePage = props => {
   return (
     <form onSubmit={handleSubmit} className="SavePageForm">
       <h3>Save a new page:</h3>
-      <input id="SavePageForm__Input" type="text" name="handle" /><input type="submit" /> <br/>
+      <input id="SavePageForm__Input" type="text" name="handle" />
+      <input type="submit" /> <br />
     </form>
   );
 };

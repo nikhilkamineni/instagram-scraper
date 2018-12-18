@@ -44,7 +44,8 @@ userRouter.post('/savePage', async (req, res) => {
 
 userRouter.put('/deletePage', async (req, res) => {
   try {
-    const { userId, pageId } = req.body;
+    const pageId = req.body.pageId;
+    const username = req.user.username;
     const pageToRemove = {
       $pull: {
         pages: {
@@ -53,8 +54,8 @@ userRouter.put('/deletePage', async (req, res) => {
       }
     };
     const options = { new: true };
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
+    const updatedUser = await User.findByOneAndUpdate(
+      { username },
       pageToRemove,
       options
     );

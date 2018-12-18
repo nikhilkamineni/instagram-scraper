@@ -16,9 +16,17 @@ class App extends Component {
   };
 
   getUserData = async username => {
+    const token = localStorage.getItem('token');
     try {
-      const url = `${API_URL}/api/user/${username}`;
-      const response = await fetch(url);
+      const url = `${API_URL}/api/user/getUser`;
+      const options = {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+      const response = await fetch(url, options);
       const userData = await response.json();
       this.setState({ user: userData, pages: userData.pages });
     } catch (error) {
