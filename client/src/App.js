@@ -15,6 +15,14 @@ class App extends Component {
     authenticated: false
   };
 
+  async componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      await this.getUser();
+      return this.setState({ authenticated: true })
+    }
+  }
+
   getUser = async () => {
     const token = localStorage.getItem('token');
     try {
