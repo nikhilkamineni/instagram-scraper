@@ -123,7 +123,7 @@ class App extends Component {
         {this.state.authenticated ? (
           <div className="App__Container">
             {this.state.user && <h1>Hello {this.state.user.username}</h1>}
-            <SavePage id={this.state.user._id} getUserData={this.getUserData} />
+            <SavePage id={this.state.user._id} getUser={this.getUser} />
             <select id="sort" name="sort" onChange={this.handleSorted}>
               <option value="oldestToNewest">Oldest to Newest</option>
               <option value="newestToOldest">Newest to Oldest</option>

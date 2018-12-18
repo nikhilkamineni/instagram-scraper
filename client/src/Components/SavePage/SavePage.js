@@ -23,7 +23,7 @@ const SavePage = props => {
       await fetch(url, options);
 
       // TODO: Add error handling
-      props.getUserData();
+      props.getUser();
 
       // clear form element after hitting submit
       document.getElementById('SavePageForm__Input').value = '';
