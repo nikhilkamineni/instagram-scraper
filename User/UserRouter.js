@@ -3,30 +3,17 @@ const User = require('./UserModel');
 
 const userRouter = express.Router();
 
-userRouter.get('/:username', async (req, res) => {
+userRouter.get('/getUser', async (req, res) => {
   try {
-    const username = req.params.username;
+    const username = req.user.username;
     const user = await User.findOne({ username });
     res.status(200).json(user);
   } catch (error) {
-    const message = 'Error getting User with that ID';
+    const message = 'Internal Server Error!';
     console.error(`${message}\n${error}`);
     res.status(500).json({ message, error });
   }
-});
-
-userRouter.post('/saveUser', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const newUser = new User({ username, password });
-    const savedUser = await newUser.save();
-    res.status(200).json(savedUser);
-  } catch (error) {
-    const message = 'Error saving new user';
-    console.error(`${message}\n${error}`);
-    res.status(500).json({ message, error });
-  }
-});
+})
 
 userRouter.post('/savePage', async (req, res) => {
   try {

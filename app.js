@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const userRouter = require('./User/UserRouter');
 const User = require('./User/UserModel');
+const authenticate = require('./User/authenticate.js');
 
 const SECRET = process.env.SECRET;
 const app = express();
@@ -15,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(helmet());
-app.use('/api/user', userRouter);
+app.use('/api/user', authenticate, userRouter);
 
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'STATUS: OK' });
@@ -107,7 +108,7 @@ app.post('/api/login', (req, res) => {
 
     // Compare password using UserSchema method
     user.checkPassword(password, (error, isMatch) => {
-      if (error) return res.status(422).json({ error })
+      if (error) return res.status(422).json({ error });
       if (isMatch) {
         const payload = { username: user.username };
         const token = jwt.sign(payload, SECRET);
