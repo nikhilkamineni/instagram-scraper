@@ -5,6 +5,7 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
+const morgan = require('morgan');
 
 const userRouter = require('./User/UserRouter');
 const User = require('./User/UserModel');
@@ -16,6 +17,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(helmet());
+app.use(morgan('tiny'));
+
 app.use('/api/user', authenticate, userRouter);
 
 app.get('/', (req, res) => {
