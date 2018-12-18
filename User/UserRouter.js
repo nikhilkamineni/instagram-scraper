@@ -54,7 +54,7 @@ userRouter.put('/deletePage', async (req, res) => {
       }
     };
     const options = { new: true };
-    const updatedUser = await User.findByOneAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
       { username },
       pageToRemove,
       options

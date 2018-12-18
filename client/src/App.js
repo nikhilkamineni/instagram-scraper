@@ -19,7 +19,7 @@ class App extends Component {
     const token = localStorage.getItem('token');
     if (token) {
       await this.getUser();
-      return this.setState({ authenticated: true })
+      return this.setState({ authenticated: true });
     }
   }
 
@@ -53,17 +53,22 @@ class App extends Component {
 
   handleDeletePage = async pageId => {
     try {
-      const url = `${API_URL}/api/user/deletePage`;
-      const userId = this.state.user._id;
-      const body = { userId, pageId };
-      const options = {
-        method: 'put',
-        body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json' }
-      };
-      const response = await fetch(url, options);
-      const json = await response.json();
-      this.setState({ user: json.updatedUser });
+      const token = localStorage.getItem('token');
+      if (token && pageId) {
+        const url = `${API_URL}/api/user/deletePage`;
+        const body = { pageId };
+        const options = {
+          method: 'put',
+          body: JSON.stringify(body),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        };
+        const response = await fetch(url, options);
+        const json = await response.json();
+        this.setState({ user: json.updatedUser, pages: json.updatedUser.pages });
+      }
     } catch (err) {
       console.error(err);
     }
@@ -99,7 +104,7 @@ class App extends Component {
 
   render() {
     const sort = this.state.sort;
-    let pages = this.state.user.pages
+    let pages = this.state.pages
       ? this.state.pages.map(page => (
           <Page
             key={page._id}
@@ -123,7 +128,7 @@ class App extends Component {
         {this.state.authenticated ? (
           <div className="App__Container">
             {this.state.user && <h1>Hello {this.state.user.username}</h1>}
-            <SavePage id={this.state.user._id} getUser={this.getUser} />
+            <SavePage getUser={this.getUser} />
             <select id="sort" name="sort" onChange={this.handleSorted}>
               <option value="oldestToNewest">Oldest to Newest</option>
               <option value="newestToOldest">Newest to Oldest</option>
