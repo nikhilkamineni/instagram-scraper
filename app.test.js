@@ -60,11 +60,17 @@ describe('app.js test suite', () => {
     expect(Array.isArray(data.posts)).toBe(true);
   });
 
+  // Initial test user; token will be added to this object in /login test
+  const testUser = {
+    username: 'testUser',
+    password: '123456'
+  }
+
   test('POST /api/register', async () => {
     const newUser = await fetch(`${BASE_URL}/api/register`, {
       method: 'post',
       body: JSON.stringify({
-        username: 'testRegisterUser',
+        username: 'testUser',
         password: '123456'
       }),
       headers: { 'Content-Type': 'application/json' }
@@ -72,34 +78,33 @@ describe('app.js test suite', () => {
     const newUserJSON = await newUser.json();
 
     expect(newUserJSON).toBeDefined();
-    expect(newUserJSON.user.username).toEqual('testRegisterUser');
+    expect(newUserJSON.user.username).toEqual('testUser');
     expect(newUserJSON.user.pages).toBeDefined();
     expect(newUserJSON.user._id).toBeDefined();
     expect(newUserJSON.message).toEqual('New user succesfully registered!');
   });
 
-  let testUserToken;
   test('POST /api/login', async () => {
     const token = await fetch(`${BASE_URL}/api/login`, {
       method: 'post',
-      body: JSON.stringify({ username: 'testRegisterUser', password: '123456' }),
+      body: JSON.stringify({ username: 'testUser', password: '123456' }),
       headers: { 'Content-Type': 'application/json' }
     });
     const tokenJSON = await token.json();
 
-    testUserToken = tokenJSON.token;
+    testUser.token = tokenJSON.token;
     expect(tokenJSON).toBeDefined();
     expect(tokenJSON.token).toBeDefined();
   });
 
   test('GET /api/user/getUser', async () => {
     const response = await fetch(`${BASE_URL}/api/user/getUser`, {
-      headers: { Authorization: `Bearer ${testUserToken}` }
+      headers: { Authorization: `Bearer ${testUser.token}` }
     });
     const responseJSON = await response.json();
 
     expect(responseJSON).toBeDefined();
-    expect(responseJSON.username).toEqual('testRegisterUser');
+    expect(responseJSON.username).toEqual('testUser');
     expect(responseJSON._id).toBeDefined();
     expect(responseJSON.pages).toBeDefined();
   });
