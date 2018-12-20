@@ -5,10 +5,11 @@ const http = require('http');
 const mongoose = require('mongoose');
 
 const PORT = 9000;
-const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+const BASE_URL = `http://localhost:${PORT}`;
 const app = require('./app.js');
 
 describe('app.js test suite', () => {
+  /* SETUP */
   beforeAll(async () => {
     // Startup test DB
     const mongod = new MongoMemoryServer();
@@ -31,17 +32,18 @@ describe('app.js test suite', () => {
 
   // Use `http` to create a server due to .close() being removed from express
   // https://github.com/expressjs/express/issues/1101#issuecomment-13668964
-  const server = http.createServer(app);
-  beforeEach(() => {
-    server.listen(PORT);
+  const testServer = http.createServer(app);
+  beforeEach(async () => {
+    await testServer.listen(PORT);
   });
 
   afterEach(() => {
-    server.close();
+    testServer.close();
   });
 
+  /* TESTS */
   test('GET /', async () => {
-    const response = await fetch(`${BASE_URL}/`);
+    const response = await fetch(`${BASE_URL}`);
     const data = await response.json();
     expect(response.status).toBe(200);
     expect(data).toBeDefined();
@@ -59,37 +61,46 @@ describe('app.js test suite', () => {
   });
 
   test('POST /api/register', async () => {
-    const body = { username: 'testuser', password: '123456' };
-    const headers = { 'Content-Type': 'application/json' };
-    const options = { method: 'post', body: JSON.stringify(body), headers };
+    const newUser = await fetch(`${BASE_URL}/api/register`, {
+      method: 'post',
+      body: JSON.stringify({
+        username: 'testRegisterUser',
+        password: '123456'
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const newUserJSON = await newUser.json();
 
-    const response = await fetch(`${BASE_URL}/api/register`, options);
-    const responseJSON = await response.json();
-
-    expect(responseJSON).toBeDefined();
-    expect(responseJSON.user.username).toEqual('testuser');
-    expect(responseJSON.user.pages).toBeDefined();
-    expect(responseJSON.message).toEqual('New user succesfully registered!');
+    expect(newUserJSON).toBeDefined();
+    expect(newUserJSON.user.username).toEqual('testRegisterUser');
+    expect(newUserJSON.user.pages).toBeDefined();
+    expect(newUserJSON.user._id).toBeDefined();
+    expect(newUserJSON.message).toEqual('New user succesfully registered!');
   });
 
+  let testUserToken;
   test('POST /api/login', async () => {
-    const body = { username: 'testuser', password: '123456' };
-    const headers = { 'Content-Type': 'application/json' };
-    const options = { method: 'post', body: JSON.stringify(body), headers };
+    const token = await fetch(`${BASE_URL}/api/login`, {
+      method: 'post',
+      body: JSON.stringify({ username: 'testRegisterUser', password: '123456' }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const tokenJSON = await token.json();
 
-    const response = await fetch(`${BASE_URL}/api/login`, options);
+    testUserToken = tokenJSON.token;
+    expect(tokenJSON).toBeDefined();
+    expect(tokenJSON.token).toBeDefined();
+  });
+
+  test('GET /api/user/getUser', async () => {
+    const response = await fetch(`${BASE_URL}/api/user/getUser`, {
+      headers: { Authorization: `Bearer ${testUserToken}` }
+    });
     const responseJSON = await response.json();
 
     expect(responseJSON).toBeDefined();
-    expect(responseJSON.token).toBeDefined();
-  })
-
-  test('GET /api/user/:username', async () => {
-    const response = await fetch(`${BASE_URL}/api/user/testuser`)
-    const responseJSON = await response.json();
-
-    expect(responseJSON).toBeDefined();
-    expect(responseJSON.username).toEqual('testuser');
+    expect(responseJSON.username).toEqual('testRegisterUser');
+    expect(responseJSON._id).toBeDefined();
     expect(responseJSON.pages).toBeDefined();
-  })
+  });
 });
