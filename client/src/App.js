@@ -12,7 +12,8 @@ class App extends Component {
     pages: [],
     sort: 'oldestToNewest',
     pageBeingViewed: '',
-    authenticated: false
+    authenticated: false,
+    mousePosition: { x: 50, y: 50 }
   };
 
   async componentDidMount() {
@@ -22,6 +23,12 @@ class App extends Component {
       return this.setState({ authenticated: true });
     }
   }
+
+  _onMouseMove = e => {
+    this.setState({
+      mousePosition: { x: e.clientX, y: e.clientY }
+    });
+  };
 
   getUser = async () => {
     const token = localStorage.getItem('token');
@@ -67,7 +74,10 @@ class App extends Component {
         };
         const response = await fetch(url, options);
         const json = await response.json();
-        this.setState({ user: json.updatedUser, pages: json.updatedUser.pages });
+        this.setState({
+          user: json.updatedUser,
+          pages: json.updatedUser.pages
+        });
       }
     } catch (err) {
       console.error(err);
@@ -126,8 +136,28 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.authenticated ? (
-          <div className="App__Container">
-            {this.state.user && <h1>Hello {this.state.user.username}</h1>}
+          <div className="App__Container" onMouseMove={this._onMouseMove}>
+            {this.state.mousePosition.y < 40 && (
+              <div
+                className="menu"
+                style={{
+                  position: 'fixed',
+                  top: '0',
+                  left: '0',
+                  display: 'flex',
+                  flexFlow: 'row nowrap',
+                  justifyContent: 'space-between',
+                  padding: '5px 15px',
+                  alignItems: 'center',
+                  height: '50px',
+                  width: '100vw',
+                  background: 'rgba(0, 0, 0, 0.7)'
+                }}
+              >
+                {this.state.user && <h1>Hello {this.state.user.username}</h1>}
+                <button>sign out</button>
+              </div>
+            )}
             <SavePage getUser={this.getUser} />
             <select id="sort" name="sort" onChange={this.handleSorted}>
               <option value="oldestToNewest">Oldest to Newest</option>
