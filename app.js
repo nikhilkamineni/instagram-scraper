@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
+const path = require('path');
 
 const userRouter = require('./User/UserRouter');
 const User = require('./User/UserModel');
@@ -14,10 +15,11 @@ const authenticate = require('./User/authenticate.js');
 const SECRET = process.env.SECRET;
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 app.use(helmet());
 app.use(morgan('tiny'));
+app.use(cors({ origin: '*', credentials: true }));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('/api/user', authenticate, userRouter);
 
