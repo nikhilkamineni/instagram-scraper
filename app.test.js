@@ -42,8 +42,8 @@ describe('app.js test suite', () => {
   });
 
   /* TESTS */
-  test('GET /', async () => {
-    const response = await fetch(`${BASE_URL}`);
+  test('GET /api', async () => {
+    const response = await fetch(`${BASE_URL}/api`);
     const data = await response.json();
     expect(response.status).toBe(200);
     expect(data).toBeDefined();
