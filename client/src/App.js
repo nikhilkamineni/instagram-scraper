@@ -108,6 +108,11 @@ class App extends Component {
     }
   };
 
+  handleLogout = () => {
+    localStorage.removeItem('token');
+    this.setState({ authenticated: false });
+  };
+
   handleSorted = e => {
     this.setState({ sort: e.target.value });
   };
@@ -155,7 +160,7 @@ class App extends Component {
                 }}
               >
                 {this.state.user && <h1>Hello {this.state.user.username}</h1>}
-                <button>sign out</button>
+                <button onClick={this.handleLogout}>sign out</button>
               </div>
             )}
             <SavePage getUser={this.getUser} />
