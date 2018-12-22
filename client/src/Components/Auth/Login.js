@@ -1,4 +1,5 @@
 import React from 'react';
+import './Login.css';
 
 const Login = props => {
   const handleSubmit = e => {
@@ -10,15 +11,16 @@ const Login = props => {
 
   return (
     <form
+      className="LoginForm"
       onSubmit={e => {
         handleSubmit(e);
       }}
     >
       Username
-      <input type="text" name="username" />
+      <input className="LoginForm__username"type="text" name="username" />
       Password
-      <input type="password" name="password" />
-      <input type="submit" />
+      <input className="LoginForm__password"type="password" name="password" />
+      <input className="LoginForm__submit"type="submit" naem="submit" />
     </form>
   );
 };
