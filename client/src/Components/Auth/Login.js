@@ -18,9 +18,11 @@ const Login = props => {
     >
       Username
       <input className="LoginForm__username"type="text" name="username" />
+      <br />
       Password
       <input className="LoginForm__password"type="password" name="password" />
-      <input className="LoginForm__submit"type="submit" naem="submit" />
+      <br />
+      <input className="LoginForm__submit"type="submit" value="submit" />
     </form>
   );
 };

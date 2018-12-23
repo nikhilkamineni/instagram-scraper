@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Login from './Components/Auth/Login.js';
+import Register from './Components/Auth/Register.js';
 import Page from './Components/Page/Page.js';
 import SavePage from './Components/SavePage/SavePage.js';
 
@@ -173,7 +174,10 @@ class App extends Component {
           </div>
         ) : (
           <div className="App__Auth">
+            Login
             <Login handleLogin={this.handleLogin} />
+            Register
+            <Register />
           </div>
         )}
       </div>
