@@ -192,9 +192,8 @@ class App extends Component {
           </div>
         ) : (
           <div className="App__Auth">
-            Login
+            <h1>zen-gram</h1>
             <Login handleLogin={this.handleLogin} />
-            Register
             <Register handleRegister={this.handleRegister} />
           </div>
         )}

@@ -15,22 +15,25 @@ const Register = props => {
     props.handleRegister(username, password);
   };
   return (
-    <form
-      onSubmit={e => {
-        handleSubmit(e);
-      }}
-    >
-      Username
-      <input type="text" name="username" />
-      <br />
-      Password
-      <input type="password" name="password" />
-      <br />
-      Confirm Password
-      <input type="password" name="confirmPassword" />
-      <br />
-      <input type="submit" value="submit" />
-    </form>
+    <div>
+      <h3>Register</h3>
+      <form
+        onSubmit={e => {
+          handleSubmit(e);
+        }}
+      >
+        Username
+        <input type="text" name="username" />
+        <br />
+        Password
+        <input type="password" name="password" />
+        <br />
+        Confirm Password
+        <input type="password" name="confirmPassword" />
+        <br />
+        <input type="submit" value="submit" />
+      </form>
+    </div>
   );
 };
 

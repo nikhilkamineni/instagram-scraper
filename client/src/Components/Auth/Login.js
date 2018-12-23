@@ -10,20 +10,27 @@ const Login = props => {
   };
 
   return (
-    <form
-      className="LoginForm"
-      onSubmit={e => {
-        handleSubmit(e);
-      }}
-    >
-      Username
-      <input className="LoginForm__username"type="text" name="username" />
-      <br />
-      Password
-      <input className="LoginForm__password"type="password" name="password" />
-      <br />
-      <input className="LoginForm__submit"type="submit" value="submit" />
-    </form>
+    <div className="Login">
+      <h3>Login</h3>
+      <form
+        className="LoginForm"
+        onSubmit={e => {
+          handleSubmit(e);
+        }}
+      >
+        Username
+        <input className="LoginForm__username" type="text" name="username" />
+        <br />
+        Password
+        <input
+          className="LoginForm__password"
+          type="password"
+          name="password"
+        />
+        <br />
+        <input className="LoginForm__submit" type="submit" value="submit" />
+      </form>
+    </div>
   );
 };
 
