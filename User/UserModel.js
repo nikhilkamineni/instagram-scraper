@@ -8,7 +8,8 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
-    required: true
+    required: true,
+    spares: true
   },
   password: {
     type: String,
@@ -16,6 +17,7 @@ const UserSchema = new mongoose.Schema({
   },
   pages: [
     {
+      required: false,
       handle: { type: String },
       dateAdded: { type: Date, default: Date.now }
     }

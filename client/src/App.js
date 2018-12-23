@@ -85,6 +85,24 @@ class App extends Component {
     }
   };
 
+  handleRegister = async (username, password) => {
+    try {
+      const url = `${API_URL}/api/register`;
+      const body = { username, password };
+      const options = {
+        method: 'post',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' }
+      };
+      const response = await fetch(url, options);
+      console.log(response.status);
+      const json = await response.json();
+      console.log(json);
+    } catch (err) {
+      console.err(err);
+    }
+  };
+
   handleLogin = async (username, password) => {
     try {
       const url = `${API_URL}/api/login`;
@@ -177,7 +195,7 @@ class App extends Component {
             Login
             <Login handleLogin={this.handleLogin} />
             Register
-            <Register />
+            <Register handleRegister={this.handleRegister} />
           </div>
         )}
       </div>
