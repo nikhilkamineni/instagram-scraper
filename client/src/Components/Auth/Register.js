@@ -2,10 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const RegisterStyled = styled.div`
-  border: 1px solid grey;
+  border: 1px solid #000000;
   width: 300px;
   margin: 30px auto;
   padding: 10px;
+  background-color: #222222;
+  
+  h2 {
+    color: #BBB;
+  }
 
   .textInput {
     border: none;
@@ -19,6 +24,11 @@ const RegisterStyled = styled.div`
     margin-bottom: 20px;
   }
 
+  .textInputLabel {
+    font-weight: bold;
+    color: #AAA;
+  }
+
   .form__submit {
     padding-bottom: 20px;
     padding-top: 10px;
@@ -30,16 +40,13 @@ const RegisterStyled = styled.div`
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
-      color: white;
+      color: #AAA;
       background-color: #000000;
       border: none;
       &:hover {
         border: 1px solid grey;
       }
     }
-  }
-  .textInputLabel {
-    font-weight: bold;
   }
 `;
 

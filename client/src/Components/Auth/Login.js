@@ -2,19 +2,29 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const LoginStyled = styled.div`
-  border: 1px solid grey;
+  border: 1px solid #555;
   width: 300px;
   margin: 30px auto;
   padding: 10px;
 
+  h2 {
+    color: #BBB;
+  }
+
   .textInput {
     border: none;
     height: 20px;
+    width: 180px;
     background-color: #444444;
-    color: white;
+    color: #AAA;
     font-weight: bold;
     font-size: 20px;
     padding: 10px;
+  }
+
+  .textInputLabel {
+    font-weight: bold;
+    color: #AAA;
   }
 
   .form__submit {
@@ -28,7 +38,7 @@ const LoginStyled = styled.div`
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
-      color: white;
+      color: #AAA;
       background-color: #000000;
       border: none;
       &:hover {
@@ -56,12 +66,12 @@ const Login = props => {
         }}
       >
         <div className="form__username">
-          <label style={{ fontWeight: 'bold' }}>Username</label>
+          <label className="textInputLabel">Username</label>
           <br />
           <input className="textInput" type="text" name="username" />
         </div>
         <div className="form__password">
-          <label style={{ fontWeight: 'bold' }}>Password</label>
+          <label className="textInputLabel">Password</label>
           <br />
           <input className="textInput" type="password" name="password" />
         </div>
