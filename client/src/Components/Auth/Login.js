@@ -1,5 +1,22 @@
 import React from 'react';
-import './Login.css';
+import styled from '@emotion/styled';
+
+const LoginStyled = styled.div`
+  border: 1px solid grey;
+  width: 300px;
+  margin: 30px auto;
+  padding: 10px;
+  .form__submit {
+    padding-bottom: 20px;
+    padding-top: 10px;
+    input {
+      width: 80px;
+      height: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+`;
 
 const Login = props => {
   const handleSubmit = e => {
@@ -10,27 +27,33 @@ const Login = props => {
   };
 
   return (
-    <div className="Login">
-      <h3>Login</h3>
+    <LoginStyled>
+      <h2>Login</h2>
       <form
-        className="LoginForm"
+        className="Login__form"
         onSubmit={e => {
           handleSubmit(e);
         }}
       >
-        Username
-        <input className="LoginForm__username" type="text" name="username" />
-        <br />
-        Password
-        <input
-          className="LoginForm__password"
-          type="password"
-          name="password"
-        />
-        <br />
-        <input className="LoginForm__submit" type="submit" value="submit" />
+        <div className="form__username">
+          <label style={{ fontWeight: 'bold' }}>Username</label>
+          <br />
+          <input className="form__username" type="text" name="username" />
+        </div>
+        <div className="form__password">
+          <label style={{ fontWeight: 'bold' }}>Password</label>
+          <br />
+          <input className="form__password" type="password" name="password" />
+        </div>
+        <div className="form__submit">
+          <input
+            className="LoginForm__submit"
+            type="submit"
+            value="submit"
+          />
+        </div>
       </form>
-    </div>
+    </LoginStyled>
   );
 };
 
