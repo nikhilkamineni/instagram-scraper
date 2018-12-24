@@ -7,15 +7,39 @@ const RegisterStyled = styled.div`
   margin: 30px auto;
   padding: 10px;
 
+  .textInput {
+    border: none;
+    height: 20px;
+    width: 180px;
+    background-color: #444444;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
   .form__submit {
     padding-bottom: 20px;
     padding-top: 10px;
+
     input {
-      width: 80px;
+      width: 90px;
       height: 40px;
+      padding: 10px;
+      font-size: 17px;
       font-weight: bold;
       cursor: pointer;
+      color: white;
+      background-color: #000000;
+      border: none;
+      &:hover {
+        border: 1px solid grey;
+      }
     }
+  }
+  .textInputLabel {
+    font-weight: bold;
   }
 `;
 
@@ -43,22 +67,26 @@ const Register = props => {
         }}
       >
         <div className="form__username">
-          <label style={{ fontWeight: 'bold' }}>Username</label>
+          <label className="textInputLabel">
+            Username
+          </label>
           <br />
-          <input type="text" name="username" style={{ fontWeight: 'bold' }} />
+          <input className="textInput" type="text" name="username" />
         </div>
         <div className="form__password">
-          <label style={{ fontWeight: 'bold' }}>Password</label>
+          <label className="textInputLabel">
+            Password
+          </label>
           <br />
-          <input type="password" name="password" />
+          <input className="textInput" type="password" name="password" />
         </div>
         <div className="form__confirmPassword">
-          <label style={{ fontWeight: 'bold' }}>Confirm Password</label>
+          <label className="textInputLabel">Confirm Password</label>
           <br />
-          <input type="password" name="confirmPassword" />
+          <input className="textInput" type="password" name="confirmPassword" />
         </div>
         <div className="form__submit">
-          <input type="submit" value="submit"/>
+          <input type="submit" value="submit" />
         </div>
       </form>
     </RegisterStyled>
