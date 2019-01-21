@@ -9,7 +9,7 @@ const SavePage = props => {
     const token = localStorage.getItem('token');
 
     if (token && handle) {
-      const url = `${process.env.REACT_APP_API_URL}/api/user/savePage`;
+      const url = `${process.env.REACT_APP_API_URL}/api/user/save-page`;
       const body = { handle };
       const options = {
         method: 'post',
