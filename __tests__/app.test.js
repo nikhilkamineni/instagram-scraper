@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
-const app = require('./app.js');
+const app = require('../app.js');
 
 describe('app.js test suite', () => {
   /* SETUP */
@@ -42,7 +42,7 @@ describe('app.js test suite', () => {
   });
 
   /* TESTS */
-  test('GET /api', async () => {
+  test('[GET] /api', async () => {
     const response = await fetch(`${BASE_URL}/api`);
     const data = await response.json();
     expect(response.status).toBe(200);
@@ -50,7 +50,7 @@ describe('app.js test suite', () => {
     expect(data.message).toEqual('STATUS: OK');
   });
 
-  test('GET /api/get-data', async () => {
+  test('[GET] /api/get-data', async () => {
     const handle = 'cats_of_instagram';
     const response = await fetch(`${BASE_URL}/api/get-data?handle=${handle}`);
     const data = await response.json();
@@ -68,7 +68,7 @@ describe('app.js test suite', () => {
 
   // auth routes
   describe('Test for /auth routes', () => {
-    test('POST /api/auth/register', async () => {
+    test('[POST] /api/auth/register', async () => {
       const newUser = await fetch(`${BASE_URL}/api/auth/register`, {
         method: 'post',
         body: JSON.stringify({
@@ -86,23 +86,23 @@ describe('app.js test suite', () => {
       expect(newUserJSON.message).toEqual('New user succesfully registered!');
     });
 
-    test('POST /api/auth/login', async () => {
-      const token = await fetch(`${BASE_URL}/api/auth/login`, {
+    test('[POST] /api/auth/login', async () => {
+      const response = await fetch(`${BASE_URL}/api/auth/login`, {
         method: 'post',
         body: JSON.stringify({ username: 'testUser', password: '123456' }),
         headers: { 'Content-Type': 'application/json' }
       });
-      const tokenJSON = await token.json();
+      const responseJSON = await response.json();
 
-      testUser.token = tokenJSON.token;
-      expect(tokenJSON).toBeDefined();
-      expect(tokenJSON.token).toBeDefined();
+      testUser.token = responseJSON.token;
+      expect(responseJSON).toBeDefined();
+      expect(responseJSON.token).toBeDefined();
     });
   });
 
   // user routes
   describe('Tests for /user routes', () => {
-    test('GET /api/user/get-user', async () => {
+    test('[GET] /api/user/get-user', async () => {
       const response = await fetch(`${BASE_URL}/api/user/get-user`, {
         headers: { Authorization: `Bearer ${testUser.token}` }
       });
@@ -113,5 +113,18 @@ describe('app.js test suite', () => {
       expect(responseJSON._id).toBeDefined();
       expect(responseJSON.pages).toBeDefined();
     });
+
+    test('[POST] /api/user/save-page', async () => {
+      const response = await fetch(`${BASE_URL}/api/user/save-page`, {
+        method: 'post',
+        body: JSON.stringify({ handle: 'cats_of_instagram' }),
+        headers: { Authorization: `Bearer ${testUser.token}` }
+      })
+
+      const responseJSON = await response.json();
+
+      expect(responseJSON.username).toEqual(testUser.username);
+      expect(responseJSON.pages.length).toBe(1);
+    })
   });
 });
