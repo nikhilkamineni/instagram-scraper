@@ -8,9 +8,9 @@ const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const path = require('path');
 
-const userRouter = require('./User/UserRouter');
-const User = require('./User/UserModel');
-const authenticate = require('./User/authenticate.js');
+const userRouter = require('./routes/user');
+const User = require('./models/user');
+const authenticate = require('./middleware/authenticate');
 
 const SECRET = process.env.SECRET;
 const app = express();
