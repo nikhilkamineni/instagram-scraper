@@ -1,10 +1,11 @@
-const express = require('express')
+const express = require('express');
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
 const getDataRouter = express.Router();
 
-// Get a User's data
+// Scrape instagram data (page name sent as a query) and return
+// an array containing links to the first page of images
 getDataRouter.get('/', async (req, res) => {
   const handle = req.query.handle;
 

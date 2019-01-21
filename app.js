@@ -19,12 +19,12 @@ app.use(cors({ origin: '*', credentials: true }));
 // Serve up static React build files at root endpoint
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use('/api/auth', authRouter);
-app.use('/api/get-data', getDataRouter);
-app.use('/api/user', authenticate, userRouter);
-
+// API routes
 app.get('/api', (req, res) => {
   res.status(200).json({ message: 'STATUS: OK' });
 });
+app.use('/api/auth', authRouter);
+app.use('/api/get-data', getDataRouter);
+app.use('/api/user', authenticate, userRouter);
 
 module.exports = app;
