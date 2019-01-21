@@ -42,7 +42,7 @@ userRouter.post('/save-page', async (req, res) => {
   }
 });
 
-userRouter.put('/deletePage', async (req, res) => {
+userRouter.put('/delete-page', async (req, res) => {
   try {
     const pageId = req.body.pageId;
     const username = req.user.username;

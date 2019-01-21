@@ -63,7 +63,7 @@ class App extends Component {
     try {
       const token = localStorage.getItem('token');
       if (token && pageId) {
-        const url = `${API_URL}/api/user/deletePage`;
+        const url = `${API_URL}/api/user/delete-page`;
         const body = { pageId };
         const options = {
           method: 'put',
