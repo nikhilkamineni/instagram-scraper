@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cheerio = require('cheerio');
 const cors = require('cors');
@@ -9,16 +8,16 @@ const path = require('path');
 
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
-const User = require('./models/user');
 const authenticate = require('./middleware/authenticate');
 
-const SECRET = process.env.SECRET;
 const app = express();
 
 app.use(express.json());
 app.use(helmet());
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
 app.use(cors({ origin: '*', credentials: true }));
+
+// Serve up static React build files at root endpoint
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('/api/auth', authRouter);
