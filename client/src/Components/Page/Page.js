@@ -11,7 +11,7 @@ class Page extends Component {
 
   async componentDidMount() {
     try {
-      const url = `${process.env.REACT_APP_API_URL}/api/getData?handle=${
+      const url = `${process.env.REACT_APP_API_URL}/api/get-data?handle=${
         this.props.handle
       }`;
 

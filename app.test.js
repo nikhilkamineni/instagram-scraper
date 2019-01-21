@@ -52,7 +52,7 @@ describe('app.js test suite', () => {
 
   test('GET /api/getData', async () => {
     const handle = 'cats_of_instagram';
-    const response = await fetch(`${BASE_URL}/api/getData?handle=${handle}`);
+    const response = await fetch(`${BASE_URL}/api/get-data?handle=${handle}`);
     const data = await response.json();
     expect(response.status).toBe(200);
     expect(data).toBeDefined();

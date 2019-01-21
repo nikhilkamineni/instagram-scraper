@@ -28,7 +28,7 @@ app.get('/api', (req, res) => {
 });
 
 // Get a User's data
-app.get('/api/getData', async (req, res) => {
+app.get('/api/get-data', async (req, res) => {
   const handle = req.query.handle;
 
   try {

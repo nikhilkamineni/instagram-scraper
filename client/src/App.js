@@ -171,7 +171,7 @@ class App extends Component {
                   display: 'flex',
                   flexFlow: 'row nowrap',
                   justifyContent: 'space-between',
-                  padding: '5px 15px',
+                  padding: '5px 25px',
                   alignItems: 'center',
                   height: '50px',
                   width: '100vw',
@@ -179,7 +179,7 @@ class App extends Component {
                 }}
               >
                 {this.state.user && <h1>Hello {this.state.user.username}</h1>}
-                <button onClick={this.handleLogout}>sign out</button>
+                <button style={{ marginRight: '50px' }}onClick={this.handleLogout}>sign out</button>
               </div>
             )}
             <SavePage getUser={this.getUser} />
