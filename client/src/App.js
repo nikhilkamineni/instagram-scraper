@@ -34,7 +34,7 @@ class App extends Component {
   getUser = async () => {
     const token = localStorage.getItem('token');
     try {
-      const url = `${API_URL}/api/user/getUser`;
+      const url = `${API_URL}/api/user/get-user`;
       const options = {
         method: 'get',
         headers: {

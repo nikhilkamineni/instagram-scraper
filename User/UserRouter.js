@@ -3,7 +3,7 @@ const User = require('./UserModel');
 
 const userRouter = express.Router();
 
-userRouter.get('/getUser', async (req, res) => {
+userRouter.get('/get-user', async (req, res) => {
   try {
     const username = req.user.username; // passed on from authenticate middleware
     const user = await User.findOne({ username });

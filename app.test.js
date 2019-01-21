@@ -50,7 +50,7 @@ describe('app.js test suite', () => {
     expect(data.message).toEqual('STATUS: OK');
   });
 
-  test('GET /api/getData', async () => {
+  test('GET /api/get-data', async () => {
     const handle = 'cats_of_instagram';
     const response = await fetch(`${BASE_URL}/api/get-data?handle=${handle}`);
     const data = await response.json();
@@ -97,8 +97,8 @@ describe('app.js test suite', () => {
     expect(tokenJSON.token).toBeDefined();
   });
 
-  test('GET /api/user/getUser', async () => {
-    const response = await fetch(`${BASE_URL}/api/user/getUser`, {
+  test('GET /api/user/get-user', async () => {
+    const response = await fetch(`${BASE_URL}/api/user/get-user`, {
       headers: { Authorization: `Bearer ${testUser.token}` }
     });
     const responseJSON = await response.json();
