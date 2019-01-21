@@ -87,7 +87,7 @@ class App extends Component {
 
   handleRegister = async (username, password) => {
     try {
-      const url = `${API_URL}/api/register`;
+      const url = `${API_URL}/api/auth/register`;
       const body = { username, password };
       const options = {
         method: 'post',
@@ -105,7 +105,7 @@ class App extends Component {
 
   handleLogin = async (username, password) => {
     try {
-      const url = `${API_URL}/api/login`;
+      const url = `${API_URL}/api/auth/login`;
       const body = { username, password };
       const options = {
         method: 'post',

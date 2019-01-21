@@ -64,48 +64,54 @@ describe('app.js test suite', () => {
   const testUser = {
     username: 'testUser',
     password: '123456'
-  }
+  };
 
-  test('POST /api/register', async () => {
-    const newUser = await fetch(`${BASE_URL}/api/register`, {
-      method: 'post',
-      body: JSON.stringify({
-        username: 'testUser',
-        password: '123456'
-      }),
-      headers: { 'Content-Type': 'application/json' }
+  // auth routes
+  describe('Test for /auth routes', () => {
+    test('POST /api/auth/register', async () => {
+      const newUser = await fetch(`${BASE_URL}/api/auth/register`, {
+        method: 'post',
+        body: JSON.stringify({
+          username: 'testUser',
+          password: '123456'
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const newUserJSON = await newUser.json();
+
+      expect(newUserJSON).toBeDefined();
+      expect(newUserJSON.user.username).toEqual('testUser');
+      expect(newUserJSON.user.pages).toBeDefined();
+      expect(newUserJSON.user._id).toBeDefined();
+      expect(newUserJSON.message).toEqual('New user succesfully registered!');
     });
-    const newUserJSON = await newUser.json();
 
-    expect(newUserJSON).toBeDefined();
-    expect(newUserJSON.user.username).toEqual('testUser');
-    expect(newUserJSON.user.pages).toBeDefined();
-    expect(newUserJSON.user._id).toBeDefined();
-    expect(newUserJSON.message).toEqual('New user succesfully registered!');
+    test('POST /api/auth/login', async () => {
+      const token = await fetch(`${BASE_URL}/api/auth/login`, {
+        method: 'post',
+        body: JSON.stringify({ username: 'testUser', password: '123456' }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const tokenJSON = await token.json();
+
+      testUser.token = tokenJSON.token;
+      expect(tokenJSON).toBeDefined();
+      expect(tokenJSON.token).toBeDefined();
+    });
   });
 
-  test('POST /api/login', async () => {
-    const token = await fetch(`${BASE_URL}/api/login`, {
-      method: 'post',
-      body: JSON.stringify({ username: 'testUser', password: '123456' }),
-      headers: { 'Content-Type': 'application/json' }
+  // user routes
+  describe('Tests for /user routes', () => {
+    test('GET /api/user/get-user', async () => {
+      const response = await fetch(`${BASE_URL}/api/user/get-user`, {
+        headers: { Authorization: `Bearer ${testUser.token}` }
+      });
+      const responseJSON = await response.json();
+
+      expect(responseJSON).toBeDefined();
+      expect(responseJSON.username).toEqual('testUser');
+      expect(responseJSON._id).toBeDefined();
+      expect(responseJSON.pages).toBeDefined();
     });
-    const tokenJSON = await token.json();
-
-    testUser.token = tokenJSON.token;
-    expect(tokenJSON).toBeDefined();
-    expect(tokenJSON.token).toBeDefined();
-  });
-
-  test('GET /api/user/get-user', async () => {
-    const response = await fetch(`${BASE_URL}/api/user/get-user`, {
-      headers: { Authorization: `Bearer ${testUser.token}` }
-    });
-    const responseJSON = await response.json();
-
-    expect(responseJSON).toBeDefined();
-    expect(responseJSON.username).toEqual('testUser');
-    expect(responseJSON._id).toBeDefined();
-    expect(responseJSON.pages).toBeDefined();
   });
 });

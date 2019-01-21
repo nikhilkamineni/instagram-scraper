@@ -4,10 +4,10 @@ const cheerio = require('cheerio');
 const cors = require('cors');
 const fetch = require('node-fetch');
 const helmet = require('helmet');
-const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const path = require('path');
 
+const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const User = require('./models/user');
 const authenticate = require('./middleware/authenticate');
@@ -21,6 +21,7 @@ app.use(morgan('tiny'));
 app.use(cors({ origin: '*', credentials: true }));
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+app.use('/api/auth', authRouter);
 app.use('/api/user', authenticate, userRouter);
 
 app.get('/api', (req, res) => {
@@ -69,58 +70,5 @@ app.get('/api/get-data', async (req, res) => {
     console.error(err); // eslint-disable-line
   }
 }); // /api/getData
-
-// Register a new user. Expects JSON object with 'username' and 'password' field
-app.post('/api/register', async (req, res) => {
-  let { username, password } = req.body;
-  // username = username.toLowerCase();
-
-  // Error handling
-  if (!username || !password) {
-    res
-      .status(422)
-      .json({ error: 'You need to provide a username and password' });
-  }
-
-  try {
-    const newUser = new User({ username, password });
-    const user = await newUser.save();
-    return res
-      .status(201)
-      .json({ message: 'New user succesfully registered!', user });
-  } catch (error) {
-    return res.status(500).json({ message: 'Internal server error!', error });
-  }
-});
-
-// Login user
-app.post('/api/login', (req, res) => {
-  let { username, password } = req.body;
-
-  // Error handling
-  if (!username || !password) {
-    res
-      .status(422)
-      .json({ error: 'You need to provide a username and password' });
-  }
-
-  // Find User model matching the provided username
-  User.findOne({ username }, (err, user) => {
-    if (err)
-      return res.status(403).json({ error: 'Invalid username or password!' });
-    if (user === null)
-      return res.status(422).json({ error: 'User does not exist' });
-
-    // Compare password using UserSchema method
-    user.checkPassword(password, (error, isMatch) => {
-      if (error) return res.status(422).json({ error });
-      if (isMatch) {
-        const payload = { username: user.username };
-        const token = jwt.sign(payload, SECRET);
-        return res.status(200).json({ token });
-      }
-    });
-  });
-}); // /api/login
 
 module.exports = app;
