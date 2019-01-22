@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "start-all": "concurrently \"nodemon server.js\" \"cd client;npm start\"",
+    "develop": "concurrently \"nodemon server.js\" \"cd client;npm start\"",
     "test": "jest --watch"
   },
   "keywords": [],
