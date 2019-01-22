@@ -1,18 +1,26 @@
 .Page {
   margin: 5px;
-  border: 2px solid black;
-  // background-color: rgb(58, 58, 58);
-  border: 4px solid green;
+  border: 3px solid #368f8b;
   padding: 10px;
-  color: green;
-
+  color: #368f8b;
   &:hover {
-    border: 4px solid orange;
-    color: orange;
+    border: 3px solid #612940;
+    color: #612940;
   }
 
   &:hover button {
-    color: orange;
+    color: #612940;
+  }
+
+  button {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    font-weight: bold;
+    color: transparent;
+    &:hover {
+      color: #368f8b;
+    }
   }
 
   .Page__header {
@@ -26,17 +34,6 @@
       margin: 2px;
       margin-left: auto;
       width: 100%;
-    }
-
-    button {
-      margin-left: auto;
-      background: transparent;
-      border: none;
-      // color: green;
-      font-weight: bold;
-      &:hover {
-	color: green;
-      }
     }
   }
 

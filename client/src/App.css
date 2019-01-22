@@ -3,3 +3,9 @@
   padding: 0;
   text-align: center;
 }
+.App h1 {
+  font-weight: bold;
+  padding-top: 20px;
+  font-size: 30px;
+  text-decoration: underline;
+}

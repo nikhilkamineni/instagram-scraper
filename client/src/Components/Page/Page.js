@@ -33,7 +33,7 @@ class Page extends Component {
       <div className="Page" id={this.props.handle}>
         <div className="Page__header" id={`${this.props.handle}__header`}>
           <h2 onClick={() => this.props.handleViewPage(this.props.handle)}>
-            @{this.props.handle.toUpperCase()}
+            {this.props.handle.toUpperCase()}
           </h2>
           <button onClick={this.handleOpenSource}>SRC</button>
           <button onClick={() => this.props.handleDeletePage(this.props.id)}>

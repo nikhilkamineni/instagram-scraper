@@ -2,11 +2,18 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const RegisterStyled = styled.div`
-  border: 4px solid orange;
+  border: 3px solid #612940;
   width: 300px;
   margin: 30px auto;
   padding: 20px;
-  color: orange;
+  color: #612940;
+
+  h2 {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+    // font-family: 'Major Mono Display', monospace;
+  }
 
   .Register__form {
     margin-top: 20px;
@@ -16,7 +23,7 @@ const RegisterStyled = styled.div`
     border: none;
     height: 20px;
     width: 180px;
-    background-color: orange;
+    background-color: #612940;
     color: black;
     font-weight: bold;
     font-size: 20px;
@@ -26,12 +33,13 @@ const RegisterStyled = styled.div`
 
   .textInputLabel {
     font-weight: bold;
+    font-style: italic;
   }
 
   .form__submit {
     padding-bottom: 20px;
     padding-top: 10px;
-    color: orange;
+    color: #612940;
 
     input {
       width: 90px;
@@ -39,12 +47,12 @@ const RegisterStyled = styled.div`
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      background-color: orange;
+      background-color: #612940;
       color: black;
-      border: 4px solid orange;
+      border: 3px solid #612940;
       &:hover {
         background-color: black;
-        color: orange;
+        color: #612940;
       }
     }
   }

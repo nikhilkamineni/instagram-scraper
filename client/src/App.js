@@ -161,7 +161,7 @@ class App extends Component {
       <div className="App">
         {this.state.authenticated ? (
           <div className="App__Container" onMouseMove={this._onMouseMove}>
-            {this.state.mousePosition.y < 40 && (
+            {this.state.mousePosition.y < 70 && (
               <div
                 className="menu"
                 style={{
@@ -175,13 +175,13 @@ class App extends Component {
                   alignItems: 'center',
                   height: '50px',
                   width: '100vw',
-                  background: 'green',
+                  background: '#246A73',
                   zIndex: '11'
                 }}
               >
-                ZEN-GRAM
+                <h1>ZEN-GRAM</h1>
                 {this.state.user && <h1>HELLO {this.state.user.username}</h1>}
-                <button style={{ marginRight: '50px' }}onClick={this.handleLogout}>SIGN OUT</button>
+                <button style={{ marginRight: '50px', fontWeight: 'bold', border: 'none' }}onClick={this.handleLogout}>SIGN OUT</button>
               </div>
             )}
             <SavePage getUser={this.getUser} />
@@ -194,7 +194,7 @@ class App extends Component {
           </div>
         ) : (
           <div className="App__Auth">
-            <h1>Zen-gram</h1>
+            <h1>ZEN-GRAM</h1>
             <Login handleLogin={this.handleLogin} />
             <Register handleRegister={this.handleRegister} />
           </div>

@@ -2,30 +2,34 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const LoginStyled = styled.div`
-  border: 4px solid green;
+  border: 4px solid #368F8B;
   width: 300px;
   margin: 30px auto;
   padding: 20px;
+  color: #368F8B;
 
   h2 {
-    color: green;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
   }
 
   .textInput {
     border: none;
     height: 20px;
     width: 180px;
-    background-color: green;
+    background-color: #368F8B;
     color: black;
     font-weight: bold;
     font-size: 20px;
     padding: 10px;
-    border: 4px solid green;
+    border: 4px solid #368F8B;
   }
 
   .textInputLabel {
     font-weight: bold;
-    color: green;
+    font-style: italic;
+    color: #368F8B;
   }
 
   .Login__form {
@@ -47,12 +51,12 @@ const LoginStyled = styled.div`
       font-weight: bold;
       cursor: pointer;
       color: black;
-      background-color: green;
+      background-color: #368F8B;
       border: none;
-      border: 4px solid green;
+      border: 4px solid #368F8B;
       &:hover {
         background-color: black;
-        color: green;
+        color: #368F8B;
       }
     }
   }
