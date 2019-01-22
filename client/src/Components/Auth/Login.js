@@ -2,29 +2,38 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const LoginStyled = styled.div`
-  border: 1px solid #555;
+  border: 4px solid green;
   width: 300px;
   margin: 30px auto;
-  padding: 10px;
+  padding: 20px;
 
   h2 {
-    color: #BBB;
+    color: green;
   }
 
   .textInput {
     border: none;
     height: 20px;
     width: 180px;
-    background-color: #444444;
-    color: #AAA;
+    background-color: green;
+    color: black;
     font-weight: bold;
     font-size: 20px;
     padding: 10px;
+    border: 4px solid green;
   }
 
   .textInputLabel {
     font-weight: bold;
-    color: #AAA;
+    color: green;
+  }
+
+  .Login__form {
+    margin-top: 20px;
+  }
+
+  .form__password {
+    margin-top: 20px;
   }
 
   .form__submit {
@@ -34,15 +43,16 @@ const LoginStyled = styled.div`
     input {
       width: 90px;
       height: 40px;
-      padding: 10px;
-      font-size: 17px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      color: #AAA;
-      background-color: #000000;
+      color: black;
+      background-color: green;
       border: none;
+      border: 4px solid green;
       &:hover {
-        border: 1px solid grey;
+        background-color: black;
+        color: green;
       }
     }
   }
@@ -58,7 +68,8 @@ const Login = props => {
 
   return (
     <LoginStyled>
-      <h2>Login</h2>
+      <h2>LOGIN</h2>
+
       <form
         className="Login__form"
         onSubmit={e => {
@@ -66,17 +77,18 @@ const Login = props => {
         }}
       >
         <div className="form__username">
-          <label className="textInputLabel">Username</label>
+          <label className="textInputLabel">USERNAME</label>
           <br />
           <input className="textInput" type="text" name="username" />
         </div>
+
         <div className="form__password">
-          <label className="textInputLabel">Password</label>
+          <label className="textInputLabel">PASSWORD</label>
           <br />
           <input className="textInput" type="password" name="password" />
         </div>
         <div className="form__submit">
-          <input className="LoginForm__submit" type="submit" value="submit" />
+          <input className="LoginForm__submit" type="submit" value="SUBMIT" />
         </div>
       </form>
     </LoginStyled>

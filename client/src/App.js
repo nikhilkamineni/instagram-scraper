@@ -175,11 +175,13 @@ class App extends Component {
                   alignItems: 'center',
                   height: '50px',
                   width: '100vw',
-                  background: 'rgba(0, 0, 0, 0.7)'
+                  background: 'green',
+                  zIndex: '11'
                 }}
               >
-                {this.state.user && <h1>Hello {this.state.user.username}</h1>}
-                <button style={{ marginRight: '50px' }}onClick={this.handleLogout}>sign out</button>
+                ZEN-GRAM
+                {this.state.user && <h1>HELLO {this.state.user.username}</h1>}
+                <button style={{ marginRight: '50px' }}onClick={this.handleLogout}>SIGN OUT</button>
               </div>
             )}
             <SavePage getUser={this.getUser} />

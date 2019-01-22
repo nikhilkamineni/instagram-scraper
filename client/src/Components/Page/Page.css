@@ -1,7 +1,16 @@
 .Page {
   margin: 5px;
   border: 2px solid black;
-  background-color: #3a3a3a;
+  border: 4px solid green;
+  padding: 10px;
+  color: green;
+}
+.Page:hover {
+  border: 4px solid orange;
+  color: orange;
+}
+.Page:hover button {
+  color: orange;
 }
 .Page .Page__header {
   display: flex;
@@ -9,7 +18,7 @@
   cursor: pointer;
 }
 .Page .Page__header h2 {
-  color: white;
+  font-weight: bold;
   padding: 2px;
   margin: 2px;
   margin-left: auto;
@@ -17,6 +26,12 @@
 }
 .Page .Page__header button {
   margin-left: auto;
+  background: transparent;
+  border: none;
+  font-weight: bold;
+}
+.Page .Page__header button:hover {
+  color: green;
 }
 .Page .Posts {
   display: flex;
@@ -28,7 +43,4 @@
 .Page .Posts img {
   max-height: 100vh;
   padding: 5px 0;
-}
-.Page:hover {
-  border: 2px solid gray;
 }

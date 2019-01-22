@@ -2,22 +2,22 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const RegisterStyled = styled.div`
-  border: 1px solid #000000;
+  border: 4px solid orange;
   width: 300px;
   margin: 30px auto;
-  padding: 10px;
-  background-color: #222222;
-  
-  h2 {
-    color: #BBB;
-  }
+  padding: 20px;
+  color: orange;
 
+  .Register__form {
+    margin-top: 20px;
+  }
+  
   .textInput {
     border: none;
     height: 20px;
     width: 180px;
-    background-color: #444444;
-    color: white;
+    background-color: orange;
+    color: black;
     font-weight: bold;
     font-size: 20px;
     padding: 10px;
@@ -26,25 +26,25 @@ const RegisterStyled = styled.div`
 
   .textInputLabel {
     font-weight: bold;
-    color: #AAA;
   }
 
   .form__submit {
     padding-bottom: 20px;
     padding-top: 10px;
+    color: orange;
 
     input {
       width: 90px;
       height: 40px;
-      padding: 10px;
-      font-size: 17px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      color: #AAA;
-      background-color: #000000;
-      border: none;
+      background-color: orange;
+      color: black;
+      border: 4px solid orange;
       &:hover {
-        border: 1px solid grey;
+        background-color: black;
+        color: orange;
       }
     }
   }
@@ -66,7 +66,7 @@ const Register = props => {
   };
   return (
     <RegisterStyled>
-      <h2>Register</h2>
+      <h2>REGISTER</h2>
       <form
         className="Register__form"
         onSubmit={e => {
@@ -75,25 +75,25 @@ const Register = props => {
       >
         <div className="form__username">
           <label className="textInputLabel">
-            Username
+            USERNAME
           </label>
           <br />
           <input className="textInput" type="text" name="username" />
         </div>
         <div className="form__password">
           <label className="textInputLabel">
-            Password
+            PASSWORD
           </label>
           <br />
           <input className="textInput" type="password" name="password" />
         </div>
         <div className="form__confirmPassword">
-          <label className="textInputLabel">Confirm Password</label>
+          <label className="textInputLabel">CONFIRM PASSWORD</label>
           <br />
           <input className="textInput" type="password" name="confirmPassword" />
         </div>
         <div className="form__submit">
-          <input type="submit" value="submit" />
+          <input type="submit" value="SUBMIT" />
         </div>
       </form>
     </RegisterStyled>

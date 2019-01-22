@@ -1,7 +1,19 @@
 .Page {
   margin: 5px;
   border: 2px solid black;
-  background-color: rgb(58, 58, 58);
+  // background-color: rgb(58, 58, 58);
+  border: 4px solid green;
+  padding: 10px;
+  color: green;
+
+  &:hover {
+    border: 4px solid orange;
+    color: orange;
+  }
+
+  &:hover button {
+    color: orange;
+  }
 
   .Page__header {
     display: flex;
@@ -9,7 +21,7 @@
     cursor: pointer;
 
     h2 {
-      color: white;
+      font-weight: bold;
       padding: 2px;
       margin: 2px;
       margin-left: auto;
@@ -18,6 +30,13 @@
 
     button {
       margin-left: auto;
+      background: transparent;
+      border: none;
+      // color: green;
+      font-weight: bold;
+      &:hover {
+	color: green;
+      }
     }
   }
 
@@ -32,8 +51,4 @@
       padding: 5px 0;
     }
   }
-}
-
-.Page:hover {
-  border: 2px solid gray;
 }

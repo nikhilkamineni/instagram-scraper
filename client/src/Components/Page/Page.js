@@ -33,11 +33,11 @@ class Page extends Component {
       <div className="Page" id={this.props.handle}>
         <div className="Page__header" id={`${this.props.handle}__header`}>
           <h2 onClick={() => this.props.handleViewPage(this.props.handle)}>
-            {this.state.name} - a.k.a -  {this.props.handle}
+            @{this.props.handle.toUpperCase()}
           </h2>
-          <button onClick={this.handleOpenSource}>Source</button>
+          <button onClick={this.handleOpenSource}>SRC</button>
           <button onClick={() => this.props.handleDeletePage(this.props.id)}>
-            Delete
+            X
           </button>
         </div>
         {this.props.beingViewed && (
