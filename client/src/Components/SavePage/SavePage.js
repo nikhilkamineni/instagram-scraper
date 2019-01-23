@@ -33,10 +33,14 @@ const SavePage = props => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="SavePageForm">
-      <h3>Save a new page:</h3>
-      <input id="SavePageForm__Input" type="text" name="handle" />
-      <input type="submit" value="SUBMIT"/> <br />
+    <form onSubmit={handleSubmit} className="SavePage">
+      <h3 style={{ color: '#368F8B', paddingBottom: '5px' }}>
+        Save a new page:
+      </h3>
+      <div id="SavePage__Form">
+        <input type="text" name="handle" />
+        <input type="submit" value="SAVE" /> <br />
+      </div>
     </form>
   );
 };

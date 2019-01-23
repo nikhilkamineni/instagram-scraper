@@ -1,45 +1,54 @@
-.SavePageForm {
-  margin: 35px;
+.SavePage {
+  padding-top: 50px;
+  // margin: 35px;
   padding-bottom: 30px;
-  zIndex: 5;
+  zindex: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  input[type='text'] {
-    border: 3px solid #368F8B;
-    height: 32px;
-    background-color: #368F8B;
-    color: black;
-    font-weight: bold;
-    font-size: 15px;
-    &:hover {
-      background-color: black;
-      color: #368F8B;
+  #SavePage__Form {
+    display: flex;
+    align-items: center;
+    input[type='text'] {
+      border: 3px solid #368f8b;
+      height: 30px;
+      background-color: #368f8b;
+      color: black;
+      font-weight: bold;
+      font-size: 15px;
+      &:hover {
+        background-color: black;
+        color: #368f8b;
+      }
+      &:focus {
+        background-color: black;
+        color: #368f8b;
+      }
+      &:active {
+        background-color: black;
+        color: #368f8b;
+      }
     }
-    &:focus {
-      background-color: black;
-      color: #368F8B;
-    }
-    &:active {
-      background-color: black;
-      color: #368F8B;
-    }
-  }
 
-  input[type='submit'] {
-    height: 40px;
-    background: #368F8B;
-    border: 3px solid #368F8B;
-    cursor: pointer;
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    border: 3px solid #368F8B;
-    &:hover {
-      background-color: black;
-      color: #368F8B;
-    }
-    &:active {
-      background-color: black;
-      color: #368F8B;
+    input[type='submit'] {
+      height: 38px;
+      background: #368f8b;
+      border: 3px solid #368f8b;
+      cursor: pointer;
+      color: black;
+      font-size: 15px;
+      font-weight: bold;
+      border: 3px solid #368f8b;
+      &:hover {
+        background-color: black;
+        color: #368f8b;
+      }
+      &:active {
+        background-color: black;
+        color: #368f8b;
+      }
     }
   }
 }

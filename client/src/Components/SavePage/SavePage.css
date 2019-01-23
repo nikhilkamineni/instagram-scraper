@@ -1,42 +1,50 @@
-.SavePageForm {
-  margin: 35px;
+.SavePage {
+  padding-top: 50px;
   padding-bottom: 30px;
-  zIndex: 5;
+  zindex: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.SavePageForm input[type='text'] {
-  border: 3px solid #368F8B;
-  height: 32px;
-  background-color: #368F8B;
+.SavePage #SavePage__Form {
+  display: flex;
+  align-items: center;
+}
+.SavePage #SavePage__Form input[type='text'] {
+  border: 3px solid #368f8b;
+  height: 30px;
+  background-color: #368f8b;
   color: black;
   font-weight: bold;
   font-size: 15px;
 }
-.SavePageForm input[type='text']:hover {
+.SavePage #SavePage__Form input[type='text']:hover {
   background-color: black;
-  color: #368F8B;
+  color: #368f8b;
 }
-.SavePageForm input[type='text']:focus {
+.SavePage #SavePage__Form input[type='text']:focus {
   background-color: black;
-  color: #368F8B;
+  color: #368f8b;
 }
-.SavePageForm input[type='text']:active {
+.SavePage #SavePage__Form input[type='text']:active {
   background-color: black;
-  color: #368F8B;
+  color: #368f8b;
 }
-.SavePageForm input[type='submit'] {
-  height: 40px;
-  background: #368F8B;
+.SavePage #SavePage__Form input[type='submit'] {
+  height: 38px;
+  background: #368f8b;
   cursor: pointer;
   color: black;
   font-size: 15px;
   font-weight: bold;
-  border: 3px solid #368F8B;
+  border: 3px solid #368f8b;
 }
-.SavePageForm input[type='submit']:hover {
+.SavePage #SavePage__Form input[type='submit']:hover {
   background-color: black;
-  color: #368F8B;
+  color: #368f8b;
 }
-.SavePageForm input[type='submit']:active {
+.SavePage #SavePage__Form input[type='submit']:active {
   background-color: black;
-  color: #368F8B;
+  color: #368f8b;
 }

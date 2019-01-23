@@ -164,6 +164,7 @@ class App extends Component {
       <div className="App">
         {this.state.authenticated ? (
           <div className="App__Container" onMouseMove={this._onMouseMove}>
+            <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
             {this.state.mousePosition.y < 70 && (
               <Menu handleLogout={this.handleLogout} user={this.state.user} />
             )}
