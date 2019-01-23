@@ -165,18 +165,17 @@ class App extends Component {
         {this.state.authenticated ? (
           <div className="App__Container" onMouseMove={this._onMouseMove}>
             {this.state.mousePosition.y < 70 && (
-              <Menu
-                handleLogout={this.handleLogout}
-                user={this.state.user}
-              />
+              <Menu handleLogout={this.handleLogout} user={this.state.user} />
             )}
 
             <SavePage getUser={this.getUser} />
+
             <select id="sort" name="sort" onChange={this.handleSorted}>
               <option value="oldestToNewest">Oldest to Newest</option>
               <option value="newestToOldest">Newest to Oldest</option>
               <option value="alphabetical">Alphabetical</option>
             </select>
+
             {pages ? pages : <h3>Loading...</h3>}
           </div>
         ) : (

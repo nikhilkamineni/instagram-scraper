@@ -142,6 +142,7 @@ body {
   background-color: #0f110c;
 }
 button {
+  font-family: Futura, sans-serif;
   background-color: transparent;
   border: 4px solid #368F8B;
   cursor: pointer;
