@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+
+import Login from './Components/Auth/Login';
+import Menu from './Components/Menu/Menu';
+import Register from './Components/Auth/Register';
+import Page from './Components/Page/Page';
+import SavePage from './Components/SavePage/SavePage';
+
 import './App.css';
-import Login from './Components/Auth/Login.js';
-import Register from './Components/Auth/Register.js';
-import Page from './Components/Page/Page.js';
-import SavePage from './Components/SavePage/SavePage.js';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -162,28 +165,12 @@ class App extends Component {
         {this.state.authenticated ? (
           <div className="App__Container" onMouseMove={this._onMouseMove}>
             {this.state.mousePosition.y < 70 && (
-              <div
-                className="menu"
-                style={{
-                  position: 'fixed',
-                  top: '0',
-                  left: '0',
-                  display: 'flex',
-                  flexFlow: 'row nowrap',
-                  justifyContent: 'space-between',
-                  padding: '5px 25px',
-                  alignItems: 'center',
-                  height: '50px',
-                  width: '100vw',
-                  background: '#246A73',
-                  zIndex: '11'
-                }}
-              >
-                <h1>ZEN-GRAM</h1>
-                {this.state.user && <h1>HELLO {this.state.user.username}</h1>}
-                <button style={{ marginRight: '50px', fontWeight: 'bold', border: 'none' }}onClick={this.handleLogout}>SIGN OUT</button>
-              </div>
+              <Menu
+                handleLogout={this.handleLogout}
+                user={this.state.user}
+              />
             )}
+
             <SavePage getUser={this.getUser} />
             <select id="sort" name="sort" onChange={this.handleSorted}>
               <option value="oldestToNewest">Oldest to Newest</option>
