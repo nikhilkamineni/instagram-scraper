@@ -8,3 +8,27 @@
   padding-top: 20px;
   font-size: 30px;
 }
+.App #sort {
+  border: none;
+  font-family: Futura, sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 0;
+  -webkit-appearance: none;
+  color: #368F8B;
+  cursor: pointer;
+  align-self: flex-end;
+  outline: none;
+  appearance: none;
+}
+.App #sort:hover {
+  color: #612940;
+}
+.App #sort:focus {
+  border: none;
+}
+.App #sort:active {
+  border: none;
+}

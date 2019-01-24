@@ -171,11 +171,13 @@ class App extends Component {
 
             <SavePage getUser={this.getUser} />
 
-            <select id="sort" name="sort" onChange={this.handleSorted}>
-              <option value="oldestToNewest">Oldest to Newest</option>
-              <option value="newestToOldest">Newest to Oldest</option>
-              <option value="alphabetical">Alphabetical</option>
-            </select>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <select id="sort" name="sort" onChange={this.handleSorted}>
+                <option value="oldestToNewest">Oldest to Newest</option>
+                <option value="newestToOldest">Newest to Oldest</option>
+                <option value="alphabetical">Alphabetical</option>
+              </select>
+            </div>
 
             {pages ? pages : <h3>Loading...</h3>}
           </div>
