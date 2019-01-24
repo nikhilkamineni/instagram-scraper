@@ -181,7 +181,7 @@ class App extends Component {
           </div>
         ) : (
           <div className="App__Auth">
-            <h1>ZEN-GRAM</h1>
+            <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
             <Login handleLogin={this.handleLogin} />
             <Register handleRegister={this.handleRegister} />
           </div>

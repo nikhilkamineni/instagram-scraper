@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const LoginStyled = styled.div`
-  border: 4px solid #368F8B;
+  border: 3px solid #368F8B;
   width: 300px;
   margin: 30px auto;
   padding: 20px;
