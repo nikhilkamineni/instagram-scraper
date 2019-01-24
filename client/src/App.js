@@ -14,7 +14,7 @@ class App extends Component {
   state = {
     user: {},
     pages: [],
-    sort: 'oldestToNewest',
+    sort: 'newestToOldest',
     pageBeingViewed: '',
     authenticated: false,
     mousePosition: { x: 50, y: 50 }
@@ -33,7 +33,9 @@ class App extends Component {
       mousePosition: { x: e.clientX, y: e.clientY },
       mouseIsMoving: true
     });
-    setTimeout(() => { this.setState({mouseIsMoving: false}) }, 2000)
+    setTimeout(() => {
+      this.setState({ mouseIsMoving: false });
+    }, 2000);
   };
 
   getUser = async () => {
@@ -175,9 +177,24 @@ class App extends Component {
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <select id="sort" name="sort" onChange={this.handleSorted}>
-                <option value="oldestToNewest">Oldest to Newest</option>
-                <option value="newestToOldest">Newest to Oldest</option>
-                <option value="alphabetical">Alphabetical</option>
+                <option
+                  value="oldestToNewest"
+                  selected={this.state.sort === "oldestToNewest"}
+                >
+                  Oldest to Newest
+                </option>
+                <option
+                  value="newestToOldest"
+                  selected={this.state.sort === "newestToOldest"}
+                >
+                  Newest to Oldest
+                </option>
+                <option
+                  value="alphabetical"
+                  selected={this.state.sort === "alphabetical"}
+                >
+                  Alphabetical
+                </option>
               </select>
             </div>
 
