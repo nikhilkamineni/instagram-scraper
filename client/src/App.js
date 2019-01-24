@@ -30,8 +30,10 @@ class App extends Component {
 
   _onMouseMove = e => {
     this.setState({
-      mousePosition: { x: e.clientX, y: e.clientY }
+      mousePosition: { x: e.clientX, y: e.clientY },
+      mouseIsMoving: true
     });
+    setTimeout(() => { this.setState({mouseIsMoving: false}) }, 2000)
   };
 
   getUser = async () => {
@@ -165,7 +167,7 @@ class App extends Component {
         {this.state.authenticated ? (
           <div className="App__Container" onMouseMove={this._onMouseMove}>
             <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
-            {this.state.mousePosition.y < 70 && (
+            {(this.state.mousePosition.y < 70 || this.state.mouseIsMoving) && (
               <Menu handleLogout={this.handleLogout} user={this.state.user} />
             )}
 
