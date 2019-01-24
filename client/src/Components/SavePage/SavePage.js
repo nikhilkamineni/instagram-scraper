@@ -26,7 +26,7 @@ const SavePage = props => {
       props.getUser();
 
       // clear form element after hitting submit
-      document.getElementById('SavePageForm__Input').value = '';
+      document.getElementById('Form__input').value = '';
     } else {
       console.error('Missing an id and/or handle');
     }
@@ -38,7 +38,7 @@ const SavePage = props => {
         Save a new page:
       </h3>
       <div id="SavePage__Form">
-        <input type="text" name="handle" />
+        <input id="Form__input" type="text" name="handle" />
         <input type="submit" value="SAVE" /> <br />
       </div>
     </form>
