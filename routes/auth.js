@@ -21,7 +21,9 @@ authRouter.post('/register', async (req, res) => {
 
   try {
     const newUser = new User({ username, password });
-    const user = await newUser.save();
+    let user = await newUser.save();
+    user = user.toObject();
+    delete user.password;
     return res
       .status(201)
       .json({ message: 'New user succesfully registered!', user });

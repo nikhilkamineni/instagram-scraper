@@ -7,14 +7,15 @@ const userRouter = express.Router();
 userRouter.get('/get-user', async (req, res) => {
   try {
     const username = req.user.username; // passed on from authenticate middleware
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).lean();
+    delete user.password;
     res.status(200).json(user);
   } catch (error) {
     const message = 'Internal Server Error!';
     console.error(`${message}\n${error}`);
     res.status(500).json({ message, error });
   }
-})
+});
 
 userRouter.post('/save-page', async (req, res) => {
   try {
@@ -32,7 +33,8 @@ userRouter.post('/save-page', async (req, res) => {
 
     const options = { new: true };
 
-    const savedPage = await User.findOneAndUpdate(conditions, newPage, options);
+    const savedPage = await User.findOneAndUpdate(conditions, newPage, options).lean();
+    delete savedPage.password;
     if (!savedPage)
       return res.status(400).json({ message: 'Page already exists!' });
     else return res.status(201).json(savedPage);

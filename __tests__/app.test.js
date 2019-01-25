@@ -83,6 +83,7 @@ describe('app.js test suite', () => {
       expect(newUserJSON.user.username).toEqual('testUser');
       expect(newUserJSON.user.pages).toBeDefined();
       expect(newUserJSON.user._id).toBeDefined();
+      expect(newUserJSON.user.passwrod).toBeUndefined();
       expect(newUserJSON.message).toEqual('New user succesfully registered!');
     });
 
@@ -111,6 +112,7 @@ describe('app.js test suite', () => {
       expect(responseJSON).toBeDefined();
       expect(responseJSON.username).toEqual('testUser');
       expect(responseJSON._id).toBeDefined();
+      expect(responseJSON.password).toBeUndefined();
       expect(responseJSON.pages).toBeDefined();
     });
 
@@ -118,13 +120,18 @@ describe('app.js test suite', () => {
       const response = await fetch(`${BASE_URL}/api/user/save-page`, {
         method: 'post',
         body: JSON.stringify({ handle: 'cats_of_instagram' }),
-        headers: { Authorization: `Bearer ${testUser.token}` }
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${testUser.token}`
+        }
       })
 
       const responseJSON = await response.json();
 
       expect(responseJSON.username).toEqual(testUser.username);
+      expect(responseJSON.password).toBeUndefined();
       expect(responseJSON.pages.length).toBe(1);
+      expect(responseJSON.pages[0].handle).toEqual('cats_of_instagram');
     })
   });
 });
