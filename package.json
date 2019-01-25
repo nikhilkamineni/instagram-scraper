@@ -36,11 +36,5 @@
   "devDependencies": {
     "jest": "^23.6.0",
     "mongodb-memory-server": "^3.0.0"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules",
-      "<rootDir>/client"
-    ]
   }
 }
