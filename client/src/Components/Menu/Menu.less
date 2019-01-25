@@ -10,6 +10,7 @@
   width: 100vw;
   background: #612940;
   z-index: 11;
+  transition: opacity 500ms;
 
   h1 {
     text-decoration: none;
@@ -27,7 +28,14 @@
 
     &:hover {
       background: transparent;
-      color: #368F8B;
+      color: #368f8b;
     }
   }
+}
+
+.Menu-visible {
+  opacity: 1;
+}
+.Menu-hidden {
+  opacity: 0;
 }

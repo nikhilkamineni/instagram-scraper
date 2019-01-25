@@ -35,7 +35,7 @@ class App extends Component {
     });
     setTimeout(() => {
       this.setState({ mouseIsMoving: false });
-    }, 2000);
+    }, 1000);
   };
 
   getUser = async () => {
@@ -169,9 +169,12 @@ class App extends Component {
         {this.state.authenticated ? (
           <div className="App__Container" onMouseMove={this._onMouseMove}>
             <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
-            {(this.state.mousePosition.y < 70 || this.state.mouseIsMoving) && (
-              <Menu handleLogout={this.handleLogout} user={this.state.user} />
-            )}
+            <Menu
+              handleLogout={this.handleLogout}
+              user={this.state.user}
+              mouseIsMoving={this.state.mouseIsMoving}
+              mousePosition={this.state.mousePosition}
+            />
 
             <SavePage getUser={this.getUser} />
 
@@ -179,19 +182,19 @@ class App extends Component {
               <select id="sort" name="sort" onChange={this.handleSorted}>
                 <option
                   value="oldestToNewest"
-                  selected={this.state.sort === "oldestToNewest"}
+                  selected={this.state.sort === 'oldestToNewest'}
                 >
                   Oldest to Newest
                 </option>
                 <option
                   value="newestToOldest"
-                  selected={this.state.sort === "newestToOldest"}
+                  selected={this.state.sort === 'newestToOldest'}
                 >
                   Newest to Oldest
                 </option>
                 <option
                   value="alphabetical"
-                  selected={this.state.sort === "alphabetical"}
+                  selected={this.state.sort === 'alphabetical'}
                 >
                   Alphabetical
                 </option>
