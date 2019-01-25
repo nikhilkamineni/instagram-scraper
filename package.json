@@ -2,15 +2,16 @@
   "name": "instagram-scraper",
   "version": "1.0.0",
   "description": "Simple web app that scrapes instagram",
-  "main": "index.js",
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/nikhilkamineni/instagram-scraper.git"
   },
   "scripts": {
-    "start": "nodemon server.js",
-    "develop": "concurrently \"nodemon server.js\" \"cd client;npm start\"",
-    "test": "jest --watch"
+    "start": "node server.js",
+    "dev": "concurrently \"nodemon server.js\" \"cd client;npm start\"",
+    "test": "jest --watch",
+    "heroku-postbuild": "cd client && npm install && npm run build && cd .."
   },
   "keywords": [],
   "author": "",
