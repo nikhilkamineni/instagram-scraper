@@ -35,8 +35,13 @@ class Page extends Component {
           <h2 onClick={() => this.props.handleViewPage(this.props.handle)}>
             {this.props.handle.toUpperCase()}
           </h2>
-          <button onClick={this.handleOpenSource}>SRC</button>
-          <button onClick={() => this.props.handleDeletePage(this.props.id)}>
+          <button className="header-link" onClick={this.handleOpenSource}>
+            SRC
+          </button>
+          <button
+            className="header-link"
+            onClick={() => this.props.handleDeletePage(this.props.id)}
+          >
             X
           </button>
         </div>

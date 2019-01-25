@@ -1,7 +1,6 @@
 .Page {
   margin: 5px;
   border: 3px solid #368f8b;
-  padding: 10px;
   color: #368f8b;
   transition: border 500ms, color 500ms;
 }
@@ -30,17 +29,20 @@
 }
 .Page .Page__header h2 {
   font-weight: bold;
-  padding: 2px;
+  padding: 10px;
   margin: 2px;
   margin-left: auto;
   width: 100%;
+}
+.Page .Page__header .header-link {
+  font-size: 17px;
 }
 .Page .Posts {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
   min-height: 20px;
-  cursor: pointer;
+  cursor: zoom-out;
 }
 .Page .Posts img {
   max-height: 100vh;

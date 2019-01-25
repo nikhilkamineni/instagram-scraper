@@ -1,6 +1,5 @@
 #Menu {
   position: fixed;
-  top: 0;
   left: 0;
   display: flex;
   flex-flow: row nowrap;
@@ -10,7 +9,7 @@
   width: 100vw;
   background: #612940;
   z-index: 11;
-  transition: opacity 500ms;
+  transition: top 300ms;
 }
 #Menu h1 {
   text-decoration: none;
@@ -30,8 +29,11 @@
   color: #368f8b;
 }
 .Menu-visible {
-  opacity: 1;
+  top: 0;
 }
 .Menu-hidden {
-  opacity: 0;
+  top: -100px;
+}
+.Menu-peeking {
+  top: -60px;
 }

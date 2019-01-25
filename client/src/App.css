@@ -23,13 +23,17 @@
   outline: none;
   appearance: none;
   font-size: 20px;
+  transition: color 500ms;
 }
 .App #sort:hover {
   color: #612940;
+  outline: none;
 }
 .App #sort:focus {
   border: none;
+  outline: none;
 }
 .App #sort:active {
   border: none;
+  outline: none;
 }

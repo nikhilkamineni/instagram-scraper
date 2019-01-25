@@ -35,7 +35,7 @@ class App extends Component {
     });
     setTimeout(() => {
       this.setState({ mouseIsMoving: false });
-    }, 1000);
+    }, 1500);
   };
 
   getUser = async () => {
