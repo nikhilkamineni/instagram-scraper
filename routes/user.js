@@ -56,12 +56,17 @@ userRouter.put('/delete-page', async (req, res) => {
         }
       }
     };
+
     const options = { new: true };
+
     const updatedUser = await User.findOneAndUpdate(
       { username },
       pageToRemove,
       options
-    );
+    ).lean();
+
+    delete updatedUser.password;
+
     res
       .status(200)
       .json({ message: 'Page was successfully deleted!', updatedUser });
