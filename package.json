@@ -1,5 +1,5 @@
 {
-  "name": "instagram-scraper",
+  "name": "zen-gram",
   "version": "1.0.0",
   "description": "Simple web app that scrapes instagram",
   "main": "server.js",
