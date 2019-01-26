@@ -1,16 +1,43 @@
 import React, { Component } from 'react';
 
-import Menu from '../Menu/Menu'
+import Menu from '../Menu/Menu';
 import Page from '../Page/Page';
-import SavePage from '../SavePage/SavePage'
+import SavePage from '../SavePage/SavePage';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class Home extends Component {
   state = {
-    pageBeingViewed: '',
-    sort: 'newestToOldest',
     mouseIsMoving: false,
-    mousePosition: { x: null, y: null }
+    mousePosition: { x: null, y: null },
+    user: {},
+    pages: [],
+    pageBeingViewed: '',
+    sort: 'newestToOldest'
+  };
+
+  async componentDidMount() {
+    await this.getUser();
   }
+
+  getUser = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const url = `${API_URL}/api/user/get-user`;
+      const options = {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      };
+      const response = await fetch(url, options);
+      const userData = await response.json();
+      this.setState({ user: userData, pages: userData.pages });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   _onMouseMove = e => {
     this.setState({
@@ -20,6 +47,32 @@ class Home extends Component {
     setTimeout(() => {
       this.setState({ mouseIsMoving: false });
     }, 1500);
+  };
+
+  handleDeletePage = async pageId => {
+    try {
+      const token = localStorage.getItem('token');
+      if (token && pageId) {
+        const url = `${API_URL}/api/user/delete-page`;
+        const body = { pageId };
+        const options = {
+          method: 'put',
+          body: JSON.stringify(body),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        };
+        const response = await fetch(url, options);
+        const json = await response.json();
+        this.setState({
+          user: json.updatedUser,
+          pages: json.updatedUser.pages
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   handleViewPage = async page => {
@@ -36,16 +89,16 @@ class Home extends Component {
   };
 
   render() {
-    // if (!this.props.authenticated) return null;
+    if (!this.props.authenticated) return null;
 
     const sort = this.state.sort;
-    let pages = this.props.pages
-      ? this.props.pages.map(page => (
+    let pages = this.state.pages
+      ? this.state.pages.map(page => (
           <Page
             key={page._id}
             handle={page.handle}
             id={page._id}
-            handleDeletePage={this.props.handleDeletePage}
+            handleDeletePage={this.handleDeletePage}
             handleViewPage={this.handleViewPage}
             beingViewed={this.state.pageBeingViewed === page.handle}
           />
@@ -63,33 +116,23 @@ class Home extends Component {
         <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
         <Menu
           handleLogout={this.props.handleLogout}
-          user={this.props.user}
+          user={this.state.user}
           mouseIsMoving={this.state.mouseIsMoving}
           mousePosition={this.state.mousePosition}
         />
 
-        <SavePage getUser={this.props.getUser} />
+        <SavePage getUser={this.getUser} />
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <select id="sort" name="sort" onChange={this.handleSorted}>
-            <option
-              value="oldestToNewest"
-              selected={this.state.sort === 'oldestToNewest'}
-            >
-              Oldest to Newest
-            </option>
-            <option
-              value="newestToOldest"
-              selected={this.state.sort === 'newestToOldest'}
-            >
-              Newest to Oldest
-            </option>
-            <option
-              value="alphabetical"
-              selected={this.state.sort === 'alphabetical'}
-            >
-              Alphabetical
-            </option>
+          <select
+            id="sort"
+            name="sort"
+            onChange={this.handleSorted}
+            value={this.state.sort}
+          >
+            <option value="oldestToNewest">Oldest to Newest</option>
+            <option value="newestToOldest">Newest to Oldest</option>
+            <option value="alphabetical">Alphabetical</option>
           </select>
         </div>
 
