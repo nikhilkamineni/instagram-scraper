@@ -11,10 +11,8 @@ class App extends Component {
   state = {
     user: {},
     pages: [],
-    sort: 'newestToOldest',
     pageBeingViewed: '',
-    authenticated: false,
-    mousePosition: { x: 50, y: 50 }
+    authenticated: false
   };
 
   async componentDidMount() {
@@ -24,16 +22,6 @@ class App extends Component {
       return this.setState({ authenticated: true });
     }
   }
-
-  _onMouseMove = e => {
-    this.setState({
-      mousePosition: { x: e.clientX, y: e.clientY },
-      mouseIsMoving: true
-    });
-    setTimeout(() => {
-      this.setState({ mouseIsMoving: false });
-    }, 1500);
-  };
 
   getUser = async () => {
     const token = localStorage.getItem('token');
@@ -136,27 +124,18 @@ class App extends Component {
     this.setState({ authenticated: false });
   };
 
-  handleSorted = e => {
-    this.setState({ sort: e.target.value });
-  };
-
   render() {
     return (
       <div className="App">
         {this.state.authenticated ? (
           <Home
             pages={this.state.pages}
-            sort={this.state.sort}
             getUser={this.getUser}
             handleDeletePage={this.handleDeletePage}
             handleLogout={this.handleLogout}
-            handleSorted={this.handleSorted}
             handleViewPage={this.handleViewPage}
-            mouseIsMoving={this.state.mouseIsMoving}
-            mousePosition={this.state.mousePosition}
             pageBeingViewed={this.state.pageBeingViewed}
             user={this.state.user}
-            _onMouseMove={this._onMouseMove}
           />
         ) : (
           <Auth

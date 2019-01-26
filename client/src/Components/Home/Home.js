@@ -5,10 +5,31 @@ import Page from '../Page/Page';
 import SavePage from '../SavePage/SavePage'
 
 class Home extends Component {
+  state = {
+    sort: 'newestToOldest',
+    mouseIsMoving: false,
+    mousePosition: { x: null, y: null }
+  }
+
+  _onMouseMove = e => {
+    this.setState({
+      mousePosition: { x: e.clientX, y: e.clientY },
+      mouseIsMoving: true
+    });
+    setTimeout(() => {
+      this.setState({ mouseIsMoving: false });
+    }, 1500);
+  };
+
+
+  handleSorted = e => {
+    this.setState({ sort: e.target.value });
+  };
+
   render() {
     // if (!this.props.authenticated) return null;
 
-    const sort = this.props.sort;
+    const sort = this.state.sort;
     let pages = this.props.pages
       ? this.props.pages.map(page => (
           <Page
@@ -29,34 +50,34 @@ class Home extends Component {
       });
 
     return (
-      <div className="App__Container" onMouseMove={this.props._onMouseMove}>
+      <div className="App__Container" onMouseMove={this._onMouseMove}>
         <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
         <Menu
           handleLogout={this.props.handleLogout}
           user={this.props.user}
-          mouseIsMoving={this.props.mouseIsMoving}
-          mousePosition={this.props.mousePosition}
+          mouseIsMoving={this.state.mouseIsMoving}
+          mousePosition={this.state.mousePosition}
         />
 
         <SavePage getUser={this.props.getUser} />
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <select id="sort" name="sort" onChange={this.props.handleSorted}>
+          <select id="sort" name="sort" onChange={this.handleSorted}>
             <option
               value="oldestToNewest"
-              selected={this.props.sort === 'oldestToNewest'}
+              selected={this.state.sort === 'oldestToNewest'}
             >
               Oldest to Newest
             </option>
             <option
               value="newestToOldest"
-              selected={this.props.sort === 'newestToOldest'}
+              selected={this.state.sort === 'newestToOldest'}
             >
               Newest to Oldest
             </option>
             <option
               value="alphabetical"
-              selected={this.props.sort === 'alphabetical'}
+              selected={this.state.sort === 'alphabetical'}
             >
               Alphabetical
             </option>
