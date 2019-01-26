@@ -22,7 +22,7 @@ describe('app.js test suite', () => {
     // Connect to test DB
     await mongoose.connect(
       uri,
-      { useNewUrlParser: true, useFindAndModify: false }
+      { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true }
     );
   });
 
@@ -151,7 +151,6 @@ describe('app.js test suite', () => {
       expect(responseJSON.updatedUser.username).toEqual(testUser.username);
       expect(responseJSON.updatedUser.password).toBeUndefined();
       expect(responseJSON.updatedUser.pages.length).toBe(0);
-      // expect(responseJSON.pages[0].handle).toEqual('cats_of_instagram');
     });
   });
 });
