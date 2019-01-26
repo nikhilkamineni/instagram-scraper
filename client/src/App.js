@@ -11,7 +11,6 @@ class App extends Component {
   state = {
     user: {},
     pages: [],
-    pageBeingViewed: '',
     authenticated: false
   };
 
@@ -40,15 +39,6 @@ class App extends Component {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  handleViewPage = async page => {
-    if (this.state.pageBeingViewed === page)
-      await this.setState({ pageBeingViewed: '' });
-    else await this.setState({ pageBeingViewed: page });
-
-    const ref = document.getElementById(`${page}__header`);
-    window.scrollTo(0, ref.offsetTop);
   };
 
   handleDeletePage = async pageId => {

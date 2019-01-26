@@ -6,6 +6,7 @@ import SavePage from '../SavePage/SavePage'
 
 class Home extends Component {
   state = {
+    pageBeingViewed: '',
     sort: 'newestToOldest',
     mouseIsMoving: false,
     mousePosition: { x: null, y: null }
@@ -21,6 +22,14 @@ class Home extends Component {
     }, 1500);
   };
 
+  handleViewPage = async page => {
+    if (this.state.pageBeingViewed === page)
+      await this.setState({ pageBeingViewed: '' });
+    else await this.setState({ pageBeingViewed: page });
+
+    const ref = document.getElementById(`${page}__header`);
+    window.scrollTo(0, ref.offsetTop);
+  };
 
   handleSorted = e => {
     this.setState({ sort: e.target.value });
@@ -37,8 +46,8 @@ class Home extends Component {
             handle={page.handle}
             id={page._id}
             handleDeletePage={this.props.handleDeletePage}
-            handleViewPage={this.props.handleViewPage}
-            beingViewed={this.props.pageBeingViewed === page.handle}
+            handleViewPage={this.handleViewPage}
+            beingViewed={this.state.pageBeingViewed === page.handle}
           />
         ))
       : [];
