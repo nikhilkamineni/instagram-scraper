@@ -8,11 +8,12 @@ const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
 const app = require('../app.js');
 
+const mongod = new MongoMemoryServer();
+
 describe('app.js test suite', () => {
   /* SETUP */
   beforeAll(async () => {
     // Startup test DB
-    const mongod = new MongoMemoryServer();
     const uri = await mongod.getConnectionString();
     const port = await mongod.getPort();
     const dbPath = await mongod.getDbPath();
@@ -21,7 +22,7 @@ describe('app.js test suite', () => {
     // Connect to test DB
     await mongoose.connect(
       uri,
-      { useNewUrlParser: true }
+      { useNewUrlParser: true, useFindAndModify: false }
     );
   });
 
@@ -120,30 +121,30 @@ describe('app.js test suite', () => {
       const response = await fetch(`${BASE_URL}/api/user/save-page`, {
         method: 'post',
         body: JSON.stringify({ handle: 'cats_of_instagram' }),
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${testUser.token}`
         }
-      })
+      });
 
       const responseJSON = await response.json();
-      testUser.pages = responseJSON.pages
+      testUser.pages = responseJSON.pages;
 
       expect(responseJSON.username).toEqual(testUser.username);
       expect(responseJSON.password).toBeUndefined();
       expect(responseJSON.pages.length).toBe(1);
       expect(responseJSON.pages[0].handle).toEqual('cats_of_instagram');
-    })
+    });
 
     test('[PUT] /api/user/delete-page', async () => {
       const response = await fetch(`${BASE_URL}/api/user/delete-page`, {
         method: 'put',
         body: JSON.stringify({ pageId: testUser.pages[0]._id }),
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${testUser.token}`
         }
-      })
+      });
 
       const responseJSON = await response.json();
 
@@ -151,6 +152,6 @@ describe('app.js test suite', () => {
       expect(responseJSON.updatedUser.password).toBeUndefined();
       expect(responseJSON.updatedUser.pages.length).toBe(0);
       // expect(responseJSON.pages[0].handle).toEqual('cats_of_instagram');
-    })
+    });
   });
 });
