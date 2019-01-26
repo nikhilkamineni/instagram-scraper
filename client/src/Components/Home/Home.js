@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from '@reach/router'
 
 import Menu from '../Menu/Menu';
 import Page from '../Page/Page';
@@ -17,7 +18,8 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-    await this.getUser();
+    const token = localStorage.getItem('token');
+    if (token) await this.getUser();
   }
 
   getUser = async () => {
@@ -89,7 +91,7 @@ class Home extends Component {
   };
 
   render() {
-    if (!this.props.authenticated) return null;
+    if (!this.props.authenticated) return <Redirect to="../" noThrow />;
 
     const sort = this.state.sort;
     let pages = this.state.pages

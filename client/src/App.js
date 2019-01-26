@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, navigate } from "@reach/router";
 
 import Auth from './Components/Auth/Auth';
 import Home from './Components/Home/Home';
@@ -52,7 +53,8 @@ class App extends Component {
 
       if (token) {
         localStorage.setItem('token', token);
-        return this.setState({ authenticated: true });
+        this.setState({ authenticated: true });
+        navigate('/home')
       } else if (json.error) return console.error(json.error);
       else return console.error('Token was not retrieved!');
     } catch (err) {
@@ -63,22 +65,24 @@ class App extends Component {
   handleLogout = () => {
     localStorage.removeItem('token');
     this.setState({ authenticated: false });
+    navigate('/')
   };
 
   render() {
     return (
       <div className="App">
-        {this.state.authenticated ? (
+        <Router>
           <Home
+            path="/home"
             handleLogout={this.handleLogout}
             authenticated={this.state.authenticated}
           />
-        ) : (
           <Auth
+            path="/"
             handleLogin={this.handleLogin}
             handleRegister={this.handleRegister}
           />
-        )}
+        </Router>
       </div>
     );
   }
