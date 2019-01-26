@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 
 import Auth from './Components/Auth/Auth';
-// import Login from './Components/Auth/Login';
-import Menu from './Components/Menu/Menu';
-// import Register from './Components/Auth/Register';
-import Page from './Components/Page/Page';
-import SavePage from './Components/SavePage/SavePage';
+import Home from './Components/Home/Home';
 
 import './App.css';
 
@@ -145,65 +141,23 @@ class App extends Component {
   };
 
   render() {
-    const sort = this.state.sort;
-    let pages = this.state.pages
-      ? this.state.pages.map(page => (
-          <Page
-            key={page._id}
-            handle={page.handle}
-            id={page._id}
-            handleDeletePage={this.handleDeletePage}
-            handleViewPage={this.handleViewPage}
-            beingViewed={this.state.pageBeingViewed === page.handle}
-          />
-        ))
-      : [];
-
-    if (sort === 'newestToOldest') pages = pages.reverse();
-    if (sort === 'alphabetical')
-      pages = pages.sort((a, b) => {
-        return a.props.handle.charCodeAt(0) - b.props.handle.charCodeAt(0);
-      });
-
     return (
       <div className="App">
         {this.state.authenticated ? (
-          <div className="App__Container" onMouseMove={this._onMouseMove}>
-            <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
-            <Menu
-              handleLogout={this.handleLogout}
-              user={this.state.user}
-              mouseIsMoving={this.state.mouseIsMoving}
-              mousePosition={this.state.mousePosition}
-            />
-
-            <SavePage getUser={this.getUser} />
-
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <select id="sort" name="sort" onChange={this.handleSorted}>
-                <option
-                  value="oldestToNewest"
-                  selected={this.state.sort === 'oldestToNewest'}
-                >
-                  Oldest to Newest
-                </option>
-                <option
-                  value="newestToOldest"
-                  selected={this.state.sort === 'newestToOldest'}
-                >
-                  Newest to Oldest
-                </option>
-                <option
-                  value="alphabetical"
-                  selected={this.state.sort === 'alphabetical'}
-                >
-                  Alphabetical
-                </option>
-              </select>
-            </div>
-
-            {pages ? pages : <h3>Loading...</h3>}
-          </div>
+          <Home
+            pages={this.state.pages}
+            sort={this.state.sort}
+            getUser={this.getUser}
+            handleDeletePage={this.handleDeletePage}
+            handleLogout={this.handleLogout}
+            handleSorted={this.handleSorted}
+            handleViewPage={this.handleViewPage}
+            mouseIsMoving={this.state.mouseIsMoving}
+            mousePosition={this.state.mousePosition}
+            pageBeingViewed={this.state.pageBeingViewed}
+            user={this.state.user}
+            _onMouseMove={this._onMouseMove}
+          />
         ) : (
           <Auth
             handleLogin={this.handleLogin}
