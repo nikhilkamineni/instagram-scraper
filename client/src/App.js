@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import Login from './Components/Auth/Login';
+import Auth from './Components/Auth/Auth';
+// import Login from './Components/Auth/Login';
 import Menu from './Components/Menu/Menu';
-import Register from './Components/Auth/Register';
+// import Register from './Components/Auth/Register';
 import Page from './Components/Page/Page';
 import SavePage from './Components/SavePage/SavePage';
 
@@ -204,11 +205,10 @@ class App extends Component {
             {pages ? pages : <h3>Loading...</h3>}
           </div>
         ) : (
-          <div className="App__Auth">
-            <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
-            <Login handleLogin={this.handleLogin} />
-            <Register handleRegister={this.handleRegister} />
-          </div>
+          <Auth
+            handleLogin={this.handleLogin}
+            handleRegister={this.handleRegister}
+          />
         )}
       </div>
     );
