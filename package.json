@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently \"nodemon server.js\" \"cd client;npm start\"",
-    "test": "jest --watch",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "heroku-postbuild": "cd client && npm install && npm run build && cd .."
   },
   "keywords": [],
