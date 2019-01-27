@@ -16,7 +16,7 @@ authRouter.post('/register', async (req, res) => {
   if (!username || !password) {
     res
       .status(422)
-      .json({ error: 'You need to provide a username and password' });
+      .json({ error: 'You need to provide a username and password!' });
   }
 
   try {
@@ -28,7 +28,7 @@ authRouter.post('/register', async (req, res) => {
       .status(201)
       .json({ message: 'New user succesfully registered!', user });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal server error!', error });
+    return res.status(500).json({ error: 'Internal server error!' });
   }
 });
 
