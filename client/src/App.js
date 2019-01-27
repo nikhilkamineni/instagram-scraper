@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Router, navigate } from "@reach/router";
+import { Router, navigate } from '@reach/router';
 
 import Auth from './Components/Auth/Auth';
 import Home from './Components/Home/Home';
+import Settings from './Components/Settings/Settings';
 
 import './App.css';
 
@@ -54,7 +55,7 @@ class App extends Component {
       if (token) {
         localStorage.setItem('token', token);
         this.setState({ authenticated: true });
-        navigate('/home')
+        navigate('/home');
       } else if (json.error) return console.error(json.error);
       else return console.error('Token was not retrieved!');
     } catch (err) {
@@ -65,7 +66,7 @@ class App extends Component {
   handleLogout = () => {
     localStorage.removeItem('token');
     this.setState({ authenticated: false });
-    navigate('/')
+    navigate('/');
   };
 
   render() {
@@ -77,6 +78,7 @@ class App extends Component {
             handleLogout={this.handleLogout}
             authenticated={this.state.authenticated}
           />
+          <Settings path="/settings" authenticated={this.state.authenticated} />
           <Auth
             path="/"
             handleLogin={this.handleLogin}

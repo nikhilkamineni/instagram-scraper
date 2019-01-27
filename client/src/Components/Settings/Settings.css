@@ -1,0 +1,63 @@
+#Settings {
+  border: 3px solid #368f8b;
+  width: 60%;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  color: #368f8b;
+}
+#Settings h1 {
+  text-decoration: underline;
+  margin-bottom: 30px;
+}
+#Settings h2 {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+#Settings #Settings__ChangePassword {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+#Settings #Settings__ChangePassword .ChangePassword__label {
+  font-weight: bold;
+  font-style: italic;
+  color: #368f8b;
+  margin-bottom: 5px;
+}
+#Settings #Settings__ChangePassword .ChangePassword__input {
+  border: none;
+  height: 20px;
+  background-color: #368f8b;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px;
+  border: 4px solid #368f8b;
+  margin: 5px 20px 10px 20px;
+}
+#Settings #Settings__ChangePassword #ChangePassword__submit {
+  margin: 10px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  background-color: #368f8b;
+  border: none;
+  border: 4px solid #368f8b;
+}
+#Settings #Settings__ChangePassword #ChangePassword__submit:hover {
+  background-color: black;
+  color: #368f8b;
+}
+#Settings #Settings__ChangePassword #ChangePassword__error {
+  margin-top: 5px;
+  color: #612940;
+}
+#Settings #Settings__ChangePassword #ChangePassword__success {
+  margin-top: 5px;
+}
