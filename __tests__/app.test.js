@@ -1,23 +1,23 @@
-require('dotenv').config();
-const fetch = require('node-fetch');
-const MongoMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
-const http = require('http');
-const mongoose = require('mongoose');
+require("dotenv").config();
+const fetch = require("node-fetch");
+const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
+const http = require("http");
+const mongoose = require("mongoose");
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
-const app = require('../app.js');
+const app = require("../app.js");
 
 const mongod = new MongoMemoryServer();
 
-describe('app.js test suite', () => {
+describe("app.js test suite", () => {
   /* SETUP */
   beforeAll(async () => {
     // Startup test DB
     const uri = await mongod.getConnectionString();
-    const port = await mongod.getPort();
-    const dbPath = await mongod.getDbPath();
-    const dbName = await mongod.getDbName();
+    // const port = await mongod.getPort();
+    // const dbPath = await mongod.getDbPath();
+    // const dbName = await mongod.getDbName();
 
     // Connect to test DB
     await mongoose.connect(
@@ -43,16 +43,16 @@ describe('app.js test suite', () => {
   });
 
   /* TESTS */
-  test('[GET] /api', async () => {
+  test("[GET] /api", async () => {
     const response = await fetch(`${BASE_URL}/api`);
     const data = await response.json();
     expect(response.status).toBe(200);
     expect(data).toBeDefined();
-    expect(data.message).toEqual('STATUS: OK');
+    expect(data.message).toEqual("STATUS: OK");
   });
 
-  test('[GET] /api/get-data', async () => {
-    const handle = 'cats_of_instagram';
+  test("[GET] /api/get-data", async () => {
+    const handle = "cats_of_instagram";
     const response = await fetch(`${BASE_URL}/api/get-data?handle=${handle}`);
     const data = await response.json();
     expect(response.status).toBe(200);
@@ -63,36 +63,36 @@ describe('app.js test suite', () => {
 
   // Initial test user; token will be added to this object in /login test
   const testUser = {
-    username: 'testUser',
-    password: '123456'
+    username: "testUser",
+    password: "123456"
   };
 
   // auth routes
-  describe('Test for /auth routes', () => {
-    test('[POST] /api/auth/register', async () => {
+  describe("Test for /auth routes", () => {
+    test("[POST] /api/auth/register", async () => {
       const newUser = await fetch(`${BASE_URL}/api/auth/register`, {
-        method: 'post',
+        method: "post",
         body: JSON.stringify({
-          username: 'testUser',
-          password: '123456'
+          username: "testUser",
+          password: "123456"
         }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" }
       });
       const newUserJSON = await newUser.json();
 
       expect(newUserJSON).toBeDefined();
-      expect(newUserJSON.user.username).toEqual('testUser');
+      expect(newUserJSON.user.username).toEqual("testUser");
       expect(newUserJSON.user.pages).toBeDefined();
       expect(newUserJSON.user._id).toBeDefined();
       expect(newUserJSON.user.passwrod).toBeUndefined();
-      expect(newUserJSON.message).toEqual('New user succesfully registered!');
+      expect(newUserJSON.message).toEqual("New user succesfully registered!");
     });
 
-    test('[POST] /api/auth/login', async () => {
+    test("[POST] /api/auth/login", async () => {
       const response = await fetch(`${BASE_URL}/api/auth/login`, {
-        method: 'post',
-        body: JSON.stringify({ username: 'testUser', password: '123456' }),
-        headers: { 'Content-Type': 'application/json' }
+        method: "post",
+        body: JSON.stringify({ username: "testUser", password: "123456" }),
+        headers: { "Content-Type": "application/json" }
       });
       const responseJSON = await response.json();
 
@@ -103,26 +103,26 @@ describe('app.js test suite', () => {
   });
 
   // user routes
-  describe('Tests for /user routes', () => {
-    test('[GET] /api/user/get-user', async () => {
+  describe("Tests for /user routes", () => {
+    test("[GET] /api/user/get-user", async () => {
       const response = await fetch(`${BASE_URL}/api/user/get-user`, {
         headers: { Authorization: `Bearer ${testUser.token}` }
       });
       const responseJSON = await response.json();
 
       expect(responseJSON).toBeDefined();
-      expect(responseJSON.username).toEqual('testUser');
+      expect(responseJSON.username).toEqual("testUser");
       expect(responseJSON._id).toBeDefined();
       expect(responseJSON.password).toBeUndefined();
       expect(responseJSON.pages).toBeDefined();
     });
 
-    test('[POST] /api/user/save-page', async () => {
+    test("[POST] /api/user/save-page", async () => {
       const response = await fetch(`${BASE_URL}/api/user/save-page`, {
-        method: 'post',
-        body: JSON.stringify({ handle: 'cats_of_instagram' }),
+        method: "post",
+        body: JSON.stringify({ handle: "cats_of_instagram" }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${testUser.token}`
         }
       });
@@ -133,15 +133,15 @@ describe('app.js test suite', () => {
       expect(responseJSON.username).toEqual(testUser.username);
       expect(responseJSON.password).toBeUndefined();
       expect(responseJSON.pages.length).toBe(1);
-      expect(responseJSON.pages[0].handle).toEqual('cats_of_instagram');
+      expect(responseJSON.pages[0].handle).toEqual("cats_of_instagram");
     });
 
-    test('[PUT] /api/user/delete-page', async () => {
+    test("[PUT] /api/user/delete-page", async () => {
       const response = await fetch(`${BASE_URL}/api/user/delete-page`, {
-        method: 'put',
+        method: "put",
         body: JSON.stringify({ pageId: testUser.pages[0]._id }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${testUser.token}`
         }
       });
@@ -151,6 +151,21 @@ describe('app.js test suite', () => {
       expect(responseJSON.updatedUser.username).toEqual(testUser.username);
       expect(responseJSON.updatedUser.password).toBeUndefined();
       expect(responseJSON.updatedUser.pages.length).toBe(0);
+    });
+
+    test("[PUT] /api/user/change-password", async () => {
+      const response = await fetch(`${BASE_URL}/api/user/change-password`, {
+        method: "put",
+        body: JSON.stringify({ newPassword: "abcdef" }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${testUser.token}`
+        }
+      });
+
+      const responseJSON = await response.json();
+      expect(response.status).toBe(200);
+      expect(responseJSON.message).toEqual("Password was changed succesfully!");
     });
   });
 });
