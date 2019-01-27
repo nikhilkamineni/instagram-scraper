@@ -3,26 +3,49 @@ import { Link } from '@reach/router';
 
 import './Settings.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 class Settings extends Component {
   state = {
     error: null,
     success: null
   };
 
-  handleChangePasswordSubmit = e => {
+  handleChangePasswordSubmit = async e => {
     e.preventDefault();
     this.setState({ error: null, success: null });
 
     const newPassword = e.target.newPassword.value;
     const confirmNewPassword = e.target.confirmNewPassword.value;
 
+    // Error handling
     if (newPassword !== confirmNewPassword)
       return this.setState({ error: 'Passwords do not match!' });
     else if (newPassword.length < 3)
       return this.setState({ error: 'Password is too short!' });
+    //TODO: Make backend API call
     else {
-      //TODO: Make backedn API call
-      return this.setState({ success: 'Password was changed successfully!' });
+      try {
+        const url = `${API_URL}/api/user/change-password`;
+        const body = { newPassword };
+        const token = localStorage.getItem('token');
+        const options = {
+          method: 'put',
+          body: JSON.stringify(body),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        };
+        const response = await fetch(url, options);
+        if (response.status === 200)
+          return this.setState({
+            success: 'Password was changed successfully!'
+          });
+      } catch (error) {
+        console.err('Error changing password!');
+        return this.setState({ error: 'Error changin password!' });
+      }
     }
   };
   render() {

@@ -86,13 +86,14 @@ userRouter.put("/change-password", async (req, res) => {
   try {
     const username = req.user.username; // passed on from authenticate middleware
     const password = req.body.newPassword;
+
     await bcrypt.hash(password, 11, async (err, hash) => {
       if (err)
         return res.status(500).json({ message: "Internal Server Error", err });
       else {
-        const updatedUser = await User.findOneAndUpdate(
+        await User.findOneAndUpdate(
           { username },
-          { password },
+          { password: hash },
           { new: true }
         );
         return res

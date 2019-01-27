@@ -31,9 +31,8 @@ class App extends Component {
         headers: { 'Content-Type': 'application/json' }
       };
       const response = await fetch(url, options);
-      console.log(response.status);
-      const json = await response.json();
-      console.log(json);
+      if (response.status === 201) console.log('New user was registered successfully!')
+      // TODO: Login user automatically after succesfull login
     } catch (err) {
       console.err(err);
     }
