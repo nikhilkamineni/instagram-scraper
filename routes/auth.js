@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
@@ -28,7 +28,10 @@ authRouter.post('/register', async (req, res) => {
       .status(201)
       .json({ message: 'New user succesfully registered!', user });
   } catch (error) {
-    return res.status(500).json({ error: 'Internal server error!' });
+    console.log(error);
+    if (error.code == 11000)
+      return res.status(422).json({ error: 'User already exists!' });
+    else return res.status(500).json({ error: 'Internal server error!' });
   }
 });
 

@@ -10,6 +10,7 @@ const Auth = props => {
       <Register
         handleRegister={props.handleRegister}
         registerError={props.registerError}
+        registerSuccess={props.registerSuccess}
       />
     </div>
   );

@@ -25,6 +25,7 @@ const LoginStyled = styled.div`
     padding: 10px;
     border: 4px solid #368F8B;
     margin: 5px;
+    transition: background-color 200ms, color 200ms;
 
     &:active, &:focus {
       background-color: #19150c;
@@ -59,8 +60,10 @@ const LoginStyled = styled.div`
       color: black;
       background-color: #368F8B;
       border: 4px solid #368F8B;
+      transition: background-color 200ms, color 200ms;
+
       &:hover {
-        background-color: black;
+        background-color: #19150c;
         color: #368F8B;
       }
     }

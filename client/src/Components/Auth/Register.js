@@ -30,6 +30,7 @@ const RegisterStyled = styled.div`
     margin-bottom: 20px;
     border: 4px solid #612940;
     margin-top: 5px;
+    transition: background-color 200ms;
 
     &:active, &:focus {
       background-color: #19150c;
@@ -55,8 +56,10 @@ const RegisterStyled = styled.div`
       background-color: #612940;
       color: black;
       border: 4px solid #612940;
+      transition: background-color 200ms, color 200ms;
+
       &:hover {
-        background-color: black;
+        background-color: #19150c;
         color: #612940;
       }
     }
@@ -70,13 +73,9 @@ const Register = props => {
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
 
-    if (password !== confirmPassword) {
-      // TODO: show error message to user
-      // TODO: check for password length
-      return console.error('Passwords do not match!');
-    }
-    props.handleRegister(username, password);
+    props.handleRegister(username, password, confirmPassword);
   };
+
   return (
     <RegisterStyled>
       <h2>REGISTER</h2>
@@ -104,6 +103,8 @@ const Register = props => {
         <div className="form__submit">
           <input type="submit" value="SUBMIT" />
         </div>
+        <p>{props.registerError}</p>
+        {props.registerSuccess && <p>New user succesfully registered!</p>}
       </form>
     </RegisterStyled>
   );

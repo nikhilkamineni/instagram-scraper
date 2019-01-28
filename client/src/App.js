@@ -15,7 +15,8 @@ class App extends Component {
     pages: [],
     authenticated: false,
     loginError: null,
-    registerError: null
+    registerError: null,
+    registerSuccess: false,
   };
 
   async componentDidMount() {
@@ -23,7 +24,14 @@ class App extends Component {
     if (token) return this.setState({ authenticated: true });
   }
 
-  handleRegister = async (username, password) => {
+  handleRegister = async (username, password, confirmPassword) => {
+    this.setState({ registerError: null, registerSuccess: false })
+
+    if (password !== confirmPassword) {
+      console.log('Passwords do not match!')
+      return this.setState({ registerError: 'Passwords do not match!' })
+    }
+
     try {
       const url = `${API_URL}/api/auth/register`;
       const body = { username, password };
@@ -32,16 +40,27 @@ class App extends Component {
         body: JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' }
       };
+
       const response = await fetch(url, options);
-      if (response.status === 201)
-        console.log('New user was registered successfully!');
-      // TODO: Login user automatically after succesfull login
+
+      // Success
+      if (response.status === 201) {
+        return this.setState({ registerSuccess: true })
+        // TODO: Login user automatically after succesfull login
+      } 
+      // Failure
+      else if (response.status === 422) {
+        const json = await response.json()
+        console.error(json.error)
+        return this.setState({ registerError: json.error })
+      }
     } catch (err) {
-      console.err(err);
+      console.error(err);
     }
   };
 
   handleLogin = async (username, password) => {
+    this.setState({ loginError: null })
     try {
       const url = `${API_URL}/api/auth/login`;
       const body = { username, password };
@@ -50,9 +69,11 @@ class App extends Component {
         body: JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' }
       };
+
       const response = await fetch(url, options);
       const json = await response.json();
 
+      // Success
       if (response.status === 200) {
         const token = json.token;
         console.log(response.status);
@@ -62,7 +83,9 @@ class App extends Component {
           this.setState({ authenticated: true });
           navigate('/home');
         }
-      } else if (response.status === 422) {
+      } 
+      // Failure
+      else if (response.status === 422) {
         return this.setState({ loginError: json.error })
       }
     } catch (err) {
@@ -94,6 +117,7 @@ class App extends Component {
             handleRegister={this.handleRegister}
             loginError={this.state.loginError}
             registerError={this.state.registerError}
+            registerSuccess={this.state.registerSuccess}
           />
         </Router>
       </div>
