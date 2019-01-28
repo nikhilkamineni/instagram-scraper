@@ -71,6 +71,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
         <Router>
           <Home
             path="/home"

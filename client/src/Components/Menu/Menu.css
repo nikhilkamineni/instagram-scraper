@@ -9,7 +9,9 @@
   width: 100%;
   background: #612940;
   z-index: 11;
-  transition: top 300ms;
+  transition: top 500ms;
+  /* transition-delay: 100ms; */
+  transition-timing-function: ease-out;
 }
 #Menu h1 {
   text-decoration: none;
@@ -31,6 +33,11 @@
 #Menu .Menu__button:hover {
   background: transparent;
   color: #368f8b;
+}
+#Menu .Menu__button:active,
+#Menu .Menu__button:active {
+  border: none;
+  outline: none;
 }
 .Menu-visible {
   top: 0;

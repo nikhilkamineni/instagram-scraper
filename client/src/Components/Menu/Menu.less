@@ -10,7 +10,9 @@
   width: 100%;
   background: #612940;
   z-index: 11;
-  transition: top 300ms;
+  transition: top 500ms;
+  transition-delay: 100ms;
+  transition-timing-function: ease-out;
 
   h1 {
     text-decoration: none;
@@ -34,6 +36,11 @@
     &:hover {
       background: transparent;
       color: #368f8b;
+    }
+
+    &:active, &:active {
+      border: none;
+      outline: none;
     }
   }
 }

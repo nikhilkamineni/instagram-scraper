@@ -41,14 +41,14 @@ class Home extends Component {
     }
   };
 
-  _onMouseMove = e => {
+  _onMouseMove = (e, timer) => {
     this.setState({
       mousePosition: { x: e.clientX, y: e.clientY },
       mouseIsMoving: true
     });
     setTimeout(() => {
       this.setState({ mouseIsMoving: false });
-    }, 1500);
+    }, 2000);
   };
 
   handleDeletePage = async pageId => {
@@ -115,7 +115,6 @@ class Home extends Component {
 
     return (
       <div className="App__Container" onMouseMove={this._onMouseMove}>
-        <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
         <Menu
           handleLogout={this.props.handleLogout}
           user={this.state.user}
