@@ -96,9 +96,11 @@ const Login = props => {
           <br />
           <input className="textInput" type="password" name="password" />
         </div>
+
         <div className="form__submit">
           <input className="LoginForm__submit" type="submit" value="SUBMIT" />
         </div>
+        <p>{props.loginError}</p>
       </form>
     </LoginStyled>
   );

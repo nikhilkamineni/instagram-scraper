@@ -48,7 +48,7 @@ authRouter.post('/login', (req, res) => {
     if (err)
       return res.status(403).json({ error: 'Invalid username or password!' });
     if (user === null)
-      return res.status(422).json({ error: 'User does not exist' });
+      return res.status(422).json({ error: 'Username does not exist!' });
 
     // Compare password using UserSchema method
     user.checkPassword(password, (error, isMatch) => {

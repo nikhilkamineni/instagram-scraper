@@ -6,8 +6,11 @@ import Register from './Register';
 const Auth = props => {
   return (
     <div className="App__Auth">
-      <Login handleLogin={props.handleLogin} />
-      <Register handleRegister={props.handleRegister} />
+      <Login handleLogin={props.handleLogin} loginError={props.loginError} />
+      <Register
+        handleRegister={props.handleRegister}
+        registerError={props.registerError}
+      />
     </div>
   );
 };

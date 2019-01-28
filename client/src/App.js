@@ -13,7 +13,9 @@ class App extends Component {
   state = {
     user: {},
     pages: [],
-    authenticated: false
+    authenticated: false,
+    loginError: null,
+    registerError: null
   };
 
   async componentDidMount() {
@@ -31,7 +33,8 @@ class App extends Component {
         headers: { 'Content-Type': 'application/json' }
       };
       const response = await fetch(url, options);
-      if (response.status === 201) console.log('New user was registered successfully!')
+      if (response.status === 201)
+        console.log('New user was registered successfully!');
       // TODO: Login user automatically after succesfull login
     } catch (err) {
       console.err(err);
@@ -49,15 +52,21 @@ class App extends Component {
       };
       const response = await fetch(url, options);
       const json = await response.json();
-      const token = json.token;
 
-      if (token) {
-        localStorage.setItem('token', token);
-        this.setState({ authenticated: true });
-        navigate('/home');
-      } else if (json.error) return console.error(json.error);
-      else return console.error('Token was not retrieved!');
+      if (response.status === 200) {
+        const token = json.token;
+        console.log(response.status);
+
+        if (token) {
+          localStorage.setItem('token', token);
+          this.setState({ authenticated: true });
+          navigate('/home');
+        }
+      } else if (response.status === 422) {
+        return this.setState({ loginError: json.error })
+      }
     } catch (err) {
+      this.setState({ loginError: 'Error logging in!' });
       console.error(err);
     }
   };
@@ -83,6 +92,8 @@ class App extends Component {
             path="/"
             handleLogin={this.handleLogin}
             handleRegister={this.handleRegister}
+            loginError={this.state.loginError}
+            registerError={this.state.registerError}
           />
         </Router>
       </div>
