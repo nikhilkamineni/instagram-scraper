@@ -18,17 +18,11 @@
   color: black;
   font-weight: bold;
   font-size: 15px;
+  transition: all 200ms;
 }
-.SavePage #SavePage__Form input[type='text']:hover {
-  background-color: black;
-  color: #368f8b;
-}
-.SavePage #SavePage__Form input[type='text']:focus {
-  background-color: black;
-  color: #368f8b;
-}
+.SavePage #SavePage__Form input[type='text']:focus,
 .SavePage #SavePage__Form input[type='text']:active {
-  background-color: black;
+  background-color: #19150c;
   color: #368f8b;
 }
 .SavePage #SavePage__Form input[type='submit'] {
@@ -39,12 +33,10 @@
   font-size: 15px;
   font-weight: bold;
   border: 3px solid #368f8b;
+  transition: all 200ms;
 }
-.SavePage #SavePage__Form input[type='submit']:hover {
-  background-color: black;
-  color: #368f8b;
-}
+.SavePage #SavePage__Form input[type='submit']:hover,
 .SavePage #SavePage__Form input[type='submit']:active {
-  background-color: black;
+  background-color: #19150c;
   color: #368f8b;
 }

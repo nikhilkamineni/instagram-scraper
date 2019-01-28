@@ -20,8 +20,8 @@ userRouter.get("/get-user", async (req, res) => {
 
 userRouter.post("/save-page", async (req, res) => {
   try {
-    const handle = req.body.handle;
     const username = req.user.username; // passed on from authenticate middleware
+    const handle = req.body.handle[0] === '@' ? req.body.handle.slice(1) : req.body.handle;
 
     const conditions = {
       username,
