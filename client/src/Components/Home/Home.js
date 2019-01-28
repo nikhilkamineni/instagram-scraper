@@ -18,8 +18,10 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-    const token = localStorage.getItem('token');
-    if (token) await this.getUser();
+    const token = await localStorage.getItem('token');
+    if (token) {
+      await this.getUser();
+    }
   }
 
   getUser = async () => {

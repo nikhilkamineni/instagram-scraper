@@ -20,8 +20,11 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const token = localStorage.getItem('token');
-    if (token) return this.setState({ authenticated: true });
+    const token = await localStorage.getItem('token');
+    if (token) {
+      await this.setState({ authenticated: true });
+      navigate('/home')
+    }
   }
 
   handleRegister = async (username, password, confirmPassword) => {

@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const path = require('path');
 
 const authRouter = require('./routes/auth');
-const getDataRouter = require('./routes/get-data')
+const getDataRouter = require('./routes/get-data');
 const userRouter = require('./routes/user');
 const authenticate = require('./middleware/authenticate');
 
@@ -16,8 +16,17 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(cors({ origin: '*', credentials: true }));
 
-// Serve up static React build files at root endpoint
-app.use(express.static(path.join(__dirname, 'client/build')));
+// Client routes
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+app.get('/home', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+app.get('/settings', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 // API routes
 app.get('/api', (req, res) => {
