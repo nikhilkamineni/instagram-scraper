@@ -12,13 +12,12 @@ const RegisterStyled = styled.div`
     font-weight: bold;
     font-size: 20px;
     text-decoration: underline;
-    // font-family: 'Major Mono Display', monospace;
   }
 
   .Register__form {
     margin-top: 20px;
   }
-  
+
   .textInput {
     border: none;
     height: 20px;
@@ -29,6 +28,13 @@ const RegisterStyled = styled.div`
     font-size: 20px;
     padding: 10px;
     margin-bottom: 20px;
+    border: 4px solid #612940;
+    margin-top: 5px;
+
+    &:active, &:focus {
+      background-color: #19150c;
+      color: #612940;
+    }
   }
 
   .textInputLabel {
@@ -38,7 +44,6 @@ const RegisterStyled = styled.div`
 
   .form__submit {
     padding-bottom: 20px;
-    padding-top: 10px;
     color: #612940;
 
     input {
@@ -49,7 +54,7 @@ const RegisterStyled = styled.div`
       cursor: pointer;
       background-color: #612940;
       color: black;
-      border: 3px solid #612940;
+      border: 4px solid #612940;
       &:hover {
         background-color: black;
         color: #612940;
@@ -82,16 +87,12 @@ const Register = props => {
         }}
       >
         <div className="form__username">
-          <label className="textInputLabel">
-            USERNAME
-          </label>
+          <label className="textInputLabel">USERNAME</label>
           <br />
           <input className="textInput" type="text" name="username" />
         </div>
         <div className="form__password">
-          <label className="textInputLabel">
-            PASSWORD
-          </label>
+          <label className="textInputLabel">PASSWORD</label>
           <br />
           <input className="textInput" type="password" name="password" />
         </div>

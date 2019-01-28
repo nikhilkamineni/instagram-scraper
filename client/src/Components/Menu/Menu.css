@@ -10,7 +10,6 @@
   background: #612940;
   z-index: 11;
   transition: top 500ms;
-  /* transition-delay: 100ms; */
   transition-timing-function: ease-out;
 }
 #Menu h1 {

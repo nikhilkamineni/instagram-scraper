@@ -61,3 +61,30 @@
 #Settings #Settings__ChangePassword #ChangePassword__success {
   margin-top: 5px;
 }
+#Settings #Settings__back-button {
+  border: none;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 25px;
+  background: transparent;
+  -webkit-appearance: none;
+  color: #368f8b;
+  cursor: pointer;
+  align-self: flex-end;
+  outline: none;
+  appearance: none;
+  transition: color 500ms;
+  margin-top: 40px;
+}
+#Settings #Settings__back-button:hover {
+  color: #612940;
+  outline: none;
+}
+#Settings #Settings__back-button:focus {
+  border: none;
+  outline: none;
+}
+#Settings #Settings__back-button:active {
+  border: none;
+  outline: none;
+}

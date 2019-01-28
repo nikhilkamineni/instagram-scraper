@@ -88,7 +88,7 @@ class Settings extends Component {
             <p id="ChangePassword__success">{this.state.success}</p>
           </form>
         </div>
-        <Link to="/home">back</Link>
+        <Link to="/home"><button id="Settings__back-button">back</button></Link>
       </div>
     );
   }

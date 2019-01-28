@@ -24,6 +24,12 @@ const LoginStyled = styled.div`
     font-size: 20px;
     padding: 10px;
     border: 4px solid #368F8B;
+    margin: 5px;
+
+    &:active, &:focus {
+      background-color: #19150c;
+      color: #368F8B;
+    }
   }
 
   .textInputLabel {
@@ -52,7 +58,6 @@ const LoginStyled = styled.div`
       cursor: pointer;
       color: black;
       background-color: #368F8B;
-      border: none;
       border: 4px solid #368F8B;
       &:hover {
         background-color: black;
