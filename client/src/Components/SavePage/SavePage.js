@@ -34,9 +34,10 @@ const SavePage = props => {
 
   return (
     <form onSubmit={handleSubmit} className="SavePage">
-      <h3 style={{ color: '#368F8B', paddingBottom: '5px' }}>
+      <h2 style={{ color: '#368F8B', paddingBottom: '5px' }}>
         Save a new page:
-      </h3>
+      </h2>
+      <p>Enter the @handle of the Instagram account</p>
       <div id="SavePage__Form">
         <input id="Form__input" type="text" name="handle" />
         <input type="submit" value="SAVE" /> <br />
