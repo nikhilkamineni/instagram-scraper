@@ -5,7 +5,7 @@ const SavePage = props => {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const handle = event.target.handle.value;
+    const handle = event.target.handle.value.toLowerCase();
     const token = localStorage.getItem('token');
 
     if (token && handle) {

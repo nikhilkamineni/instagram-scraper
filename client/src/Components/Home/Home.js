@@ -100,7 +100,7 @@ class Home extends Component {
       ? this.state.pages.map(page => (
           <Page
             key={page._id}
-            handle={page.handle}
+            handle={page.handle.toLowerCase()}
             id={page._id}
             handleDeletePage={this.handleDeletePage}
             handleViewPage={this.handleViewPage}

@@ -13,7 +13,6 @@ userRouter.get("/get-user", async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     const message = "Internal Server Error!";
-    console.error(`${message}\n${error}`);
     res.status(500).json({ message, error });
   }
 });
@@ -21,7 +20,9 @@ userRouter.get("/get-user", async (req, res) => {
 userRouter.post("/save-page", async (req, res) => {
   try {
     const username = req.user.username; // passed on from authenticate middleware
-    const handle = req.body.handle[0] === '@' ? req.body.handle.slice(1) : req.body.handle;
+    let handle =
+      req.body.handle[0] === "@" ? req.body.handle.slice(1) : req.body.handle;
+    handle = handle.toLowerCase();
 
     const conditions = {
       username,
@@ -45,7 +46,6 @@ userRouter.post("/save-page", async (req, res) => {
     else return res.status(201).json(savedPage);
   } catch (error) {
     const message = "Error saving a new page";
-    console.error(`${message}\n${error}`);
     return res.status(500).json({ message, error });
   }
 });
@@ -77,7 +77,6 @@ userRouter.put("/delete-page", async (req, res) => {
       .json({ message: "Page was successfully deleted!", updatedUser });
   } catch (error) {
     const message = "Error deleting a new page";
-    console.error(`${message}\n${error}`);
     res.status(500).json({ message, error });
   }
 });
@@ -103,7 +102,6 @@ userRouter.put("/change-password", async (req, res) => {
     });
   } catch (error) {
     const message = "Error changing password!";
-    console.error(`${message}\n${error}`);
     return res.status(500).json({ message, error });
   }
 });
