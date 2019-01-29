@@ -16,7 +16,7 @@ Admittedly, this app was largely made for my own educational purposes. That said
 * Giving your private info to a company that doesn't have the greatest track record of keeping your info private is not awesome
 * But looking at pictures of cats on synthesizers in space is the perfect way to kill a few minutes when you're taking a break from work
 
-Surely there is a way to keep track of your favorite instagram accounts without having to signup for an account and getting sucked into the addictive nature of these things? 
+Surely there is a way to keep track of your favorite instagram accounts without having to signup for an account and getting sucked into the addictive nature of these things?
 
 ## Features
 
@@ -27,3 +27,25 @@ Surely there is a way to keep track of your favorite instagram accounts without 
 * No extraneous UI elements
 * No advertising
 * Ability to change your account password
+
+## Development
+
+PR's welcome!
+
+### Setup
+
+1. Fork/clone repo to a location of your choice
+
+1. Run `npm install` in root folder
+
+1. `cd` into the `client` folder and run `npm install`
+
+1. Run `npm start` in root folder
+
+1. In a new terminal window run `npm start` in the `client` folder
+
+NOTE: If you have the `concurrently` npm package installed, you can just run `npm run dev` in the root folder to start up the server and client at the same time in a single terminal window.
+
+### API Reference
+
+Coming soon...
