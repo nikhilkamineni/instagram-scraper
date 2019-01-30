@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './SortPages.css'
+
 const SortPages = props => {
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
