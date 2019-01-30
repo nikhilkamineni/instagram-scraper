@@ -4,6 +4,7 @@ import { Redirect } from '@reach/router'
 import Menu from '../Menu/Menu';
 import Page from '../Page/Page';
 import SavePage from '../SavePage/SavePage';
+import SortPages from '../SortPages/SortPages';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -126,19 +127,7 @@ class Home extends Component {
 
         <SavePage getUser={this.getUser} />
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <select
-            id="sort"
-            name="sort"
-            onChange={this.handleSorted}
-            value={this.state.sort}
-          >
-            <option value="oldestToNewest">Oldest to Newest</option>
-            <option value="newestToOldest">Newest to Oldest</option>
-            <option value="alphabetical">Alphabetical</option>
-          </select>
-        </div>
-
+        <SortPages handleSorted={this.handleSorted} sort={this.state.sort}/>
         {pages ? pages : <h3>Loading...</h3>}
       </div>
     );
