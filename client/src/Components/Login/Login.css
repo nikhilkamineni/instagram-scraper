@@ -1,0 +1,60 @@
+#Login {
+  border: 3px solid #368f8b;
+  width: 300px;
+  margin: 30px auto;
+  padding: 20px;
+  color: #368f8b;
+}
+#Login h2 {
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: underline;
+}
+#Login .textInput {
+  border: none;
+  height: 20px;
+  width: 180px;
+  background-color: #368f8b;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px;
+  border: 4px solid #368f8b;
+  margin: 5px;
+  transition: background-color 200ms, color 200ms;
+}
+#Login .textInput:active,
+#Login .textInput:focus {
+  background-color: #19150c;
+  color: #368f8b;
+}
+#Login .textInputLabel {
+  font-weight: bold;
+  font-style: italic;
+  color: #368f8b;
+}
+#Login .Login__form {
+  margin-top: 20px;
+}
+#Login .form__password {
+  margin-top: 20px;
+}
+#Login .form__submit {
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+#Login .form__submit input {
+  width: 90px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  background-color: #368f8b;
+  border: 4px solid #368f8b;
+  transition: background-color 200ms, color 200ms;
+}
+#Login .form__submit input:hover {
+  background-color: #19150c;
+  color: #368f8b;
+}

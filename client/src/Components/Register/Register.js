@@ -1,70 +1,6 @@
 import React from 'react';
-import styled from '@emotion/styled';
 
-const RegisterStyled = styled.div`
-  border: 3px solid #612940;
-  width: 300px;
-  margin: 30px auto;
-  padding: 20px;
-  color: #612940;
-
-  h2 {
-    font-weight: bold;
-    font-size: 20px;
-    text-decoration: underline;
-  }
-
-  .Register__form {
-    margin-top: 20px;
-  }
-
-  .textInput {
-    border: none;
-    height: 20px;
-    width: 180px;
-    background-color: #612940;
-    color: black;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 4px solid #612940;
-    margin-top: 5px;
-    transition: background-color 200ms;
-
-    &:active, &:focus {
-      background-color: #19150c;
-      color: #612940;
-    }
-  }
-
-  .textInputLabel {
-    font-weight: bold;
-    font-style: italic;
-  }
-
-  .form__submit {
-    padding-bottom: 20px;
-    color: #612940;
-
-    input {
-      width: 90px;
-      height: 40px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      background-color: #612940;
-      color: black;
-      border: 4px solid #612940;
-      transition: background-color 200ms, color 200ms;
-
-      &:hover {
-        background-color: #19150c;
-        color: #612940;
-      }
-    }
-  }
-`;
+import './Register.css'
 
 const Register = props => {
   const handleSubmit = e => {
@@ -77,8 +13,9 @@ const Register = props => {
   };
 
   return (
-    <RegisterStyled>
+    <div id="Register">
       <h2>REGISTER</h2>
+
       <form
         className="Register__form"
         onSubmit={e => {
@@ -90,23 +27,28 @@ const Register = props => {
           <br />
           <input className="textInput" type="text" name="username" />
         </div>
+
         <div className="form__password">
           <label className="textInputLabel">PASSWORD</label>
           <br />
           <input className="textInput" type="password" name="password" />
         </div>
+
         <div className="form__confirmPassword">
           <label className="textInputLabel">CONFIRM PASSWORD</label>
           <br />
           <input className="textInput" type="password" name="confirmPassword" />
         </div>
+
         <div className="form__submit">
           <input type="submit" value="SUBMIT" />
         </div>
+
         <p>{props.registerError}</p>
+
         {props.registerSuccess && <p>New user succesfully registered!</p>}
       </form>
-    </RegisterStyled>
+    </div>
   );
 };
 

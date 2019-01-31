@@ -1,12 +1,11 @@
 import React from 'react';
 
-import Login from './Login';
-import Register from './Register';
-import About from './About';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 const Auth = props => {
   return (
-    <div className="App__Auth">
+    <div className="Auth">
       <Login
         className="Auth__Login"
         handleLogin={props.handleLogin}
@@ -18,7 +17,6 @@ const Auth = props => {
         registerError={props.registerError}
         registerSuccess={props.registerSuccess}
       />
-      <About className="Auth__About" />
     </div>
   );
 };
