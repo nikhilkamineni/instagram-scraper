@@ -2,7 +2,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
 html,
 body,
 div,
@@ -128,6 +127,12 @@ table {
   border-spacing: 0;
 }
 /* CUSTOM STYLES */
+@font-face {
+  font-family: 'Major Mono Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Major Mono Display Regular'), local('MajorMonoDisplay-Regular'), url(https://fonts.gstatic.com/s/majormonodisplay/v2/RWmVoLyb5fEqtsfBX9PDZIGr2tFubRh7DXeU.ttf) format('truetype');
+}
 body {
   margin: 0;
   padding: 0;

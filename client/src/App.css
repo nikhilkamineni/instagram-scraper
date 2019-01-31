@@ -1,8 +1,6 @@
 .App {
-  margin: 0;
-  padding: 0 20px;
   text-align: center;
-  min-width: 800px;
+  min-width: 360px;
 }
 .App h1 {
   font-weight: bold;
