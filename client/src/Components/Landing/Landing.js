@@ -8,6 +8,7 @@ import './Landing.css'
 const Landing = props => {
   return (
     <div id="Landing">
+      <About />
       <Auth
         handleLogin={props.handleLogin}
         handleRegister={props.handleRegister}
@@ -15,7 +16,6 @@ const Landing = props => {
         registerError={props.registerError}
         registerSuccess={props.registerSuccess}
       />
-      <About />
     </div>
   );
 };
