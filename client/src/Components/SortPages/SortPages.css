@@ -1,28 +1,49 @@
-#sort {
+#SortPages {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 14px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+#SortPages h4 {
+  color: #368f8b;
+  padding: 0 5px 0 0;
+  margin: 0;
+  font-style: italic;
+  font-size: 14px;
+}
+#SortPages #sort {
   border: none;
   font-family: Futura, sans-serif;
-  font-weight: bold;
-  padding: 10px;
   background: transparent;
   overflow: hidden;
-  -webkit-appearance: none;
   color: #368f8b;
   cursor: pointer;
   align-self: flex-end;
   outline: none;
   appearance: none;
-  font-size: 20px;
-  transition: color 500ms;
+  font-size: 11px;
 }
-#sort:hover {
+#SortPages #sort label {
+  margin: 0 5px;
+  transition: color 200ms;
+}
+#SortPages #sort label:hover {
   color: #612940;
   outline: none;
+  cursor: pointer;
 }
-#sort:focus {
+#SortPages #sort label:focus {
   border: none;
   outline: none;
 }
-#sort:active {
+#SortPages #sort label:active {
   border: none;
   outline: none;
+}
+#SortPages #sort .sort-selected {
+  color: #612940;
+}
+#SortPages #sort input[type='radio'] {
+  display: none;
 }

@@ -17,7 +17,7 @@ class Home extends Component {
     user: {},
     pages: [],
     pageBeingViewed: '',
-    sort: 'newestToOldest'
+    sort: 'alphabetical'
   };
 
   async componentDidMount() {
