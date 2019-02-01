@@ -33,10 +33,7 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.post('save', async function(doc, next) {
-  console.log('Inside the post save hook!');
-  console.log(doc);
   await doc.update({ $push: { pages: { handle: 'cats_of_instagram' } } });
-  console.log(doc);
   next();
 });
 
