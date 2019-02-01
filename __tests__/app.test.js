@@ -120,7 +120,7 @@ describe("app.js test suite", () => {
     test("[POST] /api/user/save-page", async () => {
       const response = await fetch(`${BASE_URL}/api/user/save-page`, {
         method: "post",
-        body: JSON.stringify({ handle: "cats_of_instagram" }),
+        body: JSON.stringify({ handle: "dogs_of_instagram" }),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${testUser.token}`
@@ -132,8 +132,8 @@ describe("app.js test suite", () => {
 
       expect(responseJSON.username).toEqual(testUser.username);
       expect(responseJSON.password).toBeUndefined();
-      expect(responseJSON.pages.length).toBe(1);
-      expect(responseJSON.pages[0].handle).toEqual("cats_of_instagram");
+      expect(responseJSON.pages.length).toBe(2);
+      expect(responseJSON.pages[1].handle).toEqual("dogs_of_instagram");
     });
 
     test("[PUT] /api/user/delete-page", async () => {
@@ -150,7 +150,7 @@ describe("app.js test suite", () => {
 
       expect(responseJSON.updatedUser.username).toEqual(testUser.username);
       expect(responseJSON.updatedUser.password).toBeUndefined();
-      expect(responseJSON.updatedUser.pages.length).toBe(0);
+      expect(responseJSON.updatedUser.pages.length).toBe(1);
     });
 
     test("[PUT] /api/user/change-password", async () => {
