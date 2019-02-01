@@ -1,31 +1,56 @@
-#sort {
-  border: none;
-  font-family: Futura, sans-serif;
+#SortPages {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 14px;
+  margin-bottom: 10px;
   font-weight: bold;
-  padding: 10px;
-  background: transparent;
-  overflow: hidden;
-  -webkit-appearance: none;
-  color: #368f8b;
-  cursor: pointer;
-  align-self: flex-end;
-  outline: none;
-  appearance: none;
-  font-size: 20px;
-  transition: color 500ms;
 
-  &:hover {
-    color: #612940;
-    outline: none;
+  h4 {
+    color: #368f8b;
+    padding: 0 5px 0 0;
+    margin: 0;
+    font-style: italic;
+    font-size: 14px;
   }
 
-  &:focus {
+  #sort {
     border: none;
+    font-family: Futura, sans-serif;
+    background: transparent;
+    overflow: hidden;
+    color: #368f8b;
+    cursor: pointer;
+    align-self: flex-end;
     outline: none;
-  }
+    appearance: none;
+    font-size: 11px;
 
-  &:active {
-    border: none;
-    outline: none;
+    label {
+      margin: 0 5px;
+      transition: color 200ms;
+      &:hover {
+        color: #612940;
+        outline: none;
+        cursor: pointer;
+      }
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+
+      &:active {
+        border: none;
+        outline: none;
+      }
+    }
+
+    .sort-selected {
+      color: #612940;
+    }
+
+    input[type='radio'] {
+      display: none;
+    }
   }
 }

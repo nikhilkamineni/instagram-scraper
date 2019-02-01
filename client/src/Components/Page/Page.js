@@ -36,13 +36,13 @@ class Page extends Component {
             {this.props.handle.toUpperCase()}
           </h2>
           <button className="header-link" onClick={this.handleOpenSource}>
-            SRC
+            SOURCE
           </button>
           <button
             className="header-link"
             onClick={() => this.props.handleDeletePage(this.props.id)}
           >
-            X
+            DELETE
           </button>
         </div>
         {this.props.beingViewed && (

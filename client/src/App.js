@@ -48,8 +48,8 @@ class App extends Component {
 
       // Success
       if (response.status === 201) {
-        return this.setState({ registerSuccess: true });
-        // TODO: Login user automatically after succesfull login
+        this.setState({ registerSuccess: true });
+        this.handleLogin(username, password);
       }
       // Failure
       else if (response.status === 422) {

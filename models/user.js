@@ -32,6 +32,11 @@ UserSchema.pre('save', function(next) {
   });
 });
 
+UserSchema.post('save', async function(doc, next) {
+  await doc.update({ $push: { pages: { handle: 'cats_of_instagram' } } });
+  next();
+});
+
 UserSchema.methods.checkPassword = function(passwordAttempt, cb) {
   bcrypt.compare(passwordAttempt, this.password, (err, isMatch) => {
     if (!isMatch) return cb('Incorrect password!');
