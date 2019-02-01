@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, navigate } from '@reach/router';
 
-import Auth from './Components/Auth/Auth';
+import Landing from './Components/Landing/Landing';
 import Home from './Components/Home/Home';
 import Settings from './Components/Settings/Settings';
 
@@ -16,23 +16,23 @@ class App extends Component {
     authenticated: false,
     loginError: null,
     registerError: null,
-    registerSuccess: false,
+    registerSuccess: false
   };
 
   async componentDidMount() {
     const token = await localStorage.getItem('token');
     if (token) {
       await this.setState({ authenticated: true });
-      navigate('/home')
+      navigate('/home');
     }
   }
 
   handleRegister = async (username, password, confirmPassword) => {
-    this.setState({ registerError: null, registerSuccess: false })
+    this.setState({ registerError: null, registerSuccess: false });
 
     if (password !== confirmPassword) {
-      console.log('Passwords do not match!')
-      return this.setState({ registerError: 'Passwords do not match!' })
+      console.log('Passwords do not match!');
+      return this.setState({ registerError: 'Passwords do not match!' });
     }
 
     try {
@@ -48,14 +48,14 @@ class App extends Component {
 
       // Success
       if (response.status === 201) {
-        return this.setState({ registerSuccess: true })
+        return this.setState({ registerSuccess: true });
         // TODO: Login user automatically after succesfull login
-      } 
+      }
       // Failure
       else if (response.status === 422) {
-        const json = await response.json()
-        console.error(json.error)
-        return this.setState({ registerError: json.error })
+        const json = await response.json();
+        console.error(json.error);
+        return this.setState({ registerError: json.error });
       }
     } catch (err) {
       console.error(err);
@@ -63,7 +63,7 @@ class App extends Component {
   };
 
   handleLogin = async (username, password) => {
-    this.setState({ loginError: null })
+    this.setState({ loginError: null });
     try {
       const url = `${API_URL}/api/auth/login`;
       const body = { username, password };
@@ -86,10 +86,10 @@ class App extends Component {
           this.setState({ authenticated: true });
           navigate('/home');
         }
-      } 
+      }
       // Failure
       else if (response.status === 422) {
-        return this.setState({ loginError: json.error })
+        return this.setState({ loginError: json.error });
       }
     } catch (err) {
       this.setState({ loginError: 'Error logging in!' });
@@ -114,7 +114,7 @@ class App extends Component {
             authenticated={this.state.authenticated}
           />
           <Settings path="/settings" authenticated={this.state.authenticated} />
-          <Auth
+          <Landing
             path="/"
             handleLogin={this.handleLogin}
             handleRegister={this.handleRegister}

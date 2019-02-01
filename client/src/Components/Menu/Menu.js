@@ -19,7 +19,7 @@ const Menu = props => {
       {props.user && <h1>HELLO {props.user.username}</h1>}
 
       <div id="Menu__links">
-        <Link to="/settings">
+        <Link to="/settings" style={{ padding: '0', margin: '0' }}>
           <button id="settings-button" className="Menu__button">
             SETTINGS
           </button>

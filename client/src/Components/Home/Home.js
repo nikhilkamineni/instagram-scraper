@@ -6,6 +6,8 @@ import Page from '../Page/Page';
 import SavePage from '../SavePage/SavePage';
 import SortPages from '../SortPages/SortPages';
 
+import './Home.css'
+
 const API_URL = process.env.REACT_APP_API_URL;
 
 class Home extends Component {
@@ -117,7 +119,7 @@ class Home extends Component {
       });
 
     return (
-      <div className="App__Container" onMouseMove={this._onMouseMove}>
+      <div id="Home" onMouseMove={this._onMouseMove}>
         <Menu
           handleLogout={this.props.handleLogout}
           user={this.state.user}

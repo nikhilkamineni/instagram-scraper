@@ -1,39 +1,9 @@
 .App {
-  margin: 0;
-  padding: 0 20px;
   text-align: center;
-  min-width: 800px;
+  min-width: 360px;
 }
 .App h1 {
   font-weight: bold;
   padding-top: 20px;
   font-size: 30px;
-}
-.App #sort {
-  border: none;
-  font-family: Futura, sans-serif;
-  font-weight: bold;
-  padding: 10px;
-  background: transparent;
-  overflow: hidden;
-  -webkit-appearance: none;
-  color: #368f8b;
-  cursor: pointer;
-  align-self: flex-end;
-  outline: none;
-  appearance: none;
-  font-size: 20px;
-  transition: color 500ms;
-}
-.App #sort:hover {
-  color: #612940;
-  outline: none;
-}
-.App #sort:focus {
-  border: none;
-  outline: none;
-}
-.App #sort:active {
-  border: none;
-  outline: none;
 }

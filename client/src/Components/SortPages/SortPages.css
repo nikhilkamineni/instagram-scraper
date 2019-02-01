@@ -1,0 +1,28 @@
+#sort {
+  border: none;
+  font-family: Futura, sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  background: transparent;
+  overflow: hidden;
+  -webkit-appearance: none;
+  color: #368f8b;
+  cursor: pointer;
+  align-self: flex-end;
+  outline: none;
+  appearance: none;
+  font-size: 20px;
+  transition: color 500ms;
+}
+#sort:hover {
+  color: #612940;
+  outline: none;
+}
+#sort:focus {
+  border: none;
+  outline: none;
+}
+#sort:active {
+  border: none;
+  outline: none;
+}

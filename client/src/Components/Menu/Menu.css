@@ -1,3 +1,8 @@
+/* Landscape phone to portrait tablet */
+/* Small tablet - includes media query for tablet-portrait, but cuts out larger sizes */
+/* Large tablet  - includes media query for tablet-portrait, but cuts out smaller sizes */
+/* Tablet landscape */
+/* Large desktop */
 #Menu {
   position: fixed;
   left: 0;
@@ -12,14 +17,33 @@
   transition: top 500ms;
   transition-timing-function: ease-out;
 }
+@media only screen and (min-width: 360px) and (max-width: 480px) {
+  #Menu {
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+  }
+}
 #Menu h1 {
   text-decoration: none;
   padding: 0;
-  margin: 0;
+  margin: auto 0;
+}
+@media only screen and (min-width: 360px) and (max-width: 480px) {
+  #Menu h1 {
+    font-size: 18px;
+    padding: 5px;
+  }
 }
 #Menu #Menu__links {
   display: flex;
   width: auto;
+}
+@media only screen and (min-width: 360px) and (max-width: 480px) {
+  #Menu #Menu__links {
+    flex-direction: column;
+    margin: 5px;
+  }
 }
 #Menu .Menu__button {
   margin-right: 50px;
@@ -28,6 +52,7 @@
   font-size: 25px;
   padding: 0 50px 0 0;
   margin: 0;
+  height: 15px;
 }
 #Menu .Menu__button:hover {
   background: transparent;
@@ -37,6 +62,13 @@
 #Menu .Menu__button:active {
   border: none;
   outline: none;
+}
+@media only screen and (min-width: 360px) and (max-width: 480px) {
+  #Menu .Menu__button {
+    font-size: 13px;
+    margin: 2px 5px;
+    padding: 0;
+  }
 }
 .Menu-visible {
   top: 0;

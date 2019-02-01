@@ -1,0 +1,40 @@
+#About {
+  color: steelblue;
+  border: 3px solid steelblue;
+  margin: 30px;
+  height: 350px;
+  padding: 20px;
+  width: 300px;
+  min-width: 300px;
+}
+#About h2 {
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: underline;
+}
+#About #About__content {
+  padding: 20px;
+  text-align: left;
+}
+#About #About__content h3 {
+  font-size: 13px;
+  font-weight: bold;
+  padding-left: 15px;
+}
+#About #About__content ol {
+  list-style: decimal;
+}
+#About #About__content ol li {
+  margin: 15px;
+  font-size: 13px;
+}
+#About #About__content #content__about {
+  margin-bottom: 40px;
+  padding: 5px;
+  line-height: 1.7;
+  text-align: justify;
+}
+#About #About__content #content__about b {
+  font-weight: bold;
+  font-size: 18px;
+}

@@ -1,3 +1,5 @@
+@import '../../breakpoints.less';
+
 #Menu {
   position: fixed;
   // top: 0;
@@ -13,15 +15,29 @@
   transition: top 500ms;
   transition-timing-function: ease-out;
 
+  @media @phone-only {
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+  }
   h1 {
     text-decoration: none;
     padding: 0;
-    margin: 0;
+    margin: auto 0;
+
+    @media @phone-only {
+      font-size: 18px;
+      padding: 5px;
+    }
   }
 
   #Menu__links {
     display: flex;
     width: auto;
+    @media @phone-only {
+      flex-direction: column;
+      margin: 5px;
+    }
   }
 
   .Menu__button {
@@ -31,15 +47,23 @@
     font-size: 25px;
     padding: 0 50px 0 0;
     margin: 0;
+    height: 15px;
 
     &:hover {
       background: transparent;
       color: #368f8b;
     }
 
-    &:active, &:active {
+    &:active,
+    &:active {
       border: none;
       outline: none;
+    }
+
+    @media @phone-only {
+      font-size: 13px;
+      margin: 2px 5px;
+      padding: 0;
     }
   }
 }
