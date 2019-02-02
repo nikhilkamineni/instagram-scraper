@@ -10,11 +10,13 @@ const Auth = props => {
         className="Auth__Login"
         handleLogin={props.handleLogin}
         loginError={props.loginError}
+        loginLoading={props.loginLoading}
       />
       <Register
         className="Auth__Register"
         handleRegister={props.handleRegister}
         registerError={props.registerError}
+        registerLoading={props.registerLoading}
         registerSuccess={props.registerSuccess}
       />
     </div>

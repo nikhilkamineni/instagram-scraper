@@ -36,6 +36,7 @@ const Login = props => {
           <input className="LoginForm__submit" type="submit" value="SUBMIT" />
         </div>
         <p>{props.loginError}</p>
+        {props.loginLoading && <p>Loading...</p>}
       </form>
     </div>
   );
