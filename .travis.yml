@@ -4,6 +4,7 @@ node_js:
 branches:
   only:
     - master
+    - deployment
 deploy:
   provider: heroku
   api_key:

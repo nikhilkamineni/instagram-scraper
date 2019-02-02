@@ -3,8 +3,6 @@ import { Link } from '@reach/router';
 
 import './Settings.css';
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 class Settings extends Component {
   state = {
     error: null,
@@ -26,18 +24,16 @@ class Settings extends Component {
     //TODO: Make backend API call
     else {
       try {
-        const url = `${API_URL}/api/user/change-password`;
-        const body = { newPassword };
         const token = localStorage.getItem('token');
         const options = {
           method: 'put',
-          body: JSON.stringify(body),
+          body: JSON.stringify({ newPassword }),
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
           }
         };
-        const response = await fetch(url, options);
+        const response = await fetch('/api/user/change-password', options);
         if (response.status === 200)
           return this.setState({
             success: 'Password was changed successfully!'
@@ -88,7 +84,9 @@ class Settings extends Component {
             <p id="ChangePassword__success">{this.state.success}</p>
           </form>
         </div>
-        <Link to="/home"><button id="Settings__back-button">back</button></Link>
+        <Link to="/home">
+          <button id="Settings__back-button">back</button>
+        </Link>
       </div>
     );
   }

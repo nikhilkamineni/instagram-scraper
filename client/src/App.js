@@ -7,8 +7,6 @@ import Settings from './Components/Settings/Settings';
 
 import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 class App extends Component {
   state = {
     user: {},
@@ -42,7 +40,7 @@ class App extends Component {
     }
 
     try {
-      const url = `${API_URL}/api/auth/register`;
+      const url = '/api/auth/register';
       const body = { username, password };
       const options = {
         method: 'post',
@@ -74,7 +72,7 @@ class App extends Component {
   handleLogin = async (username, password) => {
     this.setState({ loginError: null, loginLoading: true });
     try {
-      const url = `${API_URL}/api/auth/login`;
+      const url = `/api/auth/login`;
       const body = { username, password };
       const options = {
         method: 'post',
