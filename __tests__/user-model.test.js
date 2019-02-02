@@ -112,8 +112,8 @@ describe('User.js test suite', () => {
 
     expect(updatedUser).toBeDefined();
     expect(updatedUser.username).toBe('existingTestUser');
-    expect(updatedUser.pages.length).toBe(3);
-    expect(updatedUser.pages[2].handle).toEqual('catsonsynthesizersinspace');
+    expect(updatedUser.pages.length).toBe(4);
+    expect(updatedUser.pages[3].handle).toEqual('catsonsynthesizersinspace');
   });
 
 
@@ -133,6 +133,6 @@ describe('User.js test suite', () => {
     expect(id).toBeDefined();
     expect(pageId).toBeDefined();
     expect(existingTestUser.pages.length).toBe(2);
-    expect(updatedUser.pages.length).toBe(1);
+    expect(updatedUser.pages.length).toBe(2);
   });
 });
