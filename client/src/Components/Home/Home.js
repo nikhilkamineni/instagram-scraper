@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Redirect } from '@reach/router'
+import { Redirect } from '@reach/router';
 
 import Menu from '../Menu/Menu';
 import Page from '../Page/Page';
 import SavePage from '../SavePage/SavePage';
 import SortPages from '../SortPages/SortPages';
 
-import './Home.css'
-
-const API_URL = process.env.REACT_APP_API_URL;
+import './Home.css';
 
 class Home extends Component {
   state = {
@@ -30,7 +28,6 @@ class Home extends Component {
   getUser = async () => {
     const token = localStorage.getItem('token');
     try {
-      const url = `${API_URL}/api/user/get-user`;
       const options = {
         method: 'get',
         headers: {
@@ -38,7 +35,7 @@ class Home extends Component {
           Authorization: `Bearer ${token}`
         }
       };
-      const response = await fetch(url, options);
+      const response = await fetch('/api/user/get-user', options);
       const userData = await response.json();
       this.setState({ user: userData, pages: userData.pages });
     } catch (error) {
@@ -60,17 +57,15 @@ class Home extends Component {
     try {
       const token = localStorage.getItem('token');
       if (token && pageId) {
-        const url = `${API_URL}/api/user/delete-page`;
-        const body = { pageId };
         const options = {
           method: 'put',
-          body: JSON.stringify(body),
+          body: JSON.stringify({ pageId }),
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
           }
         };
-        const response = await fetch(url, options);
+        const response = await fetch('/api/user/delete-page', options);
         const json = await response.json();
         this.setState({
           user: json.updatedUser,
@@ -129,7 +124,7 @@ class Home extends Component {
 
         <SavePage getUser={this.getUser} />
 
-        <SortPages handleSorted={this.handleSorted} sort={this.state.sort}/>
+        <SortPages handleSorted={this.handleSorted} sort={this.state.sort} />
         {pages ? pages : <h3>Loading...</h3>}
       </div>
     );

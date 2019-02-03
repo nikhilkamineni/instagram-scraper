@@ -11,10 +11,7 @@ class Page extends Component {
 
   async componentDidMount() {
     try {
-      const url = `${process.env.REACT_APP_API_URL}/api/get-data?handle=${
-        this.props.handle
-      }`;
-
+      const url = `/api/get-data?handle=${this.props.handle}`;
       const response = await fetch(url);
       const data = await response.json();
       this.setState({ ...data });

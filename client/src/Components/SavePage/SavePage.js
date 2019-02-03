@@ -9,18 +9,16 @@ const SavePage = props => {
     const token = localStorage.getItem('token');
 
     if (token && handle) {
-      const url = `${process.env.REACT_APP_API_URL}/api/user/save-page`;
-      const body = { handle };
       const options = {
         method: 'post',
-        body: JSON.stringify(body),
+        body: JSON.stringify({ handle }),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         }
       };
 
-      await fetch(url, options);
+      await fetch('/api/user/save-page', options);
 
       // TODO: Add error handling
       props.getUser();

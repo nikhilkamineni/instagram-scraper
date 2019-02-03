@@ -46,7 +46,8 @@ const Register = props => {
 
         <p>{props.registerError}</p>
 
-        {props.registerSuccess && <p>New user succesfully registered! Logging you in...</p>}
+        {props.registerSuccess && <p>New user succesfully registered! <br /> Logging you in...</p>}
+        {props.registerLoading && <p>Loading...</p> }
       </form>
     </div>
   );

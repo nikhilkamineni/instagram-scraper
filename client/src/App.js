@@ -7,15 +7,15 @@ import Settings from './Components/Settings/Settings';
 
 import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 class App extends Component {
   state = {
     user: {},
     pages: [],
     authenticated: false,
     loginError: null,
+    loginLoading: false,
     registerError: null,
+    registerLoading: false,
     registerSuccess: false
   };
 
@@ -28,7 +28,11 @@ class App extends Component {
   }
 
   handleRegister = async (username, password, confirmPassword) => {
-    this.setState({ registerError: null, registerSuccess: false });
+    this.setState({
+      registerError: null,
+      registerLoading: true,
+      registerSuccess: false
+    });
 
     if (password !== confirmPassword) {
       console.log('Passwords do not match!');
@@ -36,7 +40,7 @@ class App extends Component {
     }
 
     try {
-      const url = `${API_URL}/api/auth/register`;
+      const url = '/api/auth/register';
       const body = { username, password };
       const options = {
         method: 'post',
@@ -48,14 +52,17 @@ class App extends Component {
 
       // Success
       if (response.status === 201) {
-        this.setState({ registerSuccess: true });
+        this.setState({ registerSuccess: true, registerLoading: false });
         this.handleLogin(username, password);
       }
       // Failure
       else if (response.status === 422) {
         const json = await response.json();
         console.error(json.error);
-        return this.setState({ registerError: json.error });
+        return this.setState({
+          registerError: json.error,
+          registerLoading: false
+        });
       }
     } catch (err) {
       console.error(err);
@@ -63,9 +70,9 @@ class App extends Component {
   };
 
   handleLogin = async (username, password) => {
-    this.setState({ loginError: null });
+    this.setState({ loginError: null, loginLoading: true });
     try {
-      const url = `${API_URL}/api/auth/login`;
+      const url = `/api/auth/login`;
       const body = { username, password };
       const options = {
         method: 'post',
@@ -79,11 +86,14 @@ class App extends Component {
       // Success
       if (response.status === 200) {
         const token = json.token;
-        console.log(response.status);
 
         if (token) {
           localStorage.setItem('token', token);
-          this.setState({ authenticated: true });
+          this.setState({
+            authenticated: true,
+            loginLoading: false,
+            registerSuccess: false
+          });
           navigate('/home');
         }
       }
@@ -92,7 +102,7 @@ class App extends Component {
         return this.setState({ loginError: json.error });
       }
     } catch (err) {
-      this.setState({ loginError: 'Error logging in!' });
+      this.setState({ loginError: 'Error logging in!', loginLoading: false });
       console.error(err);
     }
   };
@@ -119,7 +129,9 @@ class App extends Component {
             handleLogin={this.handleLogin}
             handleRegister={this.handleRegister}
             loginError={this.state.loginError}
+            loginLoading={this.state.loginLoading}
             registerError={this.state.registerError}
+            registerLoading={this.state.registerLoading}
             registerSuccess={this.state.registerSuccess}
           />
         </Router>
