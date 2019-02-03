@@ -2,15 +2,13 @@
   color: steelblue;
   border: 3px solid steelblue;
   margin: 30px;
-  height: 350px;
-  padding: 20px;
+  height: 400px;
+  padding: 0 20px;
   width: 300px;
   min-width: 300px;
-}
-#About h2 {
-  font-weight: bold;
-  font-size: 16px;
-  text-decoration: underline;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
 }
 #About #About__content {
   padding: 20px;
@@ -27,6 +25,7 @@
 #About #About__content ol li {
   margin: 15px;
   font-size: 13px;
+  line-height: 1.3;
 }
 #About #About__content #content__about {
   margin-bottom: 40px;
@@ -37,4 +36,17 @@
 #About #About__content #content__about b {
   font-weight: bold;
   font-size: 18px;
+}
+#About #About__content #content__getting-started {
+  margin-bottom: 10px;
+}
+#About #About__content #content__fork-me {
+  margin-top: 40px;
+  text-align: center;
+}
+#About #About__content #content__fork-me a {
+  color: steelblue;
+}
+#About #About__content #content__fork-me a:hover {
+  color: #612940;
 }

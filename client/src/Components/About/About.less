@@ -2,19 +2,15 @@
   color: steelblue;
   border: 3px solid steelblue;
   margin: 30px;
-  height: 350px;
-  padding: 20px;
+  height: 400px;
+  padding: 0 20px;
   width: 300px;
   min-width: 300px;
-
-  h2 {
-    font-weight: bold;
-    font-size: 16px;
-    text-decoration: underline;
-  }
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
 
   #About__content {
-    // margin-top: 10px;
     padding: 20px;
     text-align: left;
 
@@ -29,6 +25,7 @@
       li {
         margin: 15px;
         font-size: 13px;
+        line-height: 1.3;
       }
     }
 
@@ -40,6 +37,21 @@
       b {
         font-weight: bold;
         font-size: 18px;
+      }
+    }
+
+    #content__getting-started {
+      margin-bottom: 10px;
+    }
+
+    #content__fork-me {
+      margin-top: 40px;
+      text-align: center;
+      a {
+        color: steelblue;
+        &:hover {
+          color: #612940;
+        }
       }
     }
   }

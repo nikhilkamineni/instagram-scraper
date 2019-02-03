@@ -1,5 +1,5 @@
 # zen-gram
-[![Build Status](https://travis-ci.org/nikhilkamineni/zen-gram.svg?branch=master)](https://travis-ci.org/nikhilkamineni/zen-gram)
+[![Build Status](https://travis-ci.org/nikhilkamineni/zen-gram.svg?branch=master)](https://travis-ci.org/nikhilkamineni/zen-gram)[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 ## a healthier way to instagram
 ### https://zen-gram.herokuapp.com
 
@@ -11,9 +11,9 @@ A simple web app that scrapes instagram using Cheerio.js. It allows you to keep 
 
 Admittedly, this app was largely made for my own educational purposes. That said, it was inspired by the following ideas:
 
-* Social media can addictive and it's easy to get distracted by it
-* Cat pictures (and dogs!) are awesome though
-* Giving your private info to a company that doesn't have the greatest track record of keeping your info private is not awesome
+* Social media can be addictive and can be a huge distraction
+* But cat (and dog!) pictures are awesome
+* Giving your private info to a company that doesn't have the greatest track record of keeping your info private is... not ideal
 * But looking at pictures of cats on synthesizers in space is the perfect way to kill a few minutes when you're taking a break from work
 
 Surely there is a way to keep track of your favorite instagram accounts without having to signup for an account and getting sucked into the addictive nature of these things?
