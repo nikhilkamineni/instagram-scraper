@@ -11,13 +11,14 @@
     "plugin:node/recommended",
     "prettier"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
   "rules": {
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "semi": ["error", "always"]
+    "indent": ["off"],
+    "prettier/prettier": "error"
   }
 }
+

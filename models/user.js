@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const BCRYPT_COST = 11;
 
@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
   ]
 });
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre("save", function(next) {
   bcrypt.hash(this.password, BCRYPT_COST, (err, hash) => {
     if (err) return next(err);
     this.password = hash;
@@ -32,16 +32,16 @@ UserSchema.pre('save', function(next) {
   });
 });
 
-UserSchema.post('save', async function(doc, next) {
-  await doc.update({ $push: { pages: { handle: 'cats_of_instagram' } } });
+UserSchema.post("save", async function(doc, next) {
+  await doc.update({ $push: { pages: { handle: "cats_of_instagram" } } });
   next();
 });
 
 UserSchema.methods.checkPassword = function(passwordAttempt, cb) {
   bcrypt.compare(passwordAttempt, this.password, (err, isMatch) => {
-    if (!isMatch) return cb('Incorrect password!');
+    if (!isMatch) return cb("Incorrect password!");
     cb(null, isMatch);
   });
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);

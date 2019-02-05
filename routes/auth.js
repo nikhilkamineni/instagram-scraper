@@ -1,14 +1,14 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
+const express = require("express");
+const jwt = require("jsonwebtoken");
 
-const User = require('../models/user');
+const User = require("../models/user");
 
 const SECRET = process.env.SECRET;
 
 const authRouter = express.Router();
 
 // Register a new user. Expects JSON object with 'username' and 'password' field
-authRouter.post('/register', async (req, res) => {
+authRouter.post("/register", async (req, res) => {
   let { username, password } = req.body;
   // username = username.toLowerCase();
 
@@ -16,7 +16,7 @@ authRouter.post('/register', async (req, res) => {
   if (!username || !password) {
     res
       .status(422)
-      .json({ error: 'You need to provide a username and password!' });
+      .json({ error: "You need to provide a username and password!" });
   }
 
   try {
@@ -26,32 +26,32 @@ authRouter.post('/register', async (req, res) => {
     delete user.password;
     return res
       .status(201)
-      .json({ message: 'New user succesfully registered!', user });
+      .json({ message: "New user succesfully registered!", user });
   } catch (error) {
     console.log(error);
     if (error.code == 11000)
-      return res.status(422).json({ error: 'User already exists!' });
-    else return res.status(500).json({ error: 'Internal server error!' });
+      return res.status(422).json({ error: "User already exists!" });
+    else return res.status(500).json({ error: "Internal server error!" });
   }
 });
 
 // Login user
-authRouter.post('/login', (req, res) => {
+authRouter.post("/login", (req, res) => {
   let { username, password } = req.body;
 
   // Error handling
   if (!username || !password) {
     res
       .status(422)
-      .json({ error: 'You need to provide a username and password' });
+      .json({ error: "You need to provide a username and password" });
   }
 
   // Find User model matching the provided username
   User.findOne({ username }, (err, user) => {
     if (err)
-      return res.status(403).json({ error: 'Invalid username or password!' });
+      return res.status(403).json({ error: "Invalid username or password!" });
     if (user === null)
-      return res.status(422).json({ error: 'Username does not exist!' });
+      return res.status(422).json({ error: "Username does not exist!" });
 
     // Compare password using UserSchema method
     user.checkPassword(password, (error, isMatch) => {
