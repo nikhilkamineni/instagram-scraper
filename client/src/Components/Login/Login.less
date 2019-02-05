@@ -1,9 +1,11 @@
+@import '../../colors.less';
+
 #Login {
-  border: 3px solid #368f8b;
+  border: 3px solid @color-green;
   width: 300px;
   margin: 30px auto;
   padding: 20px;
-  color: #368f8b;
+  color: @color-green;
 
   h2 {
     font-weight: bold;
@@ -15,19 +17,19 @@
     border: none;
     height: 13px;
     width: 160px;
-    background-color: #368f8b;
+    background-color: @color-green;
     color: black;
     font-size: 13px;
     font-weight: bold;
     padding: 6px;
-    border: 4px solid #368f8b;
+    border: 4px solid @color-green;
     margin: 5px;
     transition: background-color 200ms, color 200ms;
 
     &:active,
     &:focus {
-      background-color: #19150c;
-      color: #368f8b;
+      background-color: @color-black;
+      color: @color-green;
     }
   }
 
@@ -56,13 +58,13 @@
       font-weight: bold;
       cursor: pointer;
       color: black;
-      background-color: #368f8b;
-      border: 4px solid #368f8b;
+      background-color: @color-green;
+      border: 4px solid @color-green;
       transition: background-color 200ms, color 200ms;
 
       &:hover {
-        background-color: #19150c;
-        color: #368f8b;
+        background-color: @color-black;
+        color: @color-green;
       }
     }
   }

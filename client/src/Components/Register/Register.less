@@ -1,9 +1,11 @@
+@import '../../colors.less';
+
 #Register {
-  border: 3px solid #612940;
+  border: 3px solid @color-red;
   width: 300px;
   margin: 30px auto;
   padding: 20px;
-  color: #612940;
+  color: @color-red;
 
   h2 {
     font-weight: bold;
@@ -19,20 +21,20 @@
     border: none;
     height: 13px;
     width: 160px;
-    background-color: #612940;
+    background-color: @color-red;
     color: black;
     font-weight: bold;
     font-size: 13px;
     padding: 6px;
     margin-bottom: 20px;
-    border: 4px solid #612940;
+    border: 4px solid @color-red;
     margin-top: 5px;
     transition: background-color 200ms, color 200ms;
 
     &:active,
     &:focus {
-      background-color: #19150c;
-      color: #612940;
+      background-color: @color-black;
+      color: @color-red;
     }
   }
 
@@ -44,7 +46,7 @@
 
   .form__submit {
     padding-bottom: 20px;
-    color: #612940;
+    color: @color-red;
 
     input {
       width: 90px;
@@ -52,14 +54,14 @@
       font-size: 13px;
       font-weight: bold;
       cursor: pointer;
-      background-color: #612940;
+      background-color: @color-red;
       color: black;
-      border: 4px solid #612940;
+      border: 4px solid @color-red;
       transition: background-color 200ms, color 200ms;
 
       &:hover {
-        background-color: #19150c;
-        color: #612940;
+        background-color: @color-black;
+        color: @color-red;
       }
     }
   }
