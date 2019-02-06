@@ -11,7 +11,7 @@
   font-size: 25px;
 }
 .SavePage p {
-  color: #368f8b;
+  color: #368F8B;
   padding: 10px 0 15px 0;
   font-size: 13px;
   font-style: italic;
@@ -21,9 +21,9 @@
   align-items: center;
 }
 .SavePage #SavePage__Form input[type='text'] {
-  border: 3px solid #368f8b;
+  border: 3px solid #368F8B;
   height: 30px;
-  background-color: #368f8b;
+  background-color: #368F8B;
   font-weight: bold;
   font-size: 15px;
   transition: all 200ms;
@@ -31,20 +31,20 @@
 .SavePage #SavePage__Form input[type='text']:focus,
 .SavePage #SavePage__Form input[type='text']:active {
   background-color: #19150c;
-  color: #368f8b;
+  color: #368F8B;
 }
 .SavePage #SavePage__Form input[type='submit'] {
   height: 38px;
-  background: #368f8b;
+  background: #368F8B;
   cursor: pointer;
   color: black;
   font-size: 15px;
   font-weight: bold;
-  border: 3px solid #368f8b;
+  border: 3px solid #368F8B;
   transition: all 200ms;
 }
 .SavePage #SavePage__Form input[type='submit']:hover,
 .SavePage #SavePage__Form input[type='submit']:active {
   background-color: #19150c;
-  color: #368f8b;
+  color: #368F8B;
 }
