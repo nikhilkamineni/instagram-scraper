@@ -32,7 +32,13 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.post("save", async function(doc, next) {
-  await doc.update({ $push: { pages: { handle: "cats_of_instagram" } } });
+  await doc.update({
+    $push: {
+      pages: {
+        $each: [{ handle: "cats_of_instagram" }, { handle: "dogsofinstagram" }]
+      }
+    }
+  });
   next();
 });
 
