@@ -1,4 +1,4 @@
-@import '../../colors.less';
+@import "../../colors.less";
 
 .Page {
   margin: 5px;
@@ -22,7 +22,7 @@
     color: transparent;
     transition: color 500ms;
     &:hover {
-      color: @color-green;
+      color: @color-red;
     }
   }
 
@@ -37,6 +37,10 @@
       margin: 2px;
       margin-left: auto;
       width: 100%;
+      transition: color 500ms;
+      &:hover {
+        color: @color-red;
+      }
     }
 
     .header-link {
