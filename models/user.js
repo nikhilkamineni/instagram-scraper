@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const BCRYPT_COST = 11;
 
@@ -18,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   pages: [
     {
       required: false,
-      handle: { type: String },
+      handle: { type: String, lowercase: true },
       dateAdded: { type: Date, default: Date.now }
     }
   ]
@@ -33,7 +32,13 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.post("save", async function(doc, next) {
-  await doc.update({ $push: { pages: { handle: "cats_of_instagram" } } });
+  await doc.update({
+    $push: {
+      pages: {
+        $each: [{ handle: "cats_of_instagram" }, { handle: "dogsofinstagram" }]
+      }
+    }
+  });
   next();
 });
 

@@ -20,7 +20,7 @@
   transition: color 500ms;
 }
 .Page button:hover {
-  color: #368F8B;
+  color: #612940;
 }
 .Page .Page__header {
   display: flex;
@@ -33,6 +33,10 @@
   margin: 2px;
   margin-left: auto;
   width: 100%;
+  transition: color 500ms;
+}
+.Page .Page__header h2:hover {
+  color: #612940;
 }
 .Page .Page__header .header-link {
   font-size: 17px;

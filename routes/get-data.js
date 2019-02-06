@@ -25,11 +25,14 @@ getDataRouter.get("/", async (req, res) => {
     });
 
     targetScript = targetScript.children[0].data;
+
     let scriptContents = targetScript.substring(
       targetScript.indexOf("{"),
       targetScript.length - 1
     );
+
     scriptContents = eval("(" + scriptContents + ")");
+
     const postData = scriptContents.entry_data.ProfilePage[0].graphql.user;
     const name = postData.full_name;
     const posts = postData.edge_owner_to_timeline_media.edges.map(edge => {
@@ -40,10 +43,10 @@ getDataRouter.get("/", async (req, res) => {
       };
     });
 
-    res.status(200).json({ name, handle, posts });
+    return res.status(200).json({ name, handle, posts });
   } catch (err) {
     // Failed to scrape data
-    res.status(500).json({ message: "Error fetching!", err });
+    return res.status(500).json({ message: "Error fetching!", err });
     console.error(err); // eslint-disable-line
   }
 }); // /api/getData
