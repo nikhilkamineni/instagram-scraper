@@ -1,3 +1,5 @@
+@import '../../colors.less';
+
 #SortPages {
   display: flex;
   flex-flow: row nowrap;
@@ -6,7 +8,7 @@
   font-weight: bold;
 
   h4 {
-    color: #368f8b;
+    color: @color-green;
     padding: 0 5px 0 0;
     margin: 0;
     font-style: italic;
@@ -18,7 +20,7 @@
     font-family: Futura, sans-serif;
     background: transparent;
     overflow: hidden;
-    color: #368f8b;
+    color: @color-green;
     cursor: pointer;
     align-self: flex-end;
     outline: none;
@@ -29,7 +31,7 @@
       margin: 0 5px;
       transition: color 200ms;
       &:hover {
-        color: #612940;
+        color: @color-red;
         outline: none;
         cursor: pointer;
       }
@@ -46,7 +48,7 @@
     }
 
     .sort-selected {
-      color: #612940;
+      color: @color-red;
     }
 
     input[type='radio'] {

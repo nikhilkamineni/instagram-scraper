@@ -1,15 +1,17 @@
+@import '../../colors.less';
+
 .Page {
   margin: 5px;
-  border: 3px solid #368f8b;
+  border: 3px solid @color-green;
   color: #368f8b;
   transition: border 500ms, color 500ms;
   &:hover {
-    border: 3px solid #612940;
-    color: #612940;
+    border: 3px solid @color-green;
+    color: @color-green;
   }
 
   &:hover button {
-    color: #612940;
+    color: @color-green;
   }
 
   button {
@@ -20,7 +22,7 @@
     color: transparent;
     transition: color 500ms;
     &:hover {
-      color: #368f8b;
+      color: @color-green;
     }
   }
 

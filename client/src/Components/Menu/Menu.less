@@ -1,4 +1,6 @@
 @import '../../breakpoints.less';
+@import '../../colors.less';
+
 
 #Menu {
   position: fixed;
@@ -10,12 +12,12 @@
   padding: 25px 25px;
   align-tems: center;
   width: 100%;
-  background: #612940;
+  background: @color-red;
   z-index: 11;
   transition: top 500ms;
   transition-timing-function: ease-out;
 
-  @media @phone-only {
+  @media @phone {
     font-size: 15px;
     margin: 0;
     padding: 0;
