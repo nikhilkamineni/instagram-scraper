@@ -3,10 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/core": "^10.0.5",
-    "@emotion/styled": "^10.0.5",
     "@reach/router": "^1.2.1",
-    "emotion": "^10.0.5",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "^2.1.3"
