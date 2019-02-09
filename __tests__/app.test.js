@@ -17,10 +17,11 @@ describe("app.js test suite", () => {
     const uri = await mongod.getConnectionString();
 
     // Connect to test DB
-    await mongoose.connect(
-      uri,
-      { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true }
-    );
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useCreateIndex: true
+    });
   });
 
   afterAll(async () => {
