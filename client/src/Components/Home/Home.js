@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import { Redirect } from '@reach/router';
+import React, { Component } from "react";
+import { Redirect } from "@reach/router";
 
-import Menu from '../Menu/Menu';
-import Page from '../Page/Page';
-import SavePage from '../SavePage/SavePage';
-import SortPages from '../SortPages/SortPages';
+import Menu from "../Menu/Menu";
+import Page from "../Page/Page";
+import SavePage from "../SavePage/SavePage";
+import SortPages from "../SortPages/SortPages";
 
-import './Home.css';
+import "./Home.css";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class Home extends Component {
   state = {
@@ -14,28 +16,29 @@ class Home extends Component {
     mousePosition: { x: null, y: null },
     user: {},
     pages: [],
-    pageBeingViewed: '',
-    sort: 'alphabetical'
+    pageBeingViewed: "",
+    sort: "alphabetical"
   };
 
   async componentDidMount() {
-    const token = await localStorage.getItem('token');
+    console.log(process.env);
+    const token = await localStorage.getItem("token");
     if (token) {
       await this.getUser();
     }
   }
 
   getUser = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     try {
       const options = {
-        method: 'get',
+        method: "get",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         }
       };
-      const response = await fetch('/api/user/get-user', options);
+      const response = await fetch(`${API_URL}/api/user/get-user`, options);
       const userData = await response.json();
       this.setState({ user: userData, pages: userData.pages });
     } catch (error) {
@@ -55,17 +58,20 @@ class Home extends Component {
 
   handleDeletePage = async pageId => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (token && pageId) {
         const options = {
-          method: 'put',
+          method: "put",
           body: JSON.stringify({ pageId }),
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
           }
         };
-        const response = await fetch('/api/user/delete-page', options);
+        const response = await fetch(
+          `${API_URL}/api/user/delete-page`,
+          options
+        );
         const json = await response.json();
         this.setState({
           user: json.updatedUser,
@@ -79,7 +85,7 @@ class Home extends Component {
 
   handleViewPage = async page => {
     if (this.state.pageBeingViewed === page)
-      await this.setState({ pageBeingViewed: '' });
+      await this.setState({ pageBeingViewed: "" });
     else await this.setState({ pageBeingViewed: page });
 
     const ref = document.getElementById(`${page}__header`);
@@ -107,8 +113,8 @@ class Home extends Component {
         ))
       : [];
 
-    if (sort === 'newestToOldest') pages = pages.reverse();
-    if (sort === 'alphabetical')
+    if (sort === "newestToOldest") pages = pages.reverse();
+    if (sort === "alphabetical")
       pages = pages.sort((a, b) => {
         return a.props.handle.charCodeAt(0) - b.props.handle.charCodeAt(0);
       });

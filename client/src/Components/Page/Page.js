@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import './Page.css';
+import React, { Component } from "react";
+import "./Page.css";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class Page extends Component {
   state = {
@@ -11,7 +13,7 @@ class Page extends Component {
 
   async componentDidMount() {
     try {
-      const url = `/api/get-data?handle=${this.props.handle}`;
+      const url = `${API_URL}/api/get-data?handle=${this.props.handle}`;
       const response = await fetch(url);
       const data = await response.json();
       this.setState({ ...data });
@@ -22,7 +24,7 @@ class Page extends Component {
   }
 
   handleOpenSource = () => {
-    window.open(`https://www.instagram.com/${this.props.handle}`, '_blank');
+    window.open(`https://www.instagram.com/${this.props.handle}`, "_blank");
   };
 
   render() {

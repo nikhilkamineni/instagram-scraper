@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { Router, navigate } from '@reach/router';
+import React, { Component } from "react";
+import { Router, navigate } from "@reach/router";
 
-import Landing from './Components/Landing/Landing';
-import Home from './Components/Home/Home';
-import Settings from './Components/Settings/Settings';
+import Landing from "./Components/Landing/Landing";
+import Home from "./Components/Home/Home";
+import Settings from "./Components/Settings/Settings";
 
-import './App.css';
+import "./App.css";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class App extends Component {
   state = {
@@ -20,10 +22,10 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const token = await localStorage.getItem('token');
+    const token = await localStorage.getItem("token");
     if (token) {
       await this.setState({ authenticated: true });
-      navigate('/home');
+      navigate("/home");
     }
   }
 
@@ -35,17 +37,17 @@ class App extends Component {
     });
 
     if (password !== confirmPassword) {
-      console.log('Passwords do not match!');
-      return this.setState({ registerError: 'Passwords do not match!' });
+      console.log("Passwords do not match!");
+      return this.setState({ registerError: "Passwords do not match!" });
     }
 
     try {
-      const url = '/api/auth/register';
+      const url = `${API_URL}/api/auth/register`;
       const body = { username, password };
       const options = {
-        method: 'post',
+        method: "post",
         body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" }
       };
 
       const response = await fetch(url, options);
@@ -72,12 +74,12 @@ class App extends Component {
   handleLogin = async (username, password) => {
     this.setState({ loginError: null, loginLoading: true });
     try {
-      const url = `/api/auth/login`;
+      const url = `${API_URL}/api/auth/login`;
       const body = { username, password };
       const options = {
-        method: 'post',
+        method: "post",
         body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" }
       };
 
       const response = await fetch(url, options);
@@ -88,13 +90,13 @@ class App extends Component {
         const token = json.token;
 
         if (token) {
-          localStorage.setItem('token', token);
+          localStorage.setItem("token", token);
           this.setState({
             authenticated: true,
             loginLoading: false,
             registerSuccess: false
           });
-          navigate('/home');
+          navigate("/home");
         }
       }
       // Failure
@@ -102,21 +104,21 @@ class App extends Component {
         return this.setState({ loginError: json.error });
       }
     } catch (err) {
-      this.setState({ loginError: 'Error logging in!', loginLoading: false });
+      this.setState({ loginError: "Error logging in!", loginLoading: false });
       console.error(err);
     }
   };
 
   handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     this.setState({ authenticated: false });
-    navigate('/');
+    navigate("/");
   };
 
   render() {
     return (
       <div className="App">
-        <h1 style={{ color: '#368F8B' }}>ZEN-GRAM</h1>
+        <h1 style={{ color: "#368F8B" }}>ZEN-GRAM</h1>
         <Router>
           <Home
             path="/home"

@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from '@reach/router';
+import React, { Component } from "react";
+import { Link } from "@reach/router";
 
-import './Settings.css';
+import "./Settings.css";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class Settings extends Component {
   state = {
@@ -18,29 +20,32 @@ class Settings extends Component {
 
     // Error handling
     if (newPassword !== confirmNewPassword)
-      return this.setState({ error: 'Passwords do not match!' });
+      return this.setState({ error: "Passwords do not match!" });
     else if (newPassword.length < 3)
-      return this.setState({ error: 'Password is too short!' });
+      return this.setState({ error: "Password is too short!" });
     //TODO: Make backend API call
     else {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         const options = {
-          method: 'put',
+          method: "put",
           body: JSON.stringify({ newPassword }),
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
           }
         };
-        const response = await fetch('/api/user/change-password', options);
+        const response = await fetch(
+          `${API_URL}/api/user/change-password`,
+          options
+        );
         if (response.status === 200)
           return this.setState({
-            success: 'Password was changed successfully!'
+            success: "Password was changed successfully!"
           });
       } catch (error) {
-        console.err('Error changing password!');
-        return this.setState({ error: 'Error changin password!' });
+        console.err("Error changing password!");
+        return this.setState({ error: "Error changin password!" });
       }
     }
   };
