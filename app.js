@@ -13,8 +13,8 @@ const app = express();
 
 app.use(express.json());
 app.use(helmet());
+app.use(cors());
 app.use(morgan("dev"));
-app.use(cors({ origin: "*", credentials: true }));
 
 // Client routes
 app.use(express.static(path.join(__dirname, "client", "build")));
